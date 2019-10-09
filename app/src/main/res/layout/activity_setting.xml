@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.settings.Setting">
+
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_titelbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/app_color_dark_red">
+
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_slider_menu"
+            android:layout_width="60dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView_slider_menu"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_arrow_back_black_48dp" />
+
+        </RelativeLayout>
+
+
+        <emerge.project.onmealoutlet.ui.font.OpenSansLight
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:freezesText="true"
+            android:text="SETTINGS"
+            android:textColor="@color/app_white"
+            android:textSize="17sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_white"
+        android:layout_below="@+id/relativelayout_titelbar">
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_setting_printer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp">
+
+            <RelativeLayout
+                android:id="@+id/relativelayout_printer_add"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_edit_black_48dp" />
+            </RelativeLayout>
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/textview_mac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/openSansLight5"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@+id/relativeLayout2"
+                android:layout_toRightOf="@+id/relativeLayout2"
+                android:text="98D154854520215"
+                android:textColor="@color/text_subtitle"
+                android:textSize="14sp" />
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/openSansLight5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/openSansLight3"
+                android:layout_toEndOf="@+id/relativeLayout2"
+                android:layout_toRightOf="@+id/relativeLayout2"
+                android:text="Printer Address :"
+                android:textColor="@color/text_subtitle"
+                android:textSize="14sp" />
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/openSansLight3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/relativeLayout2"
+                android:layout_toRightOf="@+id/relativeLayout2"
+                android:text="Printer"
+                android:textColor="@color/app_black"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_local_printshop_black_48dp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_setting_printer_address_adding"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/relativelayout_setting_printer"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/app_btn_background"
+            android:visibility="gone">
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLightEditText
+                android:id="@+id/editText_macaddress"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/app_btn_background"
+                android:ems="10"
+                android:hint="Printer Address"
+                android:inputType="textPersonName" />
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLightButton
+                android:id="@+id/button_printer_address_save"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/editText_macaddress"
+                android:layout_toRightOf="@+id/editText_macaddress"
+                android:background="@drawable/selector_button_red"
+                android:text="Save"
+                android:textColor="@color/app_white"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_setting_pickupTimeInterval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/relativelayout_setting_printer_address_adding"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp">
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/openSansLight33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="Change pickup Time Interval"
+                android:textColor="@color/app_black"
+                android:textSize="16sp" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/openSansLight33">
+
+
+                <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                    android:id="@+id/textvie_current_timeinterval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="25"
+                    android:textColor="@color/app_black"
+                    android:textSize="14sp" />
+
+
+
+
+                <emerge.project.onmealoutlet.ui.font.OpenSansLightEditText
+                    android:id="@+id/editText_timeinterval"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:textSize="14sp"
+                    android:ems="10"
+                    android:layout_toEndOf="@+id/textvie_current_timeinterval"
+                    android:layout_toRightOf="@+id/textvie_current_timeinterval"
+                    android:layout_marginLeft="10dp"
+                    android:hint="New Interval"
+                    android:inputType="number" />
+
+
+                <Button
+                    android:id="@+id/btn_update_timeinterval"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:text="Update"
+                    android:textSize="12sp"
+                    android:layout_alignParentRight="true" />
+
+
+
+
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.menus.MenusActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_titelbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:background="@color/app_color_dark_red">
+
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout_slider_menu"
+                android:layout_width="60dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView_slider_menu"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/ic_arrow_back_black_48dp" />
+
+            </RelativeLayout>
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:freezesText="true"
+                android:text="MENUS HISTORY"
+                android:textColor="@color/app_white"
+                android:textSize="17sp" />
+
+
+        </RelativeLayout>
+
+
+        <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swiperefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/relativelayout_bottom"
+            android:layout_below="@+id/relativelayout_titelbar">
+
+            <RelativeLayout
+                android:id="@+id/relativelayout_menus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+                <RelativeLayout
+                    android:id="@+id/relativelayout_dates"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp">
+
+                    <ImageView
+                        android:id="@+id/imageView_calander"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_event"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="20dp"
+                        android:layout_alignParentRight="true" />
+
+                    <emerge.project.onmealoutlet.ui.font.OpenSansRegular
+                        android:id="@+id/textview1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Select Dates"
+                        android:textColor="@color/app_black"
+                        android:textSize="15sp" />
+
+
+                </RelativeLayout>
+
+
+                <emerge.project.onmealoutlet.ui.font.OpenSansRegular
+                    android:id="@+id/textview_stat_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativelayout_dates"
+                    android:layout_marginLeft="5dp"
+                    android:text=""
+                    android:textColor="@color/app_black"
+                    android:textSize="15sp" />
+
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView_menu_history"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/textview_stat_date"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp" />
+            </RelativeLayout>
+
+
+
+
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/app_color_dark_red">
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansSemiBold
+                android:id="@+id/openSansLight15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/openSansLight14"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Total Quantity  "
+                android:textColor="@color/app_white"
+                android:textSize="14sp" />
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/textView_tot_quntity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/openSansLight14"
+                android:layout_marginLeft="130dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/app_white"
+                android:textSize="14sp" />
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansSemiBold
+                android:id="@+id/openSansLight16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/openSansLight15"
+                android:layout_marginLeft="10dp"
+                android:text="Total Value  "
+                android:textColor="@color/app_white"
+                android:textSize="14sp" />
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/textView_tot_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/openSansLight15"
+                android:layout_marginLeft="130dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/app_white"
+                android:textSize="14sp" />
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansSemiBold
+                android:id="@+id/openSansLight17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/openSansLight16"
+                android:layout_marginLeft="10dp"
+                android:text="Cash Total Value  "
+                android:textColor="@color/app_white"
+                android:textSize="14sp" />
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/textView_tot_value_cash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/openSansLight16"
+                android:layout_marginLeft="130dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/app_white"
+                android:textSize="14sp" />
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansSemiBold
+                android:id="@+id/openSansLight18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/openSansLight17"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Card Total Value  "
+                android:textColor="@color/app_white"
+                android:textSize="14sp" />
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/textView_tot_value_cheque"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/openSansLight17"
+                android:layout_marginLeft="130dp"
+                android:layout_marginRight="5dp"
+
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/app_white"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:id="@+id/proprogressview"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible"
+            app:mk_color="@color/colorAccent"
+            app:mk_type="FishSpinner" />
+
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

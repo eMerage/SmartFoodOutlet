@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    app:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:id="@+id/ll_perant_items"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/relativelayout_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:id="@+id/relativelayout_qty"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/textView_menuName"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+              >
+
+                    <emerge.project.onmealoutlet.ui.font.OpenSansLightEditText
+                        android:id="@+id/editText"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="110dp"
+                        android:ems="10"
+                        android:text=""
+                        android:textSize="13sp"
+                        android:inputType="textPersonName" />
+
+                    <emerge.project.onmealoutlet.ui.font.OpenSansSemiBold
+                        android:id="@+id/openSansLight17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text="Menu Qty: "
+                        android:textSize="13sp"
+                        android:textColor="#000"/>
+
+
+                    <emerge.project.onmealoutlet.ui.font.OpenSansLightButton
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/selector_button_green"
+                        android:text=" UPDATE "
+                        android:textSize="11sp" />
+
+                </RelativeLayout>
+
+
+                <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                    android:id="@+id/textView_menuName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/openSansLight10"
+                    android:layout_marginLeft="110dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="@color/app_black" />
+
+                <emerge.project.onmealoutlet.ui.font.OpenSansSemiBold
+                    android:id="@+id/openSansLight14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/openSansLight10"
+                    android:layout_alignStart="@+id/openSansLight10"
+                    android:layout_alignLeft="@+id/openSansLight10"
+                    android:text="Menu Name : "
+                    android:textSize="13sp"
+                    android:textColor="#000" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

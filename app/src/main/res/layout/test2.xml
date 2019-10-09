@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_activity_background">
+
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:id="@+id/proprogressview"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="invisible"
+            app:mk_color="@color/app_color_dark_red"
+            app:mk_type="FishSpinner" />
+
+        <View
+            android:id="@+id/divider_center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="?android:attr/listDivider" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/divider_center"
+            android:background="@color/app_color_layout_background">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_edittext"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="60dip"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_edittext"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_email_black_24dp" />
+                    </LinearLayout>
+
+
+                    <emerge.project.onmealoutlet.ui.font.OpenSansLightEditText
+                        android:id="@+id/edittext_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/app_color_edittext_background"
+                        android:freezesText="true"
+                        android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                        android:hint="@string/login_edittext_email_hint"
+                        android:inputType="textEmailAddress"
+                        android:lines="1"
+                        android:padding="12dp"
+                        android:textColor="@color/app_white"
+                        android:textColorHint="@color/app_white"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_edittext"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="60dip"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_edittext"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_key_white" />
+
+                    </LinearLayout>
+
+                    <emerge.project.onmealoutlet.ui.font.OpenSansLightEditText
+                        android:id="@+id/edittext_user_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/app_color_edittext_background"
+                        android:freezesText="true"
+                        android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                        android:hint="@string/login_edittext_password_hint"
+                        android:inputType="textPassword"
+                        android:lines="1"
+                        android:padding="12dp"
+                        android:textColor="@color/app_white"
+                        android:textColorHint="@color/app_white"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+
+                    <emerge.project.onmealoutlet.ui.font.OpenSansLightButton
+                        android:id="@+id/button_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/selector_button_green"
+                        android:text="@string/singin_button_login"
+                        android:textColor="@color/app_white"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_forgetpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:freezesText="true"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:padding="10dp"
+                        android:text="@string/login_action_forgot_password"
+                        android:textColor="@color/app_white"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

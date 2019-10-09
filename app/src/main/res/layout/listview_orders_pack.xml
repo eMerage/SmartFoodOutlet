@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_cardview"
+        card_view:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/textView_ordernumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="5dp"
+                android:freezesText="true"
+                android:textSize="16sp"
+                android:text="0001542"
+                android:textColor="@color/app_black"
+                />
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/openSansLight8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:freezesText="true"
+                android:text="Order Number :"
+                android:textColor="@color/app_black"
+                android:textSize="16sp"
+                />
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/openSansLight2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_ordernumber"
+                android:layout_marginLeft="5dp"
+                android:textSize="16sp"
+                android:textColor="@color/app_black"
+                android:text="Total Quantity :" />
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/textView_qy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textView_ordernumber"
+                android:textColor="@color/app_black"
+                android:layout_marginRight="5dp"
+                android:textSize="16sp"
+                android:text="115" />
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLightButton
+                android:id="@+id/button_dispatch"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textView_qy"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_button_green"
+                android:text="Dispatch"
+                android:textColor="@color/app_white" />
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLightButton
+                android:id="@+id/button_print"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/openSansLight2"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_button_yellow"
+                android:text="Print"
+                android:textColor="@color/app_white" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
+
+
+
+
+
+
+

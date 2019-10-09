@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#dd432b</color>
+    <color name="colorPrimaryDark">#dd432b</color>
+    <color name="colorAccent">#dd432b</color>
+
+
+    <color name="app_black">#242424</color>
+    <color name="text_title">#3d3d3d</color>
+    <color name="text_heading">#666666</color>
+    <color name="text_subtitle">#919191</color>
+    <color name="text_white_hint">#979797</color>
+    <color name="app_white">#FFFFFF</color>
+
+    <color name="colorTextAsh">#8d8d8d</color>
+    <color name="colorTextGreen">#40b350</color>
+
+    <color name="app_btn_background">#d2d2d2</color>
+
+
+    <color name="edittext_background">#00000000</color>
+
+
+
+
+    <color name="app_color_green">#27ae60</color>
+    <color name="app_color_dark_green">#239c56</color>
+    <color name="app_color_red">#e0523c</color>
+    <color name="app_color_dark_red">#dd432b</color>
+
+    <color name="app_color_light_red">#f0aca1</color>
+
+
+
+    <color name="app_color_yellow">#f1c40f</color>
+
+
+    <color name="button_color_green">#27ae60</color>
+    <color name="button_color_dark_green">#239c56</color>
+
+    <color name="button_color_red">#e0523c</color>
+    <color name="button_color_dark_red">#dd432b</color>
+
+    <color name="button_color_yellow">#f1c40f</color>
+    <color name="button_color_dark_yellow">#dfb50d</color>
+
+
+
+
+    <color name="app_color_image_background">#50000000</color>
+    <color name="app_color_edittext_background">#00000000</color>
+    <color name="app_color_layout_background">#80000000</color>
+    <color name="app_activity_background">#f3f3f3</color>
+
+    <color name="menuIndicatorTextColor">#7c2012</color>
+
+</resources>
