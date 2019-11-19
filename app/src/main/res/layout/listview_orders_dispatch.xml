@@ -216,7 +216,6 @@
                 android:layout_below="@+id/openSansLight155"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-
                 android:layout_marginLeft="15dp"
                 android:layout_toEndOf="@+id/openSansLight156"
                 android:layout_toRightOf="@+id/openSansLight156"
@@ -224,19 +223,6 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="15sp" />
 
-            <emerge.project.onmealoutlet.ui.font.OpenSansLightButton
-                android:id="@+id/button_process"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/textView_note"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/selector_button_green"
-                android:text="dispatch"
-                android:textColor="@color/app_white" />
 
             <emerge.project.onmealoutlet.ui.font.OpenSansLightButton
                 android:id="@+id/button_print"

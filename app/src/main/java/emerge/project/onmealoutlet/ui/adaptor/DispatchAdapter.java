@@ -107,12 +107,6 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.MyView
         });
 
 
-        holder.buttonProcess.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // homePresenter.updateOrderStatus(orders.getOrderID(),orders.getUserID(),"ODDS");
-            }
-        });
 
 
     }
@@ -155,8 +149,7 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.MyView
         @BindView(R.id.button_print)
         Button buttonPrint;
 
-        @BindView(R.id.button_process)
-        Button buttonProcess;
+
 
         @BindView(R.id.relativelayout_main)
         RelativeLayout relativelayouMain;
