@@ -61,6 +61,9 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
         holder.textViewQTY.setText(String.valueOf(orders.getOrderQty()));
 
 
+        System.out.println("gggggg  getDispatchType: "+orders.getDispatchType());
+
+
 
         holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +78,12 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
             @Override
             public void onClick(View v) {
                 homePresenter.updateOrderStatus(orders.getOrderID(),orders.getUserID(),"ODDS");
+                if((orders.getDispatchType().equals("T")) || (orders.getDispatchType().equals("P"))){
+                    homePresenter.updateOrderStatus(orders.getOrderID(),orders.getUserID(),"ODCP");
+                }
+
+
+              //  ODCP
             }
         });
 
