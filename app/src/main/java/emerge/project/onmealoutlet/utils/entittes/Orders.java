@@ -37,10 +37,10 @@ public class Orders implements Serializable {
     String promoTitle;
 
     @SerializedName("rider")
-    Rider rider;
+    Rider rider =  new Rider();
 
     @SerializedName("deliveryTime")
-    DeliveryTime deliveryTime;
+    DeliveryTime deliveryTime =  new DeliveryTime();
 
 
     @SerializedName("orderNote")

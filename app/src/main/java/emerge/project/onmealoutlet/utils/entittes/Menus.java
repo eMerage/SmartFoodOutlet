@@ -13,7 +13,7 @@ public class Menus implements Parcelable {
     String size;
     Double price;
     int qty;
-    ArrayList<Foods> foods;
+    ArrayList<Foods> foods =  new ArrayList<>();
 
 
     public Menus(int orderId, String cartID, String outletMenuName, String size, Double price, int qty, ArrayList<Foods> foods) {

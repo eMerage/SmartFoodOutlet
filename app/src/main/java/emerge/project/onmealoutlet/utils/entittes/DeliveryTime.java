@@ -7,10 +7,10 @@ import java.io.Serializable;
 public class DeliveryTime implements Serializable {
 
     @SerializedName("timeSlotID")
-    int timeSlotID;
+    int timeSlotID = 0;
 
     @SerializedName("timeSlot")
-    String timeSlot;
+    String timeSlot = "";
 
 
     @SerializedName("timeFrom")

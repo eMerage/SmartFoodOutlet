@@ -7,16 +7,33 @@ android {
         applicationId "emerge.project.onmealoutlet"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 11
-        versionName "1.0.1.DE11"
+        versionCode 12
+        versionName "1.0.1.DE12"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+    }
+
+
+    signingConfigs {
+        key {
+            keyAlias 'onmealoutlet'
+            keyPassword 'onmealoutlet'
+            storeFile file('E:\\Project\\Android\\OnMeal -Outlet\\key\\onmealoutlet.jks')
+            storePassword 'onmealoutlet'
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
     }
 
     buildTypes {
         release {
             shrinkResources true
             minifyEnabled true
+            signingConfig signingConfigs.key
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_Production/api/\"'
         }

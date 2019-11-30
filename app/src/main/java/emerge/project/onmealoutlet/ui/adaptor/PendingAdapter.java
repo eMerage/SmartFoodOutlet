@@ -68,7 +68,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        final Orders orders = ordersItems.get(position);
+       final Orders orders = ordersItems.get(position);
 
 
         counter = 0;
@@ -78,17 +78,16 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         final String time;
         long remTime ;
 
-        if (orders.getDeliveryTime().getTimeSlotID() == 0) {
+
+
+
+     if (orders.getDeliveryTime().getTimeSlotID() == 0) {
             time = orders.getPickUpTime();
              remTime=getRemaningMin(time);
         } else {
             time = orders.getDeliveryTime().getTimeSlot();
             remTime=getRemaningMinDelivery(orders.getDeliveryTime().getTimeFrom(),orders.getDeliveryTime().getTimeTo());
         }
-
-
-
-
 
 
 
@@ -134,9 +133,6 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
                 holder.textViewTime.setText(time);//set text
             }
         }.start();
-
-
-
 
 
 
@@ -193,6 +189,9 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         });
 
     }
+
+
+
 
     @Override
     public int getItemCount() {

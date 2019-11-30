@@ -766,17 +766,18 @@ public class Home extends FragmentActivity implements HomeView {
         errorHandlingUI("", false, false, 0);
 
 
+
         if (status.equals("ODPN")) {
             pendingAdapter = new PendingAdapter(this, ordersArrayList, this);
             recyclerviewMain.setAdapter(pendingAdapter);
 
         } else if (status.equals("ODPR")) {
-            processAdapter = new ProcessAdapter(this, ordersArrayList, this);
-            recyclerviewMain.setAdapter(processAdapter);
+           processAdapter = new ProcessAdapter(this, ordersArrayList, this);
+           recyclerviewMain.setAdapter(processAdapter);
 
         } else if (status.equals("ODPK")) {
             packedAdapter = new PackedAdapter(this, ordersArrayList, this);
-            recyclerviewMain.setAdapter(packedAdapter);
+           recyclerviewMain.setAdapter(packedAdapter);
         } else if (status.equals("ODDS")) {
             dispatchAdapter = new DispatchAdapter(this, ordersArrayList, this);
             recyclerviewMain.setAdapter(dispatchAdapter);

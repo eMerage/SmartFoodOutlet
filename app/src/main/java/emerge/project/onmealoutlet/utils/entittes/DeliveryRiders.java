@@ -9,10 +9,10 @@ public class DeliveryRiders implements Serializable {
 
 
     @SerializedName("id")
-    int riderID;
+    int riderID=0;
 
     @SerializedName("name")
-    String riderName;
+    String riderName="";
 
 
     public DeliveryRiders(int riderID, String riderName) {
