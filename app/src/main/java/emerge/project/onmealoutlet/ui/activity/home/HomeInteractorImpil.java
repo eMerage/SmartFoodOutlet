@@ -233,7 +233,9 @@ public class HomeInteractorImpil implements HomeInteractor {
     }
 
     @Override
-    public void updateOrderStatus(final int orderId, final int userID, final String statusCode, final OnUpdateOrderStatusFinishedListener onUpdateOrderStatusFinishedListener) {
+    public void updateOrderStatus(final int orderId, final int userID, final String statusCode, final String dispatchType, final OnUpdateOrderStatusFinishedListener onUpdateOrderStatusFinishedListener) {
+
+
 
 
         onUpdateOrderStatusFinishedListener.updateOrderStatusStart();
@@ -252,7 +254,7 @@ public class HomeInteractorImpil implements HomeInteractor {
                     }
                     @Override
                     public void onError(Throwable e) {
-                        onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId,userID,statusCode,"Update Fail");
+                        onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId,userID,statusCode,"Update Fail",dispatchType);
                     }
                     @Override
                     public void onComplete() {
@@ -267,19 +269,22 @@ public class HomeInteractorImpil implements HomeInteractor {
                         } else if (statusCode.equals("ODDS")) {
                             orderCurrentStatus = 3;
                         }
+
                         if (updateOrderStatus) {
-                            onUpdateOrderStatusFinishedListener.updateOrderStatusSuccessful(orderCurrentStatus);
+                            onUpdateOrderStatusFinishedListener.updateOrderStatusSuccessful(orderCurrentStatus, orderId,  userID, dispatchType);
                         } else {
-                            onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId,userID,statusCode,"Update Fail");
+                            onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId,userID,statusCode,"Update Fail",dispatchType);
                         }
 
                     }
                 });
 
 
-
-
     }
+
+
+
+
 
     @Override
     public void printOrders(final int orderId, final int printType, final OnPrintOrdersFinishedListener onPrintOrdersFinishedListener) {
@@ -397,11 +402,6 @@ public class HomeInteractorImpil implements HomeInteractor {
         data = new ArrayList<Orders>();
 
 
-        System.out.println("cccccccccccccc outlet.getOutletId() : "+outlet.getOutletId());
-        System.out.println("cccccccccccccc statusCode : "+statusCode);
-        System.out.println("cccccccccccccc dispatcType : "+dispatcType);
-        System.out.println("cccccccccccccc timeSlotId : "+timeSlotId);
-        System.out.println("cccccccccccccc riderId : "+riderId);
 
 
 
@@ -438,7 +438,7 @@ public class HomeInteractorImpil implements HomeInteractor {
                         for (int i = 0; i < data.size(); i++) {
                             ordersArrayList.add(new Orders(data.get(i).getOrderID(), data.get(i).getOrderDate(), data.get(i).getUserID(), data.get(i).getOrderTotal(), data.get(i).getOrderQty(),
                                     data.get(i).getDispatchType(), data.get(i).getPickUpTime(), data.get(i).getRider(),
-                                    data.get(i).getDeliveryTime(), data.get(i).getPromoCode(), data.get(i).getPromoTitle(), data.get(i).getOrderNote()));
+                                    data.get(i).getDeliveryTime(), data.get(i).getPromoCode(), data.get(i).getPromoTitle(), data.get(i).getOrderNote(),data.get(i).getPaymentType()));
                         }
 
 

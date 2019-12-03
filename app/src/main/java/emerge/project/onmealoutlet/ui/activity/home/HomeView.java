@@ -35,8 +35,8 @@ public interface HomeView {
 
 
 
-    void  updateOrderStatusSuccessful(int orderCurrentStatus);
-    void updateOrderStatusFail(int orderId, int userID, String statusCode,String msg);
+    void  updateOrderStatusSuccessful(int orderCurrentStatus,int orderId, int userID,String dispatchType);
+    void updateOrderStatusFail(int orderId, int userID, String statusCode,String msg,String dispatchType);
     void updateOrderStatusStart();
 
 

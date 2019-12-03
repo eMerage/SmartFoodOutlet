@@ -18,7 +18,7 @@ android {
         key {
             keyAlias 'onmealoutlet'
             keyPassword 'onmealoutlet'
-            storeFile file('E:\\Project\\Android\\OnMeal -Outlet\\key\\onmealoutlet.jks')
+            storeFile file('E:\\Project\\Android\\OnMeal-Outlet\\key\\onmealoutlet.jks')
             storePassword 'onmealoutlet'
         }
     }

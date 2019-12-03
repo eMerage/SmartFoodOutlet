@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -16,6 +17,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import emerge.project.onmealoutlet.R;
+import emerge.project.onmealoutlet.ui.activity.home.Home;
 
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -54,7 +56,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     public void notification(String titel, String message){
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+        try {
+            r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle(titel)
@@ -63,15 +76,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentText(message);
         Intent resultIntent = null;
 
-     //   resultIntent = new Intent(this, AvtivityLoging.class);
+        resultIntent = new Intent(this, Home.class);
 
         TaskStackBuilder stackBuilder = null;
         PendingIntent resultPendingIntent = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            r.stop();
             stackBuilder = TaskStackBuilder.create(this);
             stackBuilder.addNextIntent(resultIntent);
             resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         } else {
+            r.stop();
             resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_ONE_SHOT);
 
         }

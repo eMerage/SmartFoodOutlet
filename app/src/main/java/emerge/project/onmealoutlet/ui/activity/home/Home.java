@@ -606,23 +606,26 @@ public class Home extends FragmentActivity implements HomeView {
 
     }
 
-    // OrdersFullDetails//
-
-
-    // OrdersStatusupdate
-
     @Override
-    public void updateOrderStatusSuccessful(int orderCurrentStatus) {
-
+    public void updateOrderStatusSuccessful(int orderCurrentStatus,int orderId, int userID,String dispatchType) {
         progressBar.setVisibility(View.GONE);
         unBloackUserInteraction();
-
         homePresenter.getOrders(status,selectDeliveryTimeSlotId,selectriderId,dispathType);
+
+        if(orderCurrentStatus==3){
+            if((dispatchType.equals("T")) || (dispatchType.equals("P"))){
+                homePresenter.updateOrderStatus(orderId,userID,"ODCP",dispatchType);
+            }else {
+
+            }
+        }else {
+
+        }
 
     }
 
     @Override
-    public void updateOrderStatusFail(final int orderId, final int userID, final String statusCode, String msg) {
+    public void updateOrderStatusFail(final int orderId, final int userID, final String statusCode, String msg, final String dispatchType) {
 
         progressBar.setVisibility(View.GONE);
         unBloackUserInteraction();
@@ -636,7 +639,7 @@ public class Home extends FragmentActivity implements HomeView {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-                                homePresenter.updateOrderStatus(orderId,userID,statusCode);
+                                homePresenter.updateOrderStatus(orderId,userID,statusCode,dispatchType);
                             } else {
 
                                 Toast.makeText(Home.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();

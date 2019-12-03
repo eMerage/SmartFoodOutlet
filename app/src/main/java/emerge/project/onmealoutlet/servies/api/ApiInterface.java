@@ -79,7 +79,8 @@ public interface ApiInterface {
 
 
     @POST("Outlet/UpdateOutletPickupInterval")
-    Observable<Integer> updateOutletPickupInterval(@Query("outletID") int outletId);
+    Observable<Integer> updateOutletPickupInterval(@Query("outletID") int outletId,@Query("Interval") int interval);
+
 
 
     @GET("Order/GetOrdersForOutletBetweenDates")

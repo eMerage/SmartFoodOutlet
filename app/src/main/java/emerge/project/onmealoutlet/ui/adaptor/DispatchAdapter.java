@@ -75,7 +75,16 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.MyView
         holder.textViewAmount.setText(String.valueOf(orders.getOrderTotal()));
         holder.textViewQty.setText(String.valueOf(orders.getOrderQty()));
 
-        holder.textViewDispatchType.setText(String.valueOf(orders.getDispatchType()));
+
+        if(String.valueOf(orders.getDispatchType()).equals("D")){
+            holder.textViewDispatchType.setText("Delivery");
+        }else if(String.valueOf(orders.getDispatchType()).equals("P")){
+            holder.textViewDispatchType.setText("Pickup");
+        }else if(String.valueOf(orders.getDispatchType()).equals("T")){
+            holder.textViewDispatchType.setText("Dine In");
+        }
+
+
 
         String promo ;
 
@@ -85,6 +94,12 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.MyView
             promo=orders.getPromoTitle();
         }
 
+
+        if(orders.getPaymentType().equals("CH")){
+            holder.textViewPaymenttype.setText("On Delivery");
+        }else {
+            holder.textViewPaymenttype.setText("Paid");
+        }
 
         holder.textViewPromotype.setText(promo);
 
@@ -148,6 +163,9 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.MyView
 
         @BindView(R.id.button_print)
         Button buttonPrint;
+
+        @BindView(R.id.textView_paymenttype)
+        TextView textViewPaymenttype;
 
 
 

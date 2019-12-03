@@ -73,7 +73,7 @@ public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHo
         holder.buttonPack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                homePresenter.updateOrderStatus(orders.getOrderID(),orders.getUserID(),"ODPK");
+                homePresenter.updateOrderStatus(orders.getOrderID(),orders.getUserID(),"ODPK",orders.getDispatchType());
 
             }
         });

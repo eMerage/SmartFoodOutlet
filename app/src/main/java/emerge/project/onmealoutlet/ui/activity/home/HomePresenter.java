@@ -21,7 +21,7 @@ public interface HomePresenter {
 
 
 
-    void updateOrderStatus(int orderId, int userID, String statusCode);
+    void updateOrderStatus(int orderId, int userID, String statusCode,String dispatchType);
 
 
 

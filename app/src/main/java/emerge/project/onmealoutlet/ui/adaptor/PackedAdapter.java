@@ -74,10 +74,8 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
         holder.buttonDispatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                homePresenter.updateOrderStatus(orders.getOrderID(),orders.getUserID(),"ODDS");
-                if((orders.getDispatchType().equals("T")) || (orders.getDispatchType().equals("P"))){
-                    homePresenter.updateOrderStatus(orders.getOrderID(),orders.getUserID(),"ODCP");
-                }
+                homePresenter.updateOrderStatus(orders.getOrderID(),orders.getUserID(),"ODDS",orders.getDispatchType());
+
             }
         });
 

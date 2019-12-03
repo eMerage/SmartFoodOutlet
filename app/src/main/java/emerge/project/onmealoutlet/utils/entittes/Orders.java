@@ -61,20 +61,6 @@ public class Orders implements Serializable {
     public Orders() {
     }
 
-    public Orders(int orderID, String orderDate, int userID, Double orderTotal, int orderQty, String dispatchType, String pickUpTime, Rider rider, DeliveryTime deliveryTime,String promocode,String promotitle,String ordernote) {
-        this.orderID = orderID;
-        this.orderDate = orderDate;
-        this.userID = userID;
-        this.orderTotal = orderTotal;
-        this.orderQty = orderQty;
-        this.dispatchType = dispatchType;
-        this.pickUpTime =pickUpTime;
-        this.rider = rider;
-        this.deliveryTime = deliveryTime;
-        this.promoCode = promocode;
-        this.promoTitle = promotitle;
-        this.orderNote = ordernote;
-    }
 
 
     public Orders(int orderID, String orderDate, int userID, Double orderTotal, int orderQty, String dispatchType, String pickUpTime,

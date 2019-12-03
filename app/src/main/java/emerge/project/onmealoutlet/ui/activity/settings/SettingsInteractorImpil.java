@@ -72,7 +72,7 @@ public class SettingsInteractorImpil implements SettingsInteractor {
             onUpdateTimeIntervalFinishedListener.updateTimeIntervalFail("Please add time");
         }else {
             try {
-                apiService.updateOutletPickupInterval(outlet.getOutletId())
+                apiService.updateOutletPickupInterval(outlet.getOutletId(),time)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Observer<Integer>() {

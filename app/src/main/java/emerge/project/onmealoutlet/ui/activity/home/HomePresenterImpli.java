@@ -129,8 +129,8 @@ HomeInteractor.OnGetOutletNameFinishedListener{
 
 
     @Override
-    public void updateOrderStatus(int orderId, int userID, String statusCode) {
-        homeInteractor.updateOrderStatus(orderId, userID, statusCode, this);
+    public void updateOrderStatus(int orderId, int userID, String statusCode,String dispatchType) {
+        homeInteractor.updateOrderStatus(orderId, userID, statusCode, dispatchType,this);
     }
 
 
@@ -141,13 +141,13 @@ HomeInteractor.OnGetOutletNameFinishedListener{
     }
 
     @Override
-    public void updateOrderStatusSuccessful(int orderCurrentStatus) {
-        homeView.updateOrderStatusSuccessful(orderCurrentStatus);
+    public void updateOrderStatusSuccessful(int orderCurrentStatus,int orderId, int userID,String dispatchType) {
+        homeView.updateOrderStatusSuccessful(orderCurrentStatus, orderId,  userID, dispatchType);
     }
 
     @Override
-    public void updateOrderStatusFail(int orderId, int userID, String statusCode,String msg) {
-        homeView.updateOrderStatusFail( orderId,  userID,  statusCode, msg);
+    public void updateOrderStatusFail(int orderId, int userID, String statusCode,String msg,String dispatchType) {
+        homeView.updateOrderStatusFail( orderId,  userID,  statusCode, msg, dispatchType);
     }
 
 

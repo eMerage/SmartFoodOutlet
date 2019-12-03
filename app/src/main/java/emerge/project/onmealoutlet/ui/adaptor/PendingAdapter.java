@@ -98,6 +98,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
                 long millis = millisUntilFinished;
 
                 String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis), TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+
                 holder.textViewTime.setText(time+" "+hms);//set text
 
                 if(millisUntilFinished<420000){
@@ -122,7 +123,6 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
                 }else {
 
 
-
                 }
 
 
@@ -136,13 +136,29 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
 
 
+        if(orders.getPaymentType().equals("CH")){
+            holder.textViewPaymenttype.setText("Cash");
+        }else {
+            holder.textViewPaymenttype.setText("Card");
+        }
+
 
         holder.textViewRider.setText(orders.getRider().getName());
 
         holder.textViewAmount.setText(String.valueOf(orders.getOrderTotal()));
         holder.textViewQty.setText(String.valueOf(orders.getOrderQty()));
 
-        holder.textViewDispatchType.setText(String.valueOf(orders.getDispatchType()));
+
+        if(String.valueOf(orders.getDispatchType()).equals("D")){
+            holder.textViewDispatchType.setText("Delivery");
+        }else if(String.valueOf(orders.getDispatchType()).equals("P")){
+            holder.textViewDispatchType.setText("Pickup");
+        }else if(String.valueOf(orders.getDispatchType()).equals("T")){
+            holder.textViewDispatchType.setText("Dine In");
+        }
+
+
+
 
         String promo;
 
@@ -170,20 +186,18 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Toast.makeText(mContext, "Please Process the Order to view order details ", Toast.LENGTH_SHORT).show();
-
-
-               // homePresenter.getOrdersFullDetails(orders.getOrderID());
 
             }
         });
 
 
+
         holder.buttonProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                homePresenter.updateOrderStatus(orders.getOrderID(), orders.getUserID(), "ODPR");
+                homePresenter.updateOrderStatus(orders.getOrderID(), orders.getUserID(), "ODPR",orders.getDispatchType());
+                orders.setCuntDownExp(true);
 
             }
         });
@@ -228,6 +242,11 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
         @BindView(R.id.textView_note)
         TextView textViewNote;
+
+
+        @BindView(R.id.textView_paymenttype)
+        TextView textViewPaymenttype;
+
 
 
         @BindView(R.id.button_print)
