@@ -30,6 +30,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -73,9 +75,6 @@ public class Home extends FragmentActivity implements HomeView {
     ListView listViewSlider;
 
 
-
-
-
     @BindView(R.id.spinner_timeslotes)
     Spinner spinnerTimeslotes;
     @BindView(R.id.spinner_riders)
@@ -92,13 +91,8 @@ public class Home extends FragmentActivity implements HomeView {
     ProgressBar progressBar;
 
 
-/*
-    @BindView(R.id.checkBox_delivery)
-    CheckBox checkBoxDelivery;
-
-    @BindView(R.id.checkBox_pickup)
-    CheckBox checkBoxPickup;
-*/
+    @BindView(R.id.radiogroup)
+    RadioGroup radiogroup;
 
 
     @BindView(R.id.button_pending)
@@ -124,15 +118,11 @@ public class Home extends FragmentActivity implements HomeView {
     TextView textviewVersion;
 
 
-
     @BindView(R.id.recyclerview_main)
     RecyclerView recyclerviewMain;
 
     @BindView(R.id.swiperefresh)
     SwipeRefreshLayout swipeContainer;
-
-
-
 
 
     @BindView(R.id.textView_total)
@@ -146,7 +136,7 @@ public class Home extends FragmentActivity implements HomeView {
     TextView textviewOutletName;
 
 
-
+    static Home instance;
 
     private static final int PERMISSIONS_REQUEST_ACCESS_BLUTOOTH = 101;
 
@@ -165,15 +155,12 @@ public class Home extends FragmentActivity implements HomeView {
     SliderMenuAdapter sliderMenuAdapter;
 
 
-
-    int selectDeliveryTimeSlotId=0;
-    int selectriderId=0;
+    int selectDeliveryTimeSlotId = 0;
+    int selectriderId = 0;
     String dispathType = "";
 
 
     String status;
-
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -185,13 +172,11 @@ public class Home extends FragmentActivity implements HomeView {
         setContentView(R.layout.activity_home);
 
         ButterKnife.bind(this);
-
-
-
+        instance = this;
 
         textviewVersion.setText(getApplicationVersion());
 
-        status ="ODPN";
+        status = "ODPN";
 
         homePresenter = new HomePresenterImpli(this);
 
@@ -210,76 +195,17 @@ public class Home extends FragmentActivity implements HomeView {
         bloackUserInteraction();
         progressBar.setVisibility(View.VISIBLE);
 
-        homePresenter.getOrders(status,selectDeliveryTimeSlotId,selectriderId,dispathType);
+        homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
         homePresenter.getIncome();
 
 
-        dispathType="P";
+        dispathType = "P";
 
-       if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_REQUEST_ACCESS_BLUTOOTH);
         } else {
 
         }
-
-
-/*
-        checkBoxDelivery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(checkBoxDelivery.isChecked()){
-                    checkBoxDelivery.setChecked(false);
-
-                    if(checkBoxPickup.isChecked()){
-                        dispathType="P";
-                    }else {
-                        dispathType="";
-                    }
-
-                }else {
-                    checkBoxDelivery.setChecked(true);
-
-                    if(checkBoxPickup.isChecked()){
-                        dispathType="";
-                    }else {
-                        dispathType="D";
-                    }
-
-                }
-
-            }
-        });
-
-
-
-        checkBoxPickup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(checkBoxPickup.isChecked()){
-                    checkBoxPickup.setChecked(false);
-
-                    if(checkBoxDelivery.isChecked()){
-                        dispathType="P";
-                    }else {
-                        dispathType="";
-                    }
-
-                }else {
-                    checkBoxPickup.setChecked(true);
-
-                    if(checkBoxDelivery.isChecked()){
-                        dispathType="";
-                    }else {
-                        dispathType="D";
-                    }
-
-                }
-
-
-            }
-        });*/
 
 
         listViewSlider.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -303,44 +229,90 @@ public class Home extends FragmentActivity implements HomeView {
                     Intent intent = new Intent(Home.this, MenuHistory.class);
                     startActivity(intent);
                     dLayout.closeDrawers();
-                }
-                else if (position == 5) {
+                } else if (position == 5) {
                     Intent intent = new Intent(Home.this, OrderHistory.class);
                     startActivity(intent);
                     dLayout.closeDrawers();
-                }
-                else if (position == 6) {
+                } else if (position == 6) {
                     homePresenter.logOut();
                 }
             }
         });
 
 
-
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 homePresenter.getIncome();
-                homePresenter.getOrders(status,selectDeliveryTimeSlotId,selectriderId,dispathType);
+                homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
             }
         });
-
 
 
     }
 
 
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+        switch (view.getId()) {
+            case R.id.radio_delivery:
+                if (checked)
+                    dispathType = "D";
+                break;
+            case R.id.radio_pickup:
+                if (checked)
+                    dispathType = "P";
+                break;
+            case R.id.radio_dinein:
+                if (checked)
+                    dispathType = "T";
+                break;
+        }
+    }
 
 
+    @OnClick(R.id.button_filter_fn)
+    public void onClickFilteDone(View view) {
 
 
+        System.out.println("mmmmmmmm  status:"+status);
+        System.out.println("mmmmmmmm  selectDeliveryTimeSlotId:"+selectDeliveryTimeSlotId);
+        System.out.println("mmmmmmmm  selectriderId:"+selectriderId);
+        System.out.println("mmmmmmmm  dispathType:"+dispathType);
+        bloackUserInteraction();
+
+        homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
+
+    }
+
+
+    public void refrashOrdersWhenOrderProsess() {
+        bloackUserInteraction();
+        homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
+
+    }
+
+
+    @OnClick(R.id.button_clear)
+    public void onClickFilteClear(View view) {
+
+        selectDeliveryTimeSlotId = 0;
+        selectriderId = 0;
+        dispathType = "";
+
+        radiogroup.clearCheck();
+
+        bloackUserInteraction();
+        homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
+
+    }
 
 
     @OnClick(R.id.button_filter)
     public void onClickFiltering(View view) {
         progressBar.setVisibility(View.VISIBLE);
         bloackUserInteraction();
-        homePresenter.getOrders(status,selectDeliveryTimeSlotId,selectriderId,dispathType);
+        homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
 
         dLayout.closeDrawers();
     }
@@ -350,19 +322,15 @@ public class Home extends FragmentActivity implements HomeView {
     public void onClickPending(View view) {
 
 
-
-        status ="ODPN";
+        status = "ODPN";
 
 
         homePresenter.getDeliveryTimeSlots(status);
         homePresenter.getDeliveryRiders(status);
 
         progressBar.setVisibility(View.VISIBLE);
-        homePresenter.getOrders(status,selectDeliveryTimeSlotId,selectriderId,dispathType);
+        homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
 
-      //  checkBoxPickup.setChecked(false);
-      //  checkBoxDelivery.setChecked(false);
-        dispathType="";
 
         bloackUserInteraction();
 
@@ -377,19 +345,15 @@ public class Home extends FragmentActivity implements HomeView {
     @OnClick(R.id.button_process)
     public void onClickProcess(View view) {
 
-        status ="ODPR";
+        status = "ODPR";
 
         homePresenter.getDeliveryTimeSlots(status);
         homePresenter.getDeliveryRiders(status);
 
 
         progressBar.setVisibility(View.VISIBLE);
-        homePresenter.getOrders(status,selectDeliveryTimeSlotId,selectriderId,dispathType);
+        homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
 
-
-     //   checkBoxPickup.setChecked(false);
-      //  checkBoxDelivery.setChecked(false);
-        dispathType="";
         bloackUserInteraction();
 
         buttonPending.setBackgroundColor(getResources().getColor(R.color.app_btn_background));
@@ -425,19 +389,16 @@ public class Home extends FragmentActivity implements HomeView {
     @OnClick(R.id.button_pack)
     public void onClickPack(View view) {
 
-        status ="ODPK";
+        status = "ODPK";
 
 
         homePresenter.getDeliveryTimeSlots(status);
         homePresenter.getDeliveryRiders(status);
         progressBar.setVisibility(View.VISIBLE);
 
-        homePresenter.getOrders(status,selectDeliveryTimeSlotId,selectriderId,dispathType);
+        homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
 
 
-      ///  checkBoxPickup.setChecked(false);
-      //  checkBoxDelivery.setChecked(false);
-        dispathType="";
         bloackUserInteraction();
 
         buttonPending.setBackgroundColor(getResources().getColor(R.color.app_btn_background));
@@ -449,16 +410,14 @@ public class Home extends FragmentActivity implements HomeView {
     @OnClick(R.id.button_dispatch)
     public void onClickDispatch(View view) {
 
-        status ="ODDS";
+        status = "ODDS";
         homePresenter.getDeliveryTimeSlots(status);
         homePresenter.getDeliveryRiders(status);
 
         progressBar.setVisibility(View.VISIBLE);
-        homePresenter.getOrders(status,selectDeliveryTimeSlotId,selectriderId,dispathType);
+        homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
 
-      //  checkBoxPickup.setChecked(false);
-      //  checkBoxDelivery.setChecked(false);
-        dispathType="";
+
         bloackUserInteraction();
 
         buttonPending.setBackgroundColor(getResources().getColor(R.color.app_btn_background));
@@ -500,13 +459,11 @@ public class Home extends FragmentActivity implements HomeView {
         spinnerTimeslotes.setAdapter(deliveryTimeSlotsAdapter);
 
 
-
-
         spinnerTimeslotes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                selectDeliveryTimeSlotId=timeSlots.get(position).getSlotID();
+                selectDeliveryTimeSlotId = timeSlots.get(position).getSlotID();
 
             }
 
@@ -532,13 +489,10 @@ public class Home extends FragmentActivity implements HomeView {
         spinnerRiders.setAdapter(deliveryRidersAdapter);
 
 
-
-
-
         spinnerRiders.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectriderId=deliveryRiders.get(position).getRiderID();
+                selectriderId = deliveryRiders.get(position).getRiderID();
             }
 
             @Override
@@ -549,8 +503,6 @@ public class Home extends FragmentActivity implements HomeView {
 
 
     }
-
-    // OrdersFullDetails
 
 
     @Override
@@ -572,7 +524,7 @@ public class Home extends FragmentActivity implements HomeView {
         progressBar.setVisibility(View.GONE);
         unBloackUserInteraction();
 
-        errorHandlingUI("Connection lost, Please try again", true, true,  orderId);
+        errorHandlingUI("Connection lost, Please try again", true, true, orderId);
 
     }
 
@@ -607,18 +559,18 @@ public class Home extends FragmentActivity implements HomeView {
     }
 
     @Override
-    public void updateOrderStatusSuccessful(int orderCurrentStatus,int orderId, int userID,String dispatchType) {
+    public void updateOrderStatusSuccessful(int orderCurrentStatus, int orderId, int userID, String dispatchType) {
         progressBar.setVisibility(View.GONE);
         unBloackUserInteraction();
-        homePresenter.getOrders(status,selectDeliveryTimeSlotId,selectriderId,dispathType);
+        homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
 
-        if(orderCurrentStatus==3){
-            if((dispatchType.equals("T")) || (dispatchType.equals("P"))){
-                homePresenter.updateOrderStatus(orderId,userID,"ODCP",dispatchType);
-            }else {
+        if (orderCurrentStatus == 3) {
+            if ((dispatchType.equals("T")) || (dispatchType.equals("P"))) {
+                homePresenter.updateOrderStatus(orderId, userID, "ODCP", dispatchType);
+            } else {
 
             }
-        }else {
+        } else {
 
         }
 
@@ -639,7 +591,7 @@ public class Home extends FragmentActivity implements HomeView {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-                                homePresenter.updateOrderStatus(orderId,userID,statusCode,dispatchType);
+                                homePresenter.updateOrderStatus(orderId, userID, statusCode, dispatchType);
                             } else {
 
                                 Toast.makeText(Home.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
@@ -661,7 +613,7 @@ public class Home extends FragmentActivity implements HomeView {
             e.printStackTrace();
         }
 
-    //    errorHandlingUI("Update Fail", true, false, 0);
+        //    errorHandlingUI("Update Fail", true, false, 0);
 
     }
 
@@ -673,9 +625,7 @@ public class Home extends FragmentActivity implements HomeView {
     }
 
 
-
     // OrdersStatusupdate//
-
 
 
     @Override
@@ -683,8 +633,6 @@ public class Home extends FragmentActivity implements HomeView {
         progressBar.setVisibility(View.VISIBLE);
         bloackUserInteraction();
     }
-
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -729,6 +677,7 @@ public class Home extends FragmentActivity implements HomeView {
 
         }
     }
+
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new android.support.v7.app.AlertDialog.Builder(this)
                 .setMessage(message)
@@ -769,18 +718,17 @@ public class Home extends FragmentActivity implements HomeView {
         errorHandlingUI("", false, false, 0);
 
 
-
         if (status.equals("ODPN")) {
             pendingAdapter = new PendingAdapter(this, ordersArrayList, this);
             recyclerviewMain.setAdapter(pendingAdapter);
 
         } else if (status.equals("ODPR")) {
-           processAdapter = new ProcessAdapter(this, ordersArrayList, this);
-           recyclerviewMain.setAdapter(processAdapter);
+            processAdapter = new ProcessAdapter(this, ordersArrayList, this);
+            recyclerviewMain.setAdapter(processAdapter);
 
         } else if (status.equals("ODPK")) {
             packedAdapter = new PackedAdapter(this, ordersArrayList, this);
-           recyclerviewMain.setAdapter(packedAdapter);
+            recyclerviewMain.setAdapter(packedAdapter);
         } else if (status.equals("ODDS")) {
             dispatchAdapter = new DispatchAdapter(this, ordersArrayList, this);
             recyclerviewMain.setAdapter(dispatchAdapter);
@@ -793,7 +741,7 @@ public class Home extends FragmentActivity implements HomeView {
         swipeContainer.setRefreshing(false);
         progressBar.setVisibility(View.GONE);
         unBloackUserInteraction();
-        errorHandlingUI("No Orders", true, false,  0);
+        errorHandlingUI("No Orders", true, false, 0);
 
         final ArrayList<Orders> ordersArrayList = new ArrayList<Orders>();
 
@@ -822,17 +770,32 @@ public class Home extends FragmentActivity implements HomeView {
         progressBar.setVisibility(View.GONE);
         swipeContainer.setRefreshing(false);
         unBloackUserInteraction();
-        errorHandlingUI("Connection lost, Please try again", true, true,  0);
+        errorHandlingUI("Connection lost, Please try again", true, true, 0);
+
+        final ArrayList<Orders> ordersArrayList = new ArrayList<Orders>();
+
+        if (status.equals("ODPN")) {
+            pendingAdapter = new PendingAdapter(this, ordersArrayList, this);
+            recyclerviewMain.setAdapter(pendingAdapter);
+
+        } else if (status.equals("ODPR")) {
+            processAdapter = new ProcessAdapter(this, ordersArrayList, this);
+            recyclerviewMain.setAdapter(processAdapter);
+
+
+        } else if (status.equals("ODPK")) {
+            packedAdapter = new PackedAdapter(this, ordersArrayList, this);
+            recyclerviewMain.setAdapter(packedAdapter);
+        } else if (status.equals("ODDS")) {
+            dispatchAdapter = new DispatchAdapter(this, ordersArrayList, this);
+            recyclerviewMain.setAdapter(dispatchAdapter);
+        }
     }
-
-
-
-
 
 
     @Override
     public void income(String total, String qty) {
-        textViewTotal.setText(total+" LKR");
+        textViewTotal.setText(total + " LKR");
         textViewTotalQty.setText(qty);
 
     }
@@ -906,7 +869,7 @@ public class Home extends FragmentActivity implements HomeView {
 
                 progressBar.setVisibility(View.VISIBLE);
                 bloackUserInteraction();
-                homePresenter.getOrders(status,selectDeliveryTimeSlotId,selectriderId,dispathType);
+                homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
 
             }
         });
@@ -927,4 +890,6 @@ public class Home extends FragmentActivity implements HomeView {
         version = pInfo.versionName;
         return version;
     }
+
+
 }

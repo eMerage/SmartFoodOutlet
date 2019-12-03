@@ -18,12 +18,14 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.ui.activity.home.Home;
+import emerge.project.onmealoutlet.ui.activity.home.PushService;
 
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     private static final String TAG = "MyFirebaseMessagingService";
+
 
     public MyFirebaseMessagingService() {
         super();
@@ -56,7 +58,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     public void notification(String titel, String message){
+
+
+
+        Intent myIntent = new Intent(getBaseContext(), PushService.class);
+        startService(myIntent);
+
+
+
+
+
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+
+
+
+
+
+
+
 
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
         Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);

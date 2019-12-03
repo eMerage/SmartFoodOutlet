@@ -7,45 +7,150 @@
 
 
     <RelativeLayout
-        android:id="@+id/drawer"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_gravity="start"
-        android:layout_marginTop="50dip"
-        android:background="@color/app_white">
+        android:background="@color/app_white"
+        android:visibility="visible">
 
-
-        <emerge.project.onmealoutlet.ui.font.OpenSansBold
-            android:id="@+id/textview_outletname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Dosa"
-            android:textColor="@color/app_black"
-            android:textSize="15sp" />
-
-        <ListView
-            android:id="@+id/listview_slider"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/textview_outletname"
-            android:divider="@color/app_white" />
 
         <emerge.project.onmealoutlet.ui.font.OpenSansLight
-            android:id="@+id/textview_version"
+            android:id="@+id/openSansLight16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
-            android:text="Version"
-            android:textColor="@color/app_black" />
+            android:layout_marginTop="10dp"
+            android:text="Filtering"
+            android:textColor="@color/app_black"
+            android:textSize="20sp" />
+
+        <emerge.project.onmealoutlet.ui.font.OpenSansLight
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/openSansLight16"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:text="Dispatch Type "
+            android:textColor="@color/text_title"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:id="@+id/relativelayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp">
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/openSansLight20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+
+                android:text="Delivery"
+                android:textColor="@color/app_black" />
+
+            <CheckBox
+                android:id="@+id/checkBox_delivery"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativelayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/relativelayout1"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp">
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/openSansLight22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+
+                android:text="Pick Up"
+                android:textColor="@color/app_black" />
+
+            <CheckBox
+                android:id="@+id/checkBox_pickup"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
 
 
+        <RelativeLayout
+            android:id="@+id/relativelayout_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/relativelayout2"
+            android:layout_marginTop="5dp">
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/openSansLight21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Time Slots"
+                android:textColor="@color/text_title"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinner_timeslotes"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@+id/openSansLight21"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp" />
+        </RelativeLayout>
+
+
+        <emerge.project.onmealoutlet.ui.font.OpenSansLight
+            android:id="@+id/openSansLight24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/relativelayout_time"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:text="Delivery Rider "
+            android:textColor="@color/text_title"
+            android:textSize="16sp" />
+
+
+        <Spinner
+            android:id="@+id/spinner_riders"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/relativelayout1"
+            android:layout_alignStart="@+id/relativelayout1"
+            android:layout_below="@+id/openSansLight24"
+            android:layout_marginTop="5dp" />
 
     </RelativeLayout>
 

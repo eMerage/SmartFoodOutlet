@@ -341,67 +341,32 @@
                 android:textColor="@color/text_title"
                 android:textSize="16sp" />
 
-            <RelativeLayout
-                android:id="@+id/relativelayout1"
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
+                android:id="@+id/radiogroup"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp">
-
-                <emerge.project.onmealoutlet.ui.font.OpenSansLight
-                    android:id="@+id/openSansLight20"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+                <RadioButton android:id="@+id/radio_delivery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-
                     android:text="Delivery"
-                    android:textColor="@color/app_black" />
-
-                <CheckBox
-                    android:id="@+id/checkBox_delivery"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relativelayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/relativelayout1"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp">
-
-              <emerge.project.onmealoutlet.ui.font.OpenSansLight
-                    android:id="@+id/openSansLight22"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/radio_pickup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
+                    android:text="Pick up"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/radio_dinein"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dine-In"
+                    android:onClick="onRadioButtonClicked"/>
+            </RadioGroup>
 
-                    android:text="Pick Up"
-                    android:textColor="@color/app_black" />
 
-              <CheckBox
-                    android:id="@+id/checkBox_pickup"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    />
-
-            </RelativeLayout>
 
 
             <RelativeLayout
@@ -410,7 +375,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/relativelayout2"
+                android:layout_below="@+id/radiogroup"
                 android:layout_marginTop="5dp">
 
                 <emerge.project.onmealoutlet.ui.font.OpenSansLight
@@ -454,6 +419,34 @@
                 android:layout_alignStart="@+id/relativelayout1"
                 android:layout_below="@+id/openSansLight24"
                 android:layout_marginTop="5dp" />
+
+
+
+
+            <Button
+                android:id="@+id/button_filter_fn"
+                android:layout_below="@+id/spinner_riders"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/app_color_red"
+                android:text="Filter" />
+
+
+
+            <Button
+                android:id="@+id/button_clear"
+                android:layout_below="@+id/spinner_riders"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="120dp"
+                android:background="@color/app_color_red"
+                android:text="Clear" />
+
+
+
 
         </RelativeLayout>
 

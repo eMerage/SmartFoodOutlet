@@ -292,6 +292,8 @@ public class OrderHistory extends Activity implements OrderHistoryView {
             public void onClick(View v) {
                 dialogCalander.dismiss();
                 proprogressview.setVisibility(View.VISIBLE);
+
+
                 orderHistoryPresenter.getOrderHistory(filterDateStart, filterDateEnd,dispathType);
                 orderHistoryPresenter.getOrderHistorySalse(filterDateStart, filterDateEnd);
             }

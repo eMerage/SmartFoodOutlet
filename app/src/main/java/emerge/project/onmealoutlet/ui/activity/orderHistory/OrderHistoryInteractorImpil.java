@@ -42,7 +42,7 @@ public class OrderHistoryInteractorImpil implements OrderHistoryInteractor {
         }
 
         try {
-            apiService.getOrdersForOutletBetweenDates(outlet.getOutletId(), "ODDS", sDate, eDate,"")
+            apiService.getOrdersForOutletBetweenDates(outlet.getOutletId(), "ODCP", sDate, eDate,"")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<ArrayList<Orders>>() {
