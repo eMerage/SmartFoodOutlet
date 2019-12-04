@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import emerge.project.onmealoutlet.R;
+import emerge.project.onmealoutlet.ui.activity.home.Home;
 import emerge.project.onmealoutlet.ui.adaptor.OrderHistoryAdapter;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
@@ -211,6 +213,9 @@ public class OrderHistory extends Activity implements OrderHistoryView {
 
     @OnClick(R.id.relativeLayout_slider_menu)
     public void onClickBackMenu(View view) {
+        final Intent intent;
+        intent = new Intent(this, Home.class);
+        startActivity(intent);
         finish();
 
     }

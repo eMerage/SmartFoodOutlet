@@ -15,7 +15,7 @@ public class MenuItems implements Serializable {
     @SerializedName("name")
     String foodName;
 
-    @SerializedName("imageUrl")
+        @SerializedName("imageUrl")
     String foodCoverImage;
 
     @SerializedName("maxAvailableQty")

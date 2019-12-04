@@ -225,7 +225,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toEndOf="@+id/openSansLight156"
                 android:layout_toRightOf="@+id/openSansLight156"
-                android:text="zxxxssddddsdssdsdsdsdsdsdsdsdsdsdsdsdsd"
+                android:text=""
                 android:textColor="@color/colorAccent"
                 android:textSize="15sp" />
 

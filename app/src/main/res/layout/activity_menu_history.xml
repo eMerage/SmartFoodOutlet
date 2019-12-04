@@ -51,16 +51,13 @@
         </RelativeLayout>
 
 
-        <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/swiperefresh"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/relativelayout_bottom"
-            android:layout_below="@+id/relativelayout_titelbar">
+
 
             <RelativeLayout
                 android:id="@+id/relativelayout_menus"
                 android:layout_width="match_parent"
+                android:layout_above="@+id/relativelayout_bottom"
+                android:layout_below="@+id/relativelayout_titelbar"
                 android:layout_height="match_parent">
 
 
@@ -106,6 +103,12 @@
                     android:textSize="15sp" />
 
 
+                <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/swiperefresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/textview_stat_date">
+
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView_menu_history"
@@ -113,13 +116,11 @@
                     android:layout_below="@+id/textview_stat_date"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp" />
+
+                </android.support.v4.widget.SwipeRefreshLayout>
             </RelativeLayout>
 
 
-
-
-
-        </android.support.v4.widget.SwipeRefreshLayout>
 
 
         <RelativeLayout

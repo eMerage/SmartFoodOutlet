@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import emerge.project.onmealoutlet.R;
+import emerge.project.onmealoutlet.ui.activity.home.Home;
 import emerge.project.onmealoutlet.ui.adaptor.MenuHistoryAdapter;
 import emerge.project.onmealoutlet.utils.entittes.MenuHistoryEntittes;
 import emerge.project.onmealoutlet.utils.entittes.MenuItems;
@@ -103,8 +105,6 @@ public class MenuHistory extends Activity implements MenuHistoryView {
 
 
 
-
-
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -126,6 +126,9 @@ public class MenuHistory extends Activity implements MenuHistoryView {
 
     @OnClick(R.id.relativeLayout_slider_menu)
     public void onClickBackMenu(View view) {
+        final Intent intent;
+        intent = new Intent(this, Home.class);
+        startActivity(intent);
         finish();
 
     }
@@ -135,6 +138,12 @@ public class MenuHistory extends Activity implements MenuHistoryView {
 
         swipeContainer.setRefreshing(false);
         proprogressview.setVisibility(View.GONE);
+
+        if(menuItems.isEmpty()){
+
+        }else {
+
+        }
 
         menuHistoryAdapter = new MenuHistoryAdapter(this, menuItems);
         recyclerViewMenu.setAdapter(menuHistoryAdapter);

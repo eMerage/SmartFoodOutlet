@@ -3,6 +3,7 @@ package emerge.project.onmealoutlet.ui.activity.menus;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.servies.network.NetworkAvailability;
+import emerge.project.onmealoutlet.ui.activity.home.Home;
+import emerge.project.onmealoutlet.ui.activity.splash.Splash;
 import emerge.project.onmealoutlet.ui.adaptor.MenuCategoryAdapter;
 import emerge.project.onmealoutlet.ui.adaptor.MenuUpdateAdapter;
 import emerge.project.onmealoutlet.utils.entittes.MenuCategoryItems;
@@ -117,7 +120,11 @@ public class MenusActivity extends Activity implements MenusView{
 
     @OnClick(R.id.relativeLayout_slider_menu)
     public void onClickBackMenu(View view) {
-       finish();
+
+        final Intent intent;
+        intent = new Intent(this, Home.class);
+        startActivity(intent);
+        finish();
 
     }
 

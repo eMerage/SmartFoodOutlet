@@ -199,7 +199,7 @@ public class Home extends FragmentActivity implements HomeView {
         homePresenter.getIncome();
 
 
-        dispathType = "P";
+        dispathType = "";
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_REQUEST_ACCESS_BLUTOOTH);
@@ -219,19 +219,27 @@ public class Home extends FragmentActivity implements HomeView {
 
                     Intent intent = new Intent(Home.this, MenusActivity.class);
                     startActivity(intent);
+                    finish();
 
                     dLayout.closeDrawers();
                 } else if (position == 3) {
                     Intent intent = new Intent(Home.this, Setting.class);
                     startActivity(intent);
+                    finish();
                     dLayout.closeDrawers();
                 } else if (position == 4) {
-                    Intent intent = new Intent(Home.this, MenuHistory.class);
-                    startActivity(intent);
+                    Toast.makeText(Home.this, "This feature will be available soon", Toast.LENGTH_SHORT).show();
+                    //Intent intent = new Intent(Home.this, MenuHistory.class);
+                   // startActivity(intent);
+                   // finish();
                     dLayout.closeDrawers();
                 } else if (position == 5) {
-                    Intent intent = new Intent(Home.this, OrderHistory.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(Home.this, OrderHistory.class);
+                   // startActivity(intent);
+                   // finish();
+
+                    Toast.makeText(Home.this, "This feature will be available soon", Toast.LENGTH_SHORT).show();
+                    
                     dLayout.closeDrawers();
                 } else if (position == 6) {
                     homePresenter.logOut();
@@ -251,6 +259,14 @@ public class Home extends FragmentActivity implements HomeView {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        homePresenter.getIncome();
+        homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
+
+    }
 
     public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
@@ -273,16 +289,8 @@ public class Home extends FragmentActivity implements HomeView {
 
     @OnClick(R.id.button_filter_fn)
     public void onClickFilteDone(View view) {
-
-
-        System.out.println("mmmmmmmm  status:"+status);
-        System.out.println("mmmmmmmm  selectDeliveryTimeSlotId:"+selectDeliveryTimeSlotId);
-        System.out.println("mmmmmmmm  selectriderId:"+selectriderId);
-        System.out.println("mmmmmmmm  dispathType:"+dispathType);
         bloackUserInteraction();
-
         homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
-
     }
 
 

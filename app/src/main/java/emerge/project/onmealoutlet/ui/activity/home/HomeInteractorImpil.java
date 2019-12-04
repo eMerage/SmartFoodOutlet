@@ -402,6 +402,11 @@ public class HomeInteractorImpil implements HomeInteractor {
         data = new ArrayList<Orders>();
 
 
+        System.out.println("xxxxxxxx    getOutletId:"+outlet.getOutletId());
+        System.out.println("xxxxxxxx  statusCode  :"+statusCode);
+        System.out.println("xxxxxxxx  dispatcType  :"+dispatcType);
+        System.out.println("xxxxxxxx  timeSlotId  :"+timeSlotId);
+        System.out.println("xxxxxxxx  riderId  :"+riderId);
 
 
 

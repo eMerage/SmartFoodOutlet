@@ -3,6 +3,7 @@ package emerge.project.onmealoutlet.ui.adaptor;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,6 +64,39 @@ public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHo
         holder.textViewNote.setText(orders.getOrderNote());
 
 
+
+        final String time;
+        long remTime ;
+
+        if (orders.getDeliveryTime().getTimeSlotID() == 0) {
+            time = orders.getPickUpTime();
+        } else {
+            time = orders.getDeliveryTime().getTimeSlot();
+        }
+
+        holder.textViewTime.setText(time);
+
+
+        if(orders.getPaymentType().equals("CH")){
+            holder.textViewPaymenttype.setText("Cash");
+        }else {
+            holder.textViewPaymenttype.setText("Card");
+        }
+
+
+        holder.textViewRider.setText(orders.getRider().getName());
+
+
+
+        if(String.valueOf(orders.getDispatchType()).equals("D")){
+            holder.textViewDispatchType.setText("Delivery");
+        }else if(String.valueOf(orders.getDispatchType()).equals("P")){
+            holder.textViewDispatchType.setText("Pickup");
+        }else if(String.valueOf(orders.getDispatchType()).equals("T")){
+            holder.textViewDispatchType.setText("Dine In");
+        }
+
+
         holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +142,22 @@ public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHo
 
         @BindView(R.id.textView_note)
         TextView textViewNote;
+
+
+
+        @BindView(R.id.textView_time)
+        TextView textViewTime;
+
+        @BindView(R.id.textView_rider)
+        TextView textViewRider;
+
+        @BindView(R.id.textView_dispatchtype)
+        TextView textViewDispatchType;
+
+
+        @BindView(R.id.textView_paymenttype)
+        TextView textViewPaymenttype;
+
 
         @BindView(R.id.button_print)
         Button buttonPrint;

@@ -12,6 +12,7 @@ import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.data.db.Outlet;
 import emerge.project.onmealoutlet.ui.activity.home.Home;
 import emerge.project.onmealoutlet.ui.activity.login.Login;
+import emerge.project.onmealoutlet.ui.activity.menus.MenusActivity;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -38,7 +39,7 @@ public class Splash extends Activity {
         if(allTransactions.size()==0){
             intent = new Intent(Splash.this, Login.class);
         }else {
-             intent = new Intent(Splash.this, Home.class);
+            intent = new Intent(Splash.this, MenusActivity.class);
         }
 
         new Handler().postDelayed(new Runnable() {

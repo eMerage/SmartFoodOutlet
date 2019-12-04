@@ -222,11 +222,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         @BindView(R.id.textView_ordernumber)
         TextView textViewOrderNumber;
 
-        @BindView(R.id.textView_time)
-        TextView textViewTime;
 
-        @BindView(R.id.textView_rider)
-        TextView textViewRider;
 
         @BindView(R.id.textView_amount)
         TextView textViewAmount;
@@ -234,19 +230,25 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         @BindView(R.id.textView_qty)
         TextView textViewQty;
 
+        @BindView(R.id.textView_time)
+        TextView textViewTime;
+
+        @BindView(R.id.textView_rider)
+        TextView textViewRider;
+
         @BindView(R.id.textView_dispatchtype)
         TextView textViewDispatchType;
+
+        @BindView(R.id.textView_paymenttype)
+        TextView textViewPaymenttype;
+
+
 
         @BindView(R.id.textView_promotype)
         TextView textViewPromotype;
 
         @BindView(R.id.textView_note)
         TextView textViewNote;
-
-
-        @BindView(R.id.textView_paymenttype)
-        TextView textViewPaymenttype;
-
 
 
         @BindView(R.id.button_print)

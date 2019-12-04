@@ -61,6 +61,36 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
         holder.textViewQTY.setText(String.valueOf(orders.getOrderQty()));
 
 
+        final String time;
+
+        if (orders.getDeliveryTime().getTimeSlotID() == 0) {
+            time = orders.getPickUpTime();
+        } else {
+            time = orders.getDeliveryTime().getTimeSlot();
+        }
+
+        holder.textViewTime.setText(time);
+
+
+
+        if(orders.getPaymentType().equals("CH")){
+            holder.textViewPaymenttype.setText("Cash");
+        }else {
+            holder.textViewPaymenttype.setText("Card");
+        }
+
+
+        holder.textViewRider.setText(orders.getRider().getName());
+
+
+        if(String.valueOf(orders.getDispatchType()).equals("D")){
+            holder.textViewDispatchType.setText("Delivery");
+        }else if(String.valueOf(orders.getDispatchType()).equals("P")){
+            holder.textViewDispatchType.setText("Pickup");
+        }else if(String.valueOf(orders.getDispatchType()).equals("T")){
+            holder.textViewDispatchType.setText("Dine In");
+        }
+
 
         holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +136,18 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
         @BindView(R.id.textView_qy)
         TextView textViewQTY;
 
+
+        @BindView(R.id.textView_time)
+        TextView textViewTime;
+
+        @BindView(R.id.textView_rider)
+        TextView textViewRider;
+
+        @BindView(R.id.textView_dispatchtype)
+        TextView textViewDispatchType;
+
+        @BindView(R.id.textView_paymenttype)
+        TextView textViewPaymenttype;
 
 
         @BindView(R.id.button_print)

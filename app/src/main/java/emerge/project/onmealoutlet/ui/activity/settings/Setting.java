@@ -3,6 +3,7 @@ package emerge.project.onmealoutlet.ui.activity.settings;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -21,6 +22,7 @@ import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.data.db.Outlet;
 import emerge.project.onmealoutlet.data.db.PrinterMac;
 import emerge.project.onmealoutlet.servies.network.NetworkAvailability;
+import emerge.project.onmealoutlet.ui.activity.home.Home;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -109,6 +111,9 @@ public class Setting extends Activity implements SettingsView {
     @OnClick(R.id.relativeLayout_slider_menu)
     public void onClickSliderMenue(View view) {
 
+        final Intent intent;
+        intent = new Intent(this, Home.class);
+        startActivity(intent);
         finish();
     }
 

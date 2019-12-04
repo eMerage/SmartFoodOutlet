@@ -44,8 +44,6 @@ public class MenuHistoryInteractorImpil implements MenuHistoryInteractor {
         }
 
 
-
-
         try {
             apiService.getMenuSaleForOutlet(outlet.getOutletId(),sDate, eDate,"")
                     .subscribeOn(Schedulers.io())
@@ -63,7 +61,7 @@ public class MenuHistoryInteractorImpil implements MenuHistoryInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetMenuHistoryFinishedListener.getMenuHistoryFail("Something went wrong, Please try again");
+                            onGetMenuHistoryFinishedListener.getMenuHistoryFail("Something went wrong, Please try again "+e.toString());
                         }
 
                         @Override
@@ -73,7 +71,7 @@ public class MenuHistoryInteractorImpil implements MenuHistoryInteractor {
                         }
                     });
         } catch (Exception ex) {
-            onGetMenuHistoryFinishedListener.getMenuHistoryFail("Something went wrong, Please try again");
+            onGetMenuHistoryFinishedListener.getMenuHistoryFail("Something went wrong, Please try again ex"+ex.toString());
         }
 
     }
