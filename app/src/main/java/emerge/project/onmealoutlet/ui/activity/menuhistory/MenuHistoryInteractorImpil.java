@@ -66,7 +66,12 @@ public class MenuHistoryInteractorImpil implements MenuHistoryInteractor {
 
                         @Override
                         public void onComplete() {
-                            onGetMenuHistoryFinishedListener.getMenuHistory(menuHistoryEntittes);
+                            if(menuHistoryEntittes.size()==0){
+                                onGetMenuHistoryFinishedListener.getMenuHistoryFail("No History for selected Date,Please check the date");
+
+                            }else {
+                                onGetMenuHistoryFinishedListener.getMenuHistory(menuHistoryEntittes);
+                            }
 
                         }
                     });
@@ -101,7 +106,7 @@ public class MenuHistoryInteractorImpil implements MenuHistoryInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetOrderHistorySalseFinishedListener.getOrderHistoryFailSalse("Something went wrong, Please try again");
+                          //  onGetOrderHistorySalseFinishedListener.getOrderHistoryFailSalse("Something went wrong, Please try again");
 
                         }
 

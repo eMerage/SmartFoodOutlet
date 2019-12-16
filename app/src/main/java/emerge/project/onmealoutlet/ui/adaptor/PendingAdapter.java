@@ -92,7 +92,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
 
 
-        new CountDownTimer(remTime, 1000) {
+        cTimer=  new CountDownTimer(remTime, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 long millis = millisUntilFinished;
@@ -196,6 +196,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         holder.buttonProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cTimer.cancel();
                 homePresenter.updateOrderStatus(orders.getOrderID(), orders.getUserID(), "ODPR",orders.getDispatchType());
                 orders.setCuntDownExp(true);
 
@@ -203,6 +204,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         });
 
     }
+
 
 
 

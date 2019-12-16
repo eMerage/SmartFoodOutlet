@@ -39,6 +39,8 @@ public class OrderHistoryInteractorImpil implements OrderHistoryInteractor {
 
         }
 
+        System.out.println("pppppppppppppp getOrderHistory "+outlet.getOutletId());
+
         try {
             apiService.getOrdersForOutletBetweenDates(outlet.getOutletId(), "ODCP", sDate, eDate,"")
                     .subscribeOn(Schedulers.io())
@@ -62,7 +64,16 @@ public class OrderHistoryInteractorImpil implements OrderHistoryInteractor {
 
                         @Override
                         public void onComplete() {
-                            onGetOrderHistoryFinishedListener.getOrderHistory(ordersArrayList);
+                            if(ordersArrayList.size()==1){
+                                if(ordersArrayList.get(0).getOrderID()==0){
+                                    onGetOrderHistoryFinishedListener.getOrderHistoryFail("No History for selected Date,Please check the date");
+                                }else {
+                                    onGetOrderHistoryFinishedListener.getOrderHistory(ordersArrayList);
+                                }
+
+                            }else {
+                                onGetOrderHistoryFinishedListener.getOrderHistory(ordersArrayList);
+                            }
 
                         }
                     });
@@ -96,7 +107,7 @@ public class OrderHistoryInteractorImpil implements OrderHistoryInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetOrderHistorySalseFinishedListener.getOrderHistoryFailSalse("Something went wrong, Please try again");
+                          //  onGetOrderHistorySalseFinishedListener.getOrderHistoryFailSalse("Something went wrong, Please try again");
 
                         }
 
