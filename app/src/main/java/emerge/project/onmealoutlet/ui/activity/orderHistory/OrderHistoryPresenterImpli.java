@@ -3,12 +3,7 @@ package emerge.project.onmealoutlet.ui.activity.orderHistory;
 
 import java.util.ArrayList;
 
-import emerge.project.onmealoutlet.ui.activity.menuhistory.MenuHistoryInteractor;
-import emerge.project.onmealoutlet.ui.activity.menuhistory.MenuHistoryInteractorImpil;
-import emerge.project.onmealoutlet.ui.activity.menuhistory.MenuHistoryPresenter;
-import emerge.project.onmealoutlet.ui.activity.menuhistory.MenuHistoryView;
-import emerge.project.onmealoutlet.utils.entittes.MenuItems;
-import emerge.project.onmealoutlet.utils.entittes.Orders;
+import emerge.project.onmealoutlet.utils.entittes.OrderHistoryEntitte;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
 
 /**
@@ -43,7 +38,7 @@ public class OrderHistoryPresenterImpli implements OrderHistoryPresenter,
 
 
     @Override
-    public void getOrderHistory(ArrayList<Orders> OrderItems) {
+    public void getOrderHistory(ArrayList<OrderHistoryEntitte> OrderItems) {
         orderHistoryView.getOrderHistory(OrderItems);
     }
 

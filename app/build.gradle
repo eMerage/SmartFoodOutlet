@@ -7,8 +7,8 @@ android {
         applicationId "emerge.project.onmealoutlet"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 14
-        versionName "1.0.1.PO14"
+        versionCode 15
+        versionName "1.0.1.PO15"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -38,7 +38,7 @@ android {
             buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_Production/api/\"'
         }
         debug {
-            buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_Production/api/\"'
+            buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_DEV/api/\"'
         }
 
     }

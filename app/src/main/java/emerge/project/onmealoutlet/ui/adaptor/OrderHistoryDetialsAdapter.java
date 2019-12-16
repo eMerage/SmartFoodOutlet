@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.utils.entittes.MenuItems;
+import emerge.project.onmealoutlet.utils.entittes.OrderMenuHistory;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 
 
@@ -28,12 +29,12 @@ import emerge.project.onmealoutlet.utils.entittes.Orders;
 public class OrderHistoryDetialsAdapter extends RecyclerView.Adapter<OrderHistoryDetialsAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<MenuItems> menuItems;
+    ArrayList<OrderMenuHistory> menuItems;
 
 
     int status = 0;
 
-    public OrderHistoryDetialsAdapter(Context mContext, ArrayList<MenuItems> item) {
+    public OrderHistoryDetialsAdapter(Context mContext, ArrayList<OrderMenuHistory> item) {
         this.mContext = mContext;
         this.menuItems = item;
 
@@ -50,7 +51,7 @@ public class OrderHistoryDetialsAdapter extends RecyclerView.Adapter<OrderHistor
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        final MenuItems menuItemsObject = menuItems.get(position);
+        final OrderMenuHistory menuItemsObject = menuItems.get(position);
 
 
 
@@ -62,7 +63,7 @@ public class OrderHistoryDetialsAdapter extends RecyclerView.Adapter<OrderHistor
         formatter.setDecimalFormatSymbols(symbols);
 
 
-         holder.textviewFoodname.setText(menuItemsObject.getFoodName());
+         holder.textviewFoodname.setText(menuItemsObject.getName());
          holder.textviewQuantity.setText(formatter.format(menuItemsObject.getMenuQty()));
          holder.textviewValue.setText(formatter.format(menuItemsObject.getMenuPrice()));
 

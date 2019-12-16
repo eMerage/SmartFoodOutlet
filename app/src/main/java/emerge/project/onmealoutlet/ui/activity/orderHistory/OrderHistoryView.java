@@ -3,8 +3,7 @@ package emerge.project.onmealoutlet.ui.activity.orderHistory;
 
 import java.util.ArrayList;
 
-import emerge.project.onmealoutlet.utils.entittes.MenuItems;
-import emerge.project.onmealoutlet.utils.entittes.Orders;
+import emerge.project.onmealoutlet.utils.entittes.OrderHistoryEntitte;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
 
 /**
@@ -14,7 +13,7 @@ import emerge.project.onmealoutlet.utils.entittes.OutletSales;
 public interface OrderHistoryView {
 
 
-        void getOrderHistory(ArrayList<Orders> OrderItems);
+        void getOrderHistory(ArrayList<OrderHistoryEntitte> OrderItems);
         void getOrderHistoryFail(String msg);
 
 

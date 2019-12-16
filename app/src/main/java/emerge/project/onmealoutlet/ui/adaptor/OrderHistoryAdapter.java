@@ -20,9 +20,12 @@ import emerge.project.onmealoutlet.servies.network.NetworkAvailability;
 import emerge.project.onmealoutlet.ui.activity.menus.MenusPresenter;
 import emerge.project.onmealoutlet.ui.activity.menus.MenusPresenterImpli;
 import emerge.project.onmealoutlet.ui.activity.menus.MenusView;
+
+
 import emerge.project.onmealoutlet.utils.entittes.MenuCategoryItems;
 import emerge.project.onmealoutlet.utils.entittes.MenuItems;
-import emerge.project.onmealoutlet.utils.entittes.Orders;
+import emerge.project.onmealoutlet.utils.entittes.OrderHistoryEntitte;
+import emerge.project.onmealoutlet.utils.entittes.OrderMenuHistory;
 
 
 /**
@@ -31,12 +34,12 @@ import emerge.project.onmealoutlet.utils.entittes.Orders;
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<Orders> ordersItems;
+    ArrayList<OrderHistoryEntitte> ordersItems;
 
 
     int status = 0;
 
-    public OrderHistoryAdapter(Context mContext, ArrayList<Orders> item) {
+    public OrderHistoryAdapter(Context mContext, ArrayList<OrderHistoryEntitte> item) {
         this.mContext = mContext;
         this.ordersItems = item;
 
@@ -53,7 +56,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        final Orders ordersObject = ordersItems.get(position);
+        final OrderHistoryEntitte ordersObject = ordersItems.get(position);
 
         if(ordersObject.getOrderID()==0){
             holder.textviewOrder.setVisibility(View.GONE);
@@ -85,25 +88,25 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         }
 
 
-        if(ordersObject.getPaymentType()==null){
+        if(ordersObject.getPaymentTypeCode()==null){
             holder.textviewPayment.setVisibility(View.GONE);
             holder.textPaymenttype.setVisibility(View.GONE);
         }else {
             holder.textviewPayment.setVisibility(View.VISIBLE);
             holder.textPaymenttype.setVisibility(View.VISIBLE);
-            holder.textPaymenttype.setText(ordersObject.getPaymentType());
+            holder.textPaymenttype.setText(ordersObject.getPaymentTypeCode());
         }
 
-         if(ordersObject.getMenuItems()==null){
+         if(ordersObject.getOrderMenuHistory()==null){
              holder.recyclerViewFoodDetails.setVisibility(View.GONE);
          }else {
-             if(ordersObject.getMenuItems().isEmpty()){
+             if(ordersObject.getOrderMenuHistory().isEmpty()){
                  holder.recyclerViewFoodDetails.setVisibility(View.GONE);
 
              }else {
                  holder.recyclerViewFoodDetails.setVisibility(View.VISIBLE);
-                 holder.textPaymenttype.setText(ordersObject.getPaymentType());
-                 setSubItems(mContext,holder,ordersObject.getMenuItems());
+                 holder.textPaymenttype.setText(ordersObject.getPaymentTypeCode());
+                 setSubItems(mContext,holder,ordersObject.getOrderMenuHistory());
 
              }
          }
@@ -114,7 +117,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
     }
 
-    public void setSubItems(Context context, MyViewHolder holder, ArrayList<MenuItems> foodist) {
+    public void setSubItems(Context context, MyViewHolder holder, ArrayList<OrderMenuHistory> foodist) {
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);

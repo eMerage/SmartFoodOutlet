@@ -2,13 +2,11 @@ package emerge.project.onmealoutlet.ui.activity.orderHistory;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import emerge.project.onmealoutlet.data.db.Outlet;
 import emerge.project.onmealoutlet.servies.api.ApiClient;
 import emerge.project.onmealoutlet.servies.api.ApiInterface;
-import emerge.project.onmealoutlet.ui.activity.menuhistory.MenuHistoryInteractor;
-import emerge.project.onmealoutlet.utils.entittes.Orders;
+import emerge.project.onmealoutlet.utils.entittes.OrderHistoryEntitte;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -28,7 +26,7 @@ public class OrderHistoryInteractorImpil implements OrderHistoryInteractor {
 
     Outlet outlet = realm.where(Outlet.class).findFirst();
 
-    ArrayList<Orders> ordersArrayList = new ArrayList<Orders>();
+    ArrayList<OrderHistoryEntitte> ordersArrayList = new ArrayList<OrderHistoryEntitte>();
 
     OutletSales outletSales = new OutletSales();
 
@@ -45,14 +43,14 @@ public class OrderHistoryInteractorImpil implements OrderHistoryInteractor {
             apiService.getOrdersForOutletBetweenDates(outlet.getOutletId(), "ODCP", sDate, eDate,"")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<ArrayList<Orders>>() {
+                    .subscribe(new Observer<ArrayList<OrderHistoryEntitte>>() {
                         @Override
                         public void onSubscribe(Disposable d) {
 
                         }
 
                         @Override
-                        public void onNext(ArrayList<Orders> ordersList) {
+                        public void onNext(ArrayList<OrderHistoryEntitte> ordersList) {
                             ordersArrayList = ordersList;
                         }
 
@@ -65,7 +63,6 @@ public class OrderHistoryInteractorImpil implements OrderHistoryInteractor {
                         @Override
                         public void onComplete() {
                             onGetOrderHistoryFinishedListener.getOrderHistory(ordersArrayList);
-                            System.out.println("ordersArrayList : "+ordersArrayList.size());
 
                         }
                     });

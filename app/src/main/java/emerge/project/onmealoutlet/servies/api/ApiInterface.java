@@ -11,6 +11,7 @@ import emerge.project.onmealoutlet.utils.entittes.DeliveryRiders;
 import emerge.project.onmealoutlet.utils.entittes.MenuCategoryItems;
 import emerge.project.onmealoutlet.utils.entittes.MenuHistoryEntittes;
 import emerge.project.onmealoutlet.utils.entittes.MenuItems;
+import emerge.project.onmealoutlet.utils.entittes.OrderHistoryEntitte;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
 import emerge.project.onmealoutlet.utils.entittes.TimeSlots;
@@ -36,7 +37,7 @@ public interface ApiInterface {
     Observable<User> getUserByEmail(@Query("email") String email, @Query("pushTokenId") String pushTokenId);
 
 
-    @GET("Order/GetOrdersForOutlet")
+        @GET("Order/GetOrdersForOutlet")
     Observable<List<Orders>> getOrdersForOutlet(@Query("outletID") int outletID, @Query("orderStatusCode") String orderStatusCode, @Query("dispatchType") String dispatchType, @Query("timeSlotID") int timeSlotID, @Query("riderID") int riderID);
 
 
@@ -84,9 +85,9 @@ public interface ApiInterface {
 
 
     @GET("Order/GetOrdersForOutletBetweenDates")
-    Observable<ArrayList<Orders>> getOrdersForOutletBetweenDates(@Query("outletID") int outletID,
-                                                                 @Query("orderStatusCode") String orderStatusCode, @Query("startDate") String startDate,
-                                                                 @Query("endDate") String endDate, @Query("dispatchType") String dispatchType);
+    Observable<ArrayList<OrderHistoryEntitte>> getOrdersForOutletBetweenDates(@Query("outletID") int outletID,
+                                                                              @Query("orderStatusCode") String orderStatusCode, @Query("startDate") String startDate,
+                                                                              @Query("endDate") String endDate, @Query("dispatchType") String dispatchType);
 
 
 

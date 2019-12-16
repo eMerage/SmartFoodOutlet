@@ -402,14 +402,6 @@ public class HomeInteractorImpil implements HomeInteractor {
         data = new ArrayList<Orders>();
 
 
-        System.out.println("xxxxxxxx    getOutletId:"+outlet.getOutletId());
-        System.out.println("xxxxxxxx  statusCode  :"+statusCode);
-        System.out.println("xxxxxxxx  dispatcType  :"+dispatcType);
-        System.out.println("xxxxxxxx  timeSlotId  :"+timeSlotId);
-        System.out.println("xxxxxxxx  riderId  :"+riderId);
-
-
-
         apiService.getOrdersForOutlet(outlet.getOutletId(), statusCode, dispatcType, timeSlotId, riderId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -421,14 +413,8 @@ public class HomeInteractorImpil implements HomeInteractor {
 
                     @Override
                     public void onNext(List<Orders> ordersList) {
-
                         data = ordersList;
 
-                        /*for (int i = 0; i < ordersList.size(); i++) {
-                            ordersArrayList.add(new Orders(ordersList.get(i).getOrderID(), ordersList.get(i).getOrderDate(), ordersList.get(i).getUserID(), ordersList.get(i).getOrderTotal(), ordersList.get(i).getOrderQty(),
-                                    ordersList.get(i).getDispatchType(), ordersList.get(i).getPickUpTime(), ordersList.get(i).getRider(),
-                                    ordersList.get(i).getDeliveryTime(), ordersList.get(i).getPromoCode(), ordersList.get(i).getPromoTitle(), ordersList.get(i).getOrderNote()));
-                        }*/
                     }
 
                     @Override
@@ -439,14 +425,11 @@ public class HomeInteractorImpil implements HomeInteractor {
                     @Override
                     public void onComplete() {
 
-
                         for (int i = 0; i < data.size(); i++) {
                             ordersArrayList.add(new Orders(data.get(i).getOrderID(), data.get(i).getOrderDate(), data.get(i).getUserID(), data.get(i).getOrderTotal(), data.get(i).getOrderQty(),
                                     data.get(i).getDispatchType(), data.get(i).getPickUpTime(), data.get(i).getRider(),
                                     data.get(i).getDeliveryTime(), data.get(i).getPromoCode(), data.get(i).getPromoTitle(), data.get(i).getOrderNote(),data.get(i).getPaymentType()));
                         }
-
-
 
 
                         if (ordersArrayList.isEmpty()) {
@@ -455,13 +438,6 @@ public class HomeInteractorImpil implements HomeInteractor {
                             onGetOrdersFinishedListener.ordersList(ordersArrayList);
                         }
 
-
-
-                       /* if (ordersArrayList.isEmpty()) {
-                            onGetOrdersFinishedListener.noOrdersList();
-                        } else {
-                            onGetOrdersFinishedListener.ordersList(ordersArrayList);
-                        }*/
 
                     }
                 });

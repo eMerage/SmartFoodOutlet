@@ -228,17 +228,15 @@ public class Home extends FragmentActivity implements HomeView {
                     finish();
                     dLayout.closeDrawers();
                 } else if (position == 4) {
-                    Toast.makeText(Home.this, "This feature will be available soon", Toast.LENGTH_SHORT).show();
-                    //Intent intent = new Intent(Home.this, MenuHistory.class);
-                   // startActivity(intent);
-                   // finish();
+                    Intent intent = new Intent(Home.this, MenuHistory.class);
+                    startActivity(intent);
+                    finish();
                     dLayout.closeDrawers();
                 } else if (position == 5) {
-                    //Intent intent = new Intent(Home.this, OrderHistory.class);
-                   // startActivity(intent);
-                   // finish();
+                    Intent intent = new Intent(Home.this, OrderHistory.class);
+                    startActivity(intent);
+                    finish();
 
-                    Toast.makeText(Home.this, "This feature will be available soon", Toast.LENGTH_SHORT).show();
                     
                     dLayout.closeDrawers();
                 } else if (position == 6) {

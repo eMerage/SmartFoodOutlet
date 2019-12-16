@@ -37,6 +37,7 @@ import butterknife.OnClick;
 import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.ui.activity.home.Home;
 import emerge.project.onmealoutlet.ui.adaptor.OrderHistoryAdapter;
+import emerge.project.onmealoutlet.utils.entittes.OrderHistoryEntitte;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
 
@@ -128,7 +129,7 @@ public class OrderHistory extends Activity implements OrderHistoryView {
 
 
     @Override
-    public void getOrderHistory(ArrayList<Orders> orderItems) {
+    public void getOrderHistory(ArrayList<OrderHistoryEntitte> orderItems) {
 
         OrderHistoryAdapter OrderHistoryAdapter = new OrderHistoryAdapter(this, orderItems);
         recyclerViewOrder.setAdapter(OrderHistoryAdapter);
