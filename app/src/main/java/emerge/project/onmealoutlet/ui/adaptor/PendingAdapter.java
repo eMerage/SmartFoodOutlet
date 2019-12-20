@@ -145,7 +145,9 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
         holder.textViewRider.setText(orders.getRider().getName());
 
-        holder.textViewAmount.setText(String.valueOf(orders.getOrderTotal()));
+
+        //holder.textViewAmount.setText(String.valueOf(orders.getOrderTotal()));
+        holder.textViewAmount.setText(String.valueOf(orders.getOrderTotalWithoutDeliveryCost()));
         holder.textViewQty.setText(String.valueOf(orders.getOrderQty()));
 
 

@@ -428,7 +428,7 @@ public class HomeInteractorImpil implements HomeInteractor {
                         for (int i = 0; i < data.size(); i++) {
                             ordersArrayList.add(new Orders(data.get(i).getOrderID(), data.get(i).getOrderDate(), data.get(i).getUserID(), data.get(i).getOrderTotal(), data.get(i).getOrderQty(),
                                     data.get(i).getDispatchType(), data.get(i).getPickUpTime(), data.get(i).getRider(),
-                                    data.get(i).getDeliveryTime(), data.get(i).getPromoCode(), data.get(i).getPromoTitle(), data.get(i).getOrderNote(),data.get(i).getPaymentType()));
+                                    data.get(i).getDeliveryTime(), data.get(i).getPromoCode(), data.get(i).getPromoTitle(), data.get(i).getOrderNote(),data.get(i).getPaymentType(),data.get(i).getOrderTotalWithoutDeliveryCost()));
                         }
 
 
