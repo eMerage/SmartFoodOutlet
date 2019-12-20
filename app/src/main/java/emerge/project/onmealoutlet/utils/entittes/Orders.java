@@ -18,7 +18,11 @@ public class Orders implements Serializable {
     int userID;
 
 
-    @SerializedName("orderTotal")
+  /*  @SerializedName("orderTotal")
+    Double orderTotal;
+*/
+
+    @SerializedName("orderTotalWithoutDeliveryCost")
     Double orderTotal;
 
     @SerializedName("orderQty")
@@ -48,6 +52,7 @@ public class Orders implements Serializable {
 
     @SerializedName("paymentTypeCode")
     String paymentType;
+
 
 
     @SerializedName("orderMenus")

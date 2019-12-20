@@ -37,7 +37,7 @@ public interface ApiInterface {
     Observable<User> getUserByEmail(@Query("email") String email, @Query("pushTokenId") String pushTokenId);
 
 
-        @GET("Order/GetOrdersForOutlet")
+    @GET("Order/GetOrdersForOutlet")
     Observable<List<Orders>> getOrdersForOutlet(@Query("outletID") int outletID, @Query("orderStatusCode") String orderStatusCode, @Query("dispatchType") String dispatchType, @Query("timeSlotID") int timeSlotID, @Query("riderID") int riderID);
 
 
