@@ -92,6 +92,8 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
         }
 
 
+        holder.textView_price.setText(String.valueOf(orders.getOrderTotal()));
+
         holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +150,11 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
 
         @BindView(R.id.textView_paymenttype)
         TextView textViewPaymenttype;
+
+        @BindView(R.id.textView_price)
+        TextView textView_price;
+
+
 
 
         @BindView(R.id.button_print)

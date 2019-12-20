@@ -7,11 +7,12 @@ android {
         applicationId "emerge.project.onmealoutlet"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 16
-        versionName "1.0.1.PO16"
+        versionCode 17
+        versionName "1.0.1.PO17"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+
 
 
     signingConfigs {
@@ -36,6 +37,9 @@ android {
             signingConfig signingConfigs.key
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_Production/api/\"'
+            //buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_DEV/api/\"'
+
+
         }
         debug {
             buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_DEV/api/\"'

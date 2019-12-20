@@ -84,7 +84,16 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         }else {
             holder.textviewDispatch.setVisibility(View.VISIBLE);
             holder.textDispatchtype.setVisibility(View.VISIBLE);
-            holder.textDispatchtype.setText(ordersObject.getDispatchType());
+
+            if(String.valueOf(ordersObject.getDispatchType()).equals("D")){
+                holder.textDispatchtype.setText("Delivery");
+            }else if(String.valueOf(ordersObject.getDispatchType()).equals("P")){
+                holder.textDispatchtype.setText("Pickup");
+            }else if(String.valueOf(ordersObject.getDispatchType()).equals("T")){
+                holder.textDispatchtype.setText("Dine In");
+            }
+
+
         }
 
 

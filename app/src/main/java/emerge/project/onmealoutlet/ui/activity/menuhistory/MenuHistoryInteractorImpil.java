@@ -43,41 +43,50 @@ public class MenuHistoryInteractorImpil implements MenuHistoryInteractor {
 
         }
 
+        if ((sDate.equals("")) || (eDate.equals("")) ){
+            onGetMenuHistoryFinishedListener.getMenuHistoryFail("Selected date can not be empty");
+        }else if((sDate == null)  || (eDate == null)){
+            onGetMenuHistoryFinishedListener.getMenuHistoryFail("Selected date can not be empty");
+        }else {
+            try {
+                apiService.getMenuSaleForOutlet(outlet.getOutletId(),sDate, eDate,"")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<ArrayList<MenuHistoryEntittes>>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
 
-        try {
-            apiService.getMenuSaleForOutlet(outlet.getOutletId(),sDate, eDate,"")
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<ArrayList<MenuHistoryEntittes>>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
-
-                        @Override
-                        public void onNext(ArrayList<MenuHistoryEntittes> outletsales) {
-                            menuHistoryEntittes = outletsales;
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            onGetMenuHistoryFinishedListener.getMenuHistoryFail("Something went wrong, Please try again "+e.toString());
-                        }
-
-                        @Override
-                        public void onComplete() {
-                            if(menuHistoryEntittes.size()==0){
-                                onGetMenuHistoryFinishedListener.getMenuHistoryFail("No History for selected Date,Please check the date");
-
-                            }else {
-                                onGetMenuHistoryFinishedListener.getMenuHistory(menuHistoryEntittes);
                             }
 
-                        }
-                    });
-        } catch (Exception ex) {
-            onGetMenuHistoryFinishedListener.getMenuHistoryFail("Something went wrong, Please try again ex"+ex.toString());
+                            @Override
+                            public void onNext(ArrayList<MenuHistoryEntittes> outletsales) {
+                                menuHistoryEntittes = outletsales;
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                onGetMenuHistoryFinishedListener.getMenuHistoryFail("Something went wrong, Please try again "+e.toString());
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                if(menuHistoryEntittes.size()==0){
+                                    onGetMenuHistoryFinishedListener.getMenuHistoryFail("No History for selected Date,Please check the date");
+
+                                }else {
+                                    onGetMenuHistoryFinishedListener.getMenuHistory(menuHistoryEntittes);
+                                }
+
+                            }
+                        });
+            } catch (Exception ex) {
+                onGetMenuHistoryFinishedListener.getMenuHistoryFail("Something went wrong, Please try again ex"+ex.toString());
+            }
+
         }
+
+
+
 
     }
 
