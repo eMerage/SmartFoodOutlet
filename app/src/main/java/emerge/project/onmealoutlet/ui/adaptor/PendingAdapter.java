@@ -109,13 +109,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
                         holder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.app_color_light_red));
                         orders.setCuntDownExp(true);
 
-                        try {
-                            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-                            Ringtone r = RingtoneManager.getRingtone(mContext, notification);
-                            r.play();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+
                         notifyDataSetChanged();
                     }
 
@@ -124,8 +118,6 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
 
                 }
-
-
 
 
             }
@@ -146,7 +138,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         holder.textViewRider.setText(orders.getRider().getName());
 
 
-        //holder.textViewAmount.setText(String.valueOf(orders.getOrderTotal()));
+
         holder.textViewAmount.setText(String.valueOf(orders.getOrderTotalWithoutDeliveryCost()));
         holder.textViewQty.setText(String.valueOf(orders.getOrderQty()));
 
@@ -159,8 +151,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             holder.textViewDispatchType.setText("Dine In");
         }
 
-
-
+        holder.textViewDiscount.setText(String.valueOf(orders.getPromoDiscountValue()));
 
         String promo;
 
@@ -263,6 +254,14 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
         @BindView(R.id.relativelayout_main)
         RelativeLayout relativelayouMain;
+
+
+        @BindView(R.id.textView_discount)
+        TextView textViewDiscount;
+
+
+
+
 
 
         public MyViewHolder(View itemView) {

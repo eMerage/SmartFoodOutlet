@@ -63,9 +63,17 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
 
 
 
+        if (holder.linearLayoutChild.getVisibility() == View.VISIBLE) {
+            holder.linearLayoutChild.setVisibility(View.GONE);
+        } else {
+            holder.linearLayoutChild.setVisibility(View.VISIBLE);
+
+            setSubItems(mContext,holder,menusList.getFoods());
+
+        }
 
 
-        holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
+       /* holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -79,7 +87,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
 
                 }
             }
-        });
+        });*/
 
     }
 

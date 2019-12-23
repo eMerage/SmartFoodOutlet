@@ -97,6 +97,20 @@ public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHo
         }
 
 
+        String promo;
+
+        if (orders.getPromoTitle().equals("")) {
+            promo = "no Promo";
+        } else {
+            promo = orders.getPromoTitle();
+        }
+
+
+        holder.textViewPromotype.setText(promo);
+        holder.textViewAmount.setText(String.valueOf(orders.getOrderTotalWithoutDeliveryCost()));
+
+        holder.textViewDiscount.setText(String.valueOf(orders.getPromoDiscountValue()));
+
         holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,6 +183,15 @@ public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHo
         @BindView(R.id.relativelayout_main)
         RelativeLayout relativelayouMain;
 
+
+        @BindView(R.id.textView_amount)
+        TextView textViewAmount;
+
+        @BindView(R.id.textView_promotype)
+        TextView textViewPromotype;
+
+        @BindView(R.id.textView_discount)
+        TextView textViewDiscount;
 
         public MyViewHolder(View itemView) {
             super(itemView);

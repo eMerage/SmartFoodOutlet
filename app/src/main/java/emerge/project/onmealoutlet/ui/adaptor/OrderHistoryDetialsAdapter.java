@@ -21,6 +21,7 @@ import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.utils.entittes.MenuItems;
 import emerge.project.onmealoutlet.utils.entittes.OrderMenuHistory;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
+import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryOrdersMenus;
 
 
 /**
@@ -29,12 +30,12 @@ import emerge.project.onmealoutlet.utils.entittes.Orders;
 public class OrderHistoryDetialsAdapter extends RecyclerView.Adapter<OrderHistoryDetialsAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<OrderMenuHistory> menuItems;
+    ArrayList<OrderHistoryOrdersMenus> menuItems;
 
 
     int status = 0;
 
-    public OrderHistoryDetialsAdapter(Context mContext, ArrayList<OrderMenuHistory> item) {
+    public OrderHistoryDetialsAdapter(Context mContext, ArrayList<OrderHistoryOrdersMenus> item) {
         this.mContext = mContext;
         this.menuItems = item;
 
@@ -51,7 +52,7 @@ public class OrderHistoryDetialsAdapter extends RecyclerView.Adapter<OrderHistor
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        final OrderMenuHistory menuItemsObject = menuItems.get(position);
+        final OrderHistoryOrdersMenus menuItemsObject = menuItems.get(position);
 
 
 

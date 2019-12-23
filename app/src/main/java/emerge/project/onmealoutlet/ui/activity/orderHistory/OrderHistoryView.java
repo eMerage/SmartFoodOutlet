@@ -1,10 +1,7 @@
 package emerge.project.onmealoutlet.ui.activity.orderHistory;
 
 
-import java.util.ArrayList;
-
-import emerge.project.onmealoutlet.utils.entittes.OrderHistoryEntitte;
-import emerge.project.onmealoutlet.utils.entittes.OutletSales;
+import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryData;
 
 /**
  * Created by Himanshu on 4/4/2017.
@@ -13,15 +10,8 @@ import emerge.project.onmealoutlet.utils.entittes.OutletSales;
 public interface OrderHistoryView {
 
 
-        void getOrderHistory(ArrayList<OrderHistoryEntitte> OrderItems);
+        void getOrderHistory(OrderHistoryData OrderItems);
         void getOrderHistoryFail(String msg);
-
-
-
-
-                void getOrderHistorySalse(OutletSales outletSales);
-                void getOrderHistoryFailSalse(String msg);
-
 
 
 

@@ -204,8 +204,84 @@
 
 
 
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/openSansLight156"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_price"
+                android:textColor="@color/app_black"
+                android:layout_marginLeft="5dp"
+                android:textSize="15sp"
+                android:text="Note :" />
 
 
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/textView_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView_price"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+
+                android:layout_marginLeft="15dp"
+                android:layout_toEndOf="@+id/openSansLight156"
+                android:layout_toRightOf="@+id/openSansLight156"
+                android:text=""
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp" />
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/openSansLight155"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_note"
+                android:textColor="@color/app_black"
+                android:layout_marginLeft="5dp"
+                android:textSize="15sp"
+                android:text="Promo Type :" />
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/textView_promotype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/textView_note"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/app_black"
+                android:text=""
+                android:textSize="15sp"
+                android:layout_alignParentRight="true" />
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/openSans1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_promotype"
+                android:textColor="@color/app_black"
+                android:layout_marginLeft="5dp"
+                android:textSize="15sp"
+                android:text="Discount Value :" />
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansLight
+                android:id="@+id/textView_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView_promotype"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/app_black"
+                android:text=""
+                android:textSize="15sp"
+                android:layout_alignParentRight="true" />
 
 
 
@@ -216,7 +292,7 @@
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/textView_price"
+                android:layout_below="@+id/textView_discount"
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="20dp"
@@ -230,7 +306,7 @@
                 android:layout_height="40dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView_price"
+                android:layout_below="@+id/textView_discount"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="20dp"

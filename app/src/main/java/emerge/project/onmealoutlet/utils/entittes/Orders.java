@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Orders implements Serializable {
+public class Orders  {
 
     @SerializedName("orderID")
     int orderID;
@@ -53,6 +53,8 @@ public class Orders implements Serializable {
     @SerializedName("paymentTypeCode")
     String paymentType;
 
+    @SerializedName("promoDiscountValue")
+    Double promoDiscountValue;
 
 
     @SerializedName("orderMenus")
@@ -67,42 +69,12 @@ public class Orders implements Serializable {
     }
 
 
-
-    public Orders(int orderID, String orderDate, int userID, Double orderTotal, int orderQty, String dispatchType, String pickUpTime,
-                  Rider rider, DeliveryTime deliveryTime,String promocode,String promotitle,String ordernote,String payment,Double ordertotalwithoutdeliverycost) {
-        this.orderID = orderID;
-        this.orderDate = orderDate;
-        this.userID = userID;
-        this.orderTotal = orderTotal;
-        this.orderQty = orderQty;
-        this.dispatchType = dispatchType;
-        this.pickUpTime =pickUpTime;
-        this.rider = rider;
-        this.deliveryTime = deliveryTime;
-        this.promoCode = promocode;
-        this.promoTitle = promotitle;
-        this.orderNote = ordernote;
-        this.paymentType = payment;
-        this.orderTotalWithoutDeliveryCost = ordertotalwithoutdeliverycost;
+    public Double getPromoDiscountValue() {
+        return promoDiscountValue;
     }
 
-
-    public Orders(int orderID, String orderDate, int userID, Double orderTotal, int orderQty, String dispatchType, String pickUpTime,
-                  Rider rider, DeliveryTime deliveryTime,String promocode,String promotitle,String ordernote,String payment) {
-        this.orderID = orderID;
-        this.orderDate = orderDate;
-        this.userID = userID;
-        this.orderTotal = orderTotal;
-        this.orderQty = orderQty;
-        this.dispatchType = dispatchType;
-        this.pickUpTime =pickUpTime;
-        this.rider = rider;
-        this.deliveryTime = deliveryTime;
-        this.promoCode = promocode;
-        this.promoTitle = promotitle;
-        this.orderNote = ordernote;
-        this.paymentType = payment;
-
+    public void setPromoDiscountValue(Double promoDiscountValue) {
+        this.promoDiscountValue = promoDiscountValue;
     }
 
     public int getOrderID() {

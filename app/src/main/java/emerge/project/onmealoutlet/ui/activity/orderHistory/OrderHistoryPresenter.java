@@ -8,16 +8,6 @@ package emerge.project.onmealoutlet.ui.activity.orderHistory;
  */
 
 public interface OrderHistoryPresenter {
-
-
     void  getOrderHistory(String sDate,String eDate,String dispatcType);
-
-
-    void  getOrderHistorySalse(String sDate,String eDate);
-
-
-
-
-
 
 }

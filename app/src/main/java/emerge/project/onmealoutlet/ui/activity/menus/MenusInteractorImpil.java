@@ -90,6 +90,8 @@ public class MenusInteractorImpil implements MenusInteractor {
 
         final ArrayList<MenuItems> menuItemsArrayList = new ArrayList<MenuItems>();
 
+
+
         try {
             apiService.getMainFoodByOutlet(outlet.getOutletId(),Integer.parseInt(menuCategoryID))
                     .subscribeOn(Schedulers.io())

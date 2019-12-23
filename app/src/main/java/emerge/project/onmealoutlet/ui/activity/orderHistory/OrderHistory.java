@@ -40,6 +40,7 @@ import emerge.project.onmealoutlet.ui.adaptor.OrderHistoryAdapter;
 import emerge.project.onmealoutlet.utils.entittes.OrderHistoryEntitte;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
+import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryData;
 
 public class OrderHistory extends Activity implements OrderHistoryView {
 
@@ -111,7 +112,6 @@ public class OrderHistory extends Activity implements OrderHistoryView {
             @Override
             public void onRefresh() {
                 orderHistoryPresenter.getOrderHistory(filterDateStart, filterDateEnd,dispathType);
-                orderHistoryPresenter.getOrderHistorySalse(filterDateStart, filterDateEnd);
 
             }
         });
@@ -129,11 +129,27 @@ public class OrderHistory extends Activity implements OrderHistoryView {
 
 
     @Override
-    public void getOrderHistory(ArrayList<OrderHistoryEntitte> orderItems) {
+    public void getOrderHistory(OrderHistoryData orderItems) {
 
-        OrderHistoryAdapter OrderHistoryAdapter = new OrderHistoryAdapter(this, orderItems);
+        OrderHistoryAdapter OrderHistoryAdapter = new OrderHistoryAdapter(this, orderItems.getStatus().getOrderHistoryOrders());
         recyclerViewOrder.setAdapter(OrderHistoryAdapter);
         proprogressview.setVisibility(View.GONE);
+
+
+
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+
+        symbols.setGroupingSeparator(',');
+        formatter.setDecimalFormatSymbols(symbols);
+
+        textViewTotQuntity.setText(formatter.format(orderItems.getStatus().getTotalQty()));
+        textViewTotValue.setText(formatter.format(orderItems.getStatus().getTotalValue()));
+        textViewCash.setText(formatter.format(orderItems.getStatus().getTotalValueCash()));
+        textViewCheque.setText(formatter.format(orderItems.getStatus().getTotValueCard()));
+
+
+
         swipeContainer.setRefreshing(false);
 
     }
@@ -165,51 +181,6 @@ public class OrderHistory extends Activity implements OrderHistoryView {
         alertDialogBuilder.show();
     }
 
-    @Override
-    public void getOrderHistorySalse(OutletSales outletSales) {
-        proprogressview.setVisibility(View.GONE);
-        swipeContainer.setRefreshing(false);
-
-
-        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
-        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
-
-        symbols.setGroupingSeparator(',');
-        formatter.setDecimalFormatSymbols(symbols);
-
-        textViewTotQuntity.setText(formatter.format(outletSales.getTotalQty()));
-        textViewTotValue.setText(formatter.format(outletSales.getTotalValue()));
-        textViewCash.setText(formatter.format(outletSales.getTotalValueCash()));
-        textViewCheque.setText(formatter.format(outletSales.getTotalValueCard()));
-
-
-    }
-
-    @Override
-    public void getOrderHistoryFailSalse(String msg) {
-        swipeContainer.setRefreshing(false);
-        proprogressview.setVisibility(View.GONE);
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Error!");
-        alertDialogBuilder.setMessage(msg + " Do you want to retry ?");
-        alertDialogBuilder.setPositiveButton("YES",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        proprogressview.setVisibility(View.VISIBLE);
-                        orderHistoryPresenter.getOrderHistorySalse(filterDateStart, filterDateEnd);
-
-                    }
-                });
-
-        alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                return;
-            }
-        });
-        alertDialogBuilder.show();
-    }
 
 
     @OnClick(R.id.relativeLayout_slider_menu)
@@ -292,16 +263,13 @@ public class OrderHistory extends Activity implements OrderHistoryView {
             }
         });
 
-
         button_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogCalander.dismiss();
                 proprogressview.setVisibility(View.VISIBLE);
-
-
                 orderHistoryPresenter.getOrderHistory(filterDateStart, filterDateEnd,dispathType);
-                orderHistoryPresenter.getOrderHistorySalse(filterDateStart, filterDateEnd);
+
             }
         });
 

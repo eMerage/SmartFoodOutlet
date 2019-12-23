@@ -94,6 +94,24 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
 
         holder.textView_price.setText(String.valueOf(orders.getOrderTotal()));
 
+
+        String promo;
+
+        if (orders.getPromoTitle().equals("")) {
+            promo = "no Promo";
+        } else {
+            promo = orders.getPromoTitle();
+        }
+
+
+        holder.textViewPromotype.setText(promo);
+        holder.textViewNote.setText(orders.getOrderNote());
+
+
+        holder.textViewDiscount.setText(String.valueOf(orders.getPromoDiscountValue()));
+
+
+
         holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,8 +182,22 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
         Button buttonDispatch;
 
 
+        @BindView(R.id.textView_note)
+        TextView textViewNote;
+
+
+        @BindView(R.id.textView_promotype)
+        TextView textViewPromotype;
+
         @BindView(R.id.relativelayout_main)
         RelativeLayout relativelayouMain;
+
+
+
+        @BindView(R.id.textView_discount)
+        TextView textViewDiscount;
+
+
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

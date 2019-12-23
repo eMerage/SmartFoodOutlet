@@ -1,24 +1,18 @@
 package emerge.project.onmealoutlet.ui.activity.orderHistory;
 
 
-import java.util.ArrayList;
-
-import emerge.project.onmealoutlet.utils.entittes.OrderHistoryEntitte;
-import emerge.project.onmealoutlet.utils.entittes.OutletSales;
+import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryData;
 
 /**
  * Created by Himanshu on 4/4/2017.
  */
 
 public class OrderHistoryPresenterImpli implements OrderHistoryPresenter,
-        OrderHistoryInteractor.OnGetOrderHistoryFinishedListener,
-        OrderHistoryInteractor.OnGetOrderHistorySalseFinishedListener{
+        OrderHistoryInteractor.OnGetOrderHistoryFinishedListener{
 
 
     private OrderHistoryView orderHistoryView;
     OrderHistoryInteractor orderHistoryInteractor;
-
-
 
 
 
@@ -38,7 +32,7 @@ public class OrderHistoryPresenterImpli implements OrderHistoryPresenter,
 
 
     @Override
-    public void getOrderHistory(ArrayList<OrderHistoryEntitte> OrderItems) {
+    public void getOrderHistory(OrderHistoryData OrderItems) {
         orderHistoryView.getOrderHistory(OrderItems);
     }
 
@@ -50,20 +44,4 @@ public class OrderHistoryPresenterImpli implements OrderHistoryPresenter,
 
 
 
-    @Override
-    public void getOrderHistorySalse(String sDate, String eDate) {
-        orderHistoryInteractor.getOrderHistorySalse(sDate,eDate,this);
-    }
-
-
-
-    @Override
-    public void getOrderHistorySalse(OutletSales outletSales) {
-        orderHistoryView.getOrderHistorySalse(outletSales);
-    }
-
-    @Override
-    public void getOrderHistoryFailSalse(String msg) {
-        orderHistoryView.getOrderHistoryFailSalse(msg);
-    }
 }

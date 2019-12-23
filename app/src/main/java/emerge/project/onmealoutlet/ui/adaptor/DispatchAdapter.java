@@ -105,12 +105,15 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.MyView
 
         holder.textViewNote.setText(orders.getOrderNote());
 
+        holder.textViewDiscount.setText(String.valueOf(orders.getPromoDiscountValue()));
+
         holder.buttonPrint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 homePresenter.printOrders(orders.getOrderID(),1);
             }
         });
+
 
 
         holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +171,8 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.MyView
         TextView textViewPaymenttype;
 
 
+        @BindView(R.id.textView_discount)
+        TextView textViewDiscount;
 
         @BindView(R.id.relativelayout_main)
         RelativeLayout relativelayouMain;

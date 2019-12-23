@@ -57,6 +57,9 @@ public class HomeInteractorImpil implements HomeInteractor {
 
 
     List<Orders> data;
+
+     ArrayList<Orders> ordersArrayList = new ArrayList<Orders>();
+
     Outlet outlet = realm.where(Outlet.class).findFirst();
 
     @Override
@@ -397,23 +400,18 @@ public class HomeInteractorImpil implements HomeInteractor {
     @Override
     public void getOrders(String statusCode, int timeSlotId, int riderId, String dispatcType, final OnGetOrdersFinishedListener onGetOrdersFinishedListener) {
 
-        final ArrayList<Orders> ordersArrayList = new ArrayList<Orders>();
-
-        data = new ArrayList<Orders>();
-
-
         apiService.getOrdersForOutlet(outlet.getOutletId(), statusCode, dispatcType, timeSlotId, riderId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Orders>>() {
+                .subscribe(new Observer<ArrayList<Orders>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(List<Orders> ordersList) {
-                        data = ordersList;
+                    public void onNext(ArrayList<Orders> ordersList) {
+                        ordersArrayList = ordersList;
 
                     }
 
@@ -424,24 +422,13 @@ public class HomeInteractorImpil implements HomeInteractor {
 
                     @Override
                     public void onComplete() {
-
-                        for (int i = 0; i < data.size(); i++) {
-                            ordersArrayList.add(new Orders(data.get(i).getOrderID(), data.get(i).getOrderDate(), data.get(i).getUserID(), data.get(i).getOrderTotal(), data.get(i).getOrderQty(),
-                                    data.get(i).getDispatchType(), data.get(i).getPickUpTime(), data.get(i).getRider(),
-                                    data.get(i).getDeliveryTime(), data.get(i).getPromoCode(), data.get(i).getPromoTitle(), data.get(i).getOrderNote(),data.get(i).getPaymentType(),data.get(i).getOrderTotalWithoutDeliveryCost()));
-                        }
-
-
                         if (ordersArrayList.isEmpty()) {
                             onGetOrdersFinishedListener.noOrdersList();
                         } else {
                             onGetOrdersFinishedListener.ordersList(ordersArrayList);
                         }
-
-
                     }
                 });
-
 
     }
 

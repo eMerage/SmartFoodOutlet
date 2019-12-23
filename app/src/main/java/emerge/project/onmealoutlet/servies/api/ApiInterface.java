@@ -11,11 +11,11 @@ import emerge.project.onmealoutlet.utils.entittes.DeliveryRiders;
 import emerge.project.onmealoutlet.utils.entittes.MenuCategoryItems;
 import emerge.project.onmealoutlet.utils.entittes.MenuHistoryEntittes;
 import emerge.project.onmealoutlet.utils.entittes.MenuItems;
-import emerge.project.onmealoutlet.utils.entittes.OrderHistoryEntitte;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
 import emerge.project.onmealoutlet.utils.entittes.TimeSlots;
 import emerge.project.onmealoutlet.utils.entittes.User;
+import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryData;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -38,7 +38,7 @@ public interface ApiInterface {
 
 
     @GET("Order/GetOrdersForOutlet")
-    Observable<List<Orders>> getOrdersForOutlet(@Query("outletID") int outletID, @Query("orderStatusCode") String orderStatusCode, @Query("dispatchType") String dispatchType, @Query("timeSlotID") int timeSlotID, @Query("riderID") int riderID);
+    Observable<ArrayList<Orders>> getOrdersForOutlet(@Query("outletID") int outletID, @Query("orderStatusCode") String orderStatusCode, @Query("dispatchType") String dispatchType, @Query("timeSlotID") int timeSlotID, @Query("riderID") int riderID);
 
 
     @GET("Order/GetOrderHistoryByOrder")
@@ -84,10 +84,16 @@ public interface ApiInterface {
 
 
 
+
     @GET("Order/GetOrdersForOutletBetweenDates")
-    Observable<ArrayList<OrderHistoryEntitte>> getOrdersForOutletBetweenDates(@Query("outletID") int outletID,
-                                                                              @Query("orderStatusCode") String orderStatusCode, @Query("startDate") String startDate,
-                                                                              @Query("endDate") String endDate, @Query("dispatchType") String dispatchType);
+    Observable<OrderHistoryData> getOrdersForOutletBetweenDates(@Query("outletID") int outletID,
+                                                                @Query("orderStatusCode") String orderStatusCode, @Query("startDate") String startDate,
+                                                                @Query("endDate") String endDate, @Query("dispatchType") String dispatchType);
+
+
+
+
+
 
 
 
