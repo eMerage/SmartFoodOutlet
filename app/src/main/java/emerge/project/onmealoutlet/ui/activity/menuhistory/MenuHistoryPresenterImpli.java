@@ -3,22 +3,16 @@ package emerge.project.onmealoutlet.ui.activity.menuhistory;
 
 import java.util.ArrayList;
 
-import emerge.project.onmealoutlet.data.db.Outlet;
-import emerge.project.onmealoutlet.ui.activity.settings.SettingsInteractor;
-import emerge.project.onmealoutlet.ui.activity.settings.SettingsInteractorImpil;
-import emerge.project.onmealoutlet.ui.activity.settings.SettingsPresenter;
-import emerge.project.onmealoutlet.ui.activity.settings.SettingsView;
-import emerge.project.onmealoutlet.utils.entittes.MenuHistoryEntittes;
-import emerge.project.onmealoutlet.utils.entittes.MenuItems;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
+import emerge.project.onmealoutlet.utils.entittes.v2.MenuHistory.MenuHistoryData;
+import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryData;
 
 /**
  * Created by Himanshu on 4/4/2017.
  */
 
 public class MenuHistoryPresenterImpli implements MenuHistoryPresenter,
-        MenuHistoryInteractor.OnGetMenuHistoryFinishedListener,
-MenuHistoryInteractor.OnGetOrderHistorySalseFinishedListener{
+        MenuHistoryInteractor.OnGetMenuHistoryFinishedListener{
 
 
     private MenuHistoryView menuHistoryView;
@@ -40,9 +34,8 @@ MenuHistoryInteractor.OnGetOrderHistorySalseFinishedListener{
     }
 
 
-
     @Override
-    public void getMenuHistory(ArrayList<MenuHistoryEntittes> menuItems) {
+    public void getMenuHistory(MenuHistoryData menuItems) {
         menuHistoryView.getMenuHistory(menuItems);
     }
 
@@ -51,18 +44,5 @@ MenuHistoryInteractor.OnGetOrderHistorySalseFinishedListener{
         menuHistoryView.getMenuHistoryFail(msg);
     }
 
-    @Override
-    public void getOrderHistorySalse(String sDate, String eDate) {
-        menuHistoryInteractor.getOrderHistorySalse(sDate,eDate,this);
-    }
 
-    @Override
-    public void getOrderHistorySalse(OutletSales outletSales) {
-        menuHistoryView.getOrderHistorySalse(outletSales);
-    }
-
-    @Override
-    public void getOrderHistoryFailSalse(String msg) {
-        menuHistoryView.getOrderHistoryFailSalse(msg);
-    }
 }

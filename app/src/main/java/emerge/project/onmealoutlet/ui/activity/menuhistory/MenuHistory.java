@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +16,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.archit.calendardaterangepicker.customviews.DateRangeCalendarView;
 import com.tuyenmonkey.mkloader.MKLoader;
@@ -38,9 +36,9 @@ import butterknife.OnClick;
 import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.ui.activity.home.Home;
 import emerge.project.onmealoutlet.ui.adaptor.MenuHistoryAdapter;
-import emerge.project.onmealoutlet.utils.entittes.MenuHistoryEntittes;
-import emerge.project.onmealoutlet.utils.entittes.MenuItems;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
+import emerge.project.onmealoutlet.utils.entittes.v2.MenuHistory.MenuHistoryData;
+import emerge.project.onmealoutlet.utils.entittes.v2.MenuHistory.MenuHistoryOrdersMenus;
 
 public class MenuHistory extends Activity implements MenuHistoryView {
 
@@ -104,12 +102,10 @@ public class MenuHistory extends Activity implements MenuHistoryView {
         recyclerViewMenu.setNestedScrollingEnabled(false);
 
 
-
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 menuHistoryPresenter.getMenuHistory(filterDateStart,filterDateEnd);
-                menuHistoryPresenter.getOrderHistorySalse(filterDateStart, filterDateEnd);
             }
         });
 
@@ -134,19 +130,26 @@ public class MenuHistory extends Activity implements MenuHistoryView {
     }
 
     @Override
-    public void getMenuHistory(ArrayList<MenuHistoryEntittes> menuItems) {
+    public void getMenuHistory(MenuHistoryData menuItems) {
 
         swipeContainer.setRefreshing(false);
         proprogressview.setVisibility(View.GONE);
 
-        if(menuItems.isEmpty()){
-
-        }else {
-
-        }
-
-        menuHistoryAdapter = new MenuHistoryAdapter(this, menuItems);
+        menuHistoryAdapter = new MenuHistoryAdapter(this, menuItems.getStatus().getOrderHistoryOrders());
         recyclerViewMenu.setAdapter(menuHistoryAdapter);
+
+
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+
+        symbols.setGroupingSeparator(',');
+        formatter.setDecimalFormatSymbols(symbols);
+
+        textViewTotQuntity.setText(formatter.format(menuItems.getStatus().getTotalQty()));
+        textViewTotValue.setText(formatter.format(menuItems.getStatus().getTotalValue()));
+        textViewCash.setText(formatter.format(menuItems.getStatus().getTotalValueCash()));
+        textViewCheque.setText(formatter.format(menuItems.getStatus().getTotValueCard()));
+
 
 
     }
@@ -155,6 +158,11 @@ public class MenuHistory extends Activity implements MenuHistoryView {
     public void getMenuHistoryFail(String msg) {
         swipeContainer.setRefreshing(false);
         proprogressview.setVisibility(View.GONE);
+
+
+
+        menuHistoryAdapter = new MenuHistoryAdapter(this, new ArrayList<MenuHistoryOrdersMenus>());
+        recyclerViewMenu.setAdapter(menuHistoryAdapter);
 
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -179,50 +187,6 @@ public class MenuHistory extends Activity implements MenuHistoryView {
 
     }
 
-    @Override
-    public void getOrderHistorySalse(OutletSales outletSales) {
-
-        proprogressview.setVisibility(View.GONE);
-        swipeContainer.setRefreshing(false);
-
-
-        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
-        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
-
-        symbols.setGroupingSeparator(',');
-        formatter.setDecimalFormatSymbols(symbols);
-
-        textViewTotQuntity.setText(formatter.format(outletSales.getTotalQty()));
-        textViewTotValue.setText(formatter.format(outletSales.getTotalValue()));
-        textViewCash.setText(formatter.format(outletSales.getTotalValueCash()));
-        textViewCheque.setText(formatter.format(outletSales.getTotalValueCard()));
-    }
-
-    @Override
-    public void getOrderHistoryFailSalse(String msg) {
-        swipeContainer.setRefreshing(false);
-        proprogressview.setVisibility(View.GONE);
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Error!");
-        alertDialogBuilder.setMessage(msg + " Do you want to retry ?");
-        alertDialogBuilder.setPositiveButton("YES",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        proprogressview.setVisibility(View.VISIBLE);
-                        menuHistoryPresenter.getOrderHistorySalse(filterDateStart, filterDateEnd);
-
-                    }
-                });
-
-        alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                return;
-            }
-        });
-        alertDialogBuilder.show();
-    }
 
     private void showCalanderDilog() {
         dialogCalander = new Dialog(this);
@@ -302,7 +266,6 @@ public class MenuHistory extends Activity implements MenuHistoryView {
                 dialogCalander.dismiss();
                 proprogressview.setVisibility(View.VISIBLE);
                menuHistoryPresenter.getMenuHistory(filterDateStart,filterDateEnd);
-               menuHistoryPresenter.getOrderHistorySalse(filterDateStart, filterDateEnd);
             }
         });
 

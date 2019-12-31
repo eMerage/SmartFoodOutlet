@@ -9,12 +9,12 @@ import java.util.List;
 import emerge.project.onmealoutlet.data.db.Outlet;
 import emerge.project.onmealoutlet.utils.entittes.DeliveryRiders;
 import emerge.project.onmealoutlet.utils.entittes.MenuCategoryItems;
-import emerge.project.onmealoutlet.utils.entittes.MenuHistoryEntittes;
 import emerge.project.onmealoutlet.utils.entittes.MenuItems;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
 import emerge.project.onmealoutlet.utils.entittes.TimeSlots;
 import emerge.project.onmealoutlet.utils.entittes.User;
+import emerge.project.onmealoutlet.utils.entittes.v2.MenuHistory.MenuHistoryData;
 import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryData;
 import io.reactivex.Observable;
 import retrofit2.Call;
@@ -102,7 +102,7 @@ public interface ApiInterface {
 
 
     @GET("Menu/GetMenuSaleForOutlet")
-    Observable<ArrayList<MenuHistoryEntittes>> getMenuSaleForOutlet(@Query("outletID") int outletID, @Query("startDate") String startDate, @Query("endDate") String endDate, @Query("menuCategoryID") String menuCategoryID);
+    Observable<MenuHistoryData> getMenuSaleForOutlet(@Query("outletID") int outletID, @Query("startDate") String startDate, @Query("endDate") String endDate, @Query("menuCategoryID") String menuCategoryID);
 
 
 

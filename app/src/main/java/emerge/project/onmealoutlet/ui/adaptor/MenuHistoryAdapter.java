@@ -6,10 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -20,12 +17,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import emerge.project.onmealoutlet.R;
-import emerge.project.onmealoutlet.servies.network.NetworkAvailability;
-import emerge.project.onmealoutlet.ui.activity.menus.MenusPresenter;
-import emerge.project.onmealoutlet.ui.activity.menus.MenusPresenterImpli;
-import emerge.project.onmealoutlet.ui.activity.menus.MenusView;
-import emerge.project.onmealoutlet.utils.entittes.MenuHistoryEntittes;
-import emerge.project.onmealoutlet.utils.entittes.MenuItems;
+import emerge.project.onmealoutlet.utils.entittes.v2.MenuHistory.MenuHistoryOrdersMenus;
 
 
 /**
@@ -34,11 +26,11 @@ import emerge.project.onmealoutlet.utils.entittes.MenuItems;
 public class MenuHistoryAdapter extends RecyclerView.Adapter<MenuHistoryAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<MenuHistoryEntittes> menusItems;
+    ArrayList<MenuHistoryOrdersMenus> menusItems;
 
 
 
-    public MenuHistoryAdapter(Context mContext, ArrayList<MenuHistoryEntittes> item) {
+    public MenuHistoryAdapter(Context mContext, ArrayList<MenuHistoryOrdersMenus> item) {
         this.mContext = mContext;
         this.menusItems = item;
     }
@@ -57,7 +49,7 @@ public class MenuHistoryAdapter extends RecyclerView.Adapter<MenuHistoryAdapter.
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        final MenuHistoryEntittes menusList =menusItems.get(position);
+        final MenuHistoryOrdersMenus menusList =menusItems.get(position);
 
 
         DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
@@ -67,7 +59,7 @@ public class MenuHistoryAdapter extends RecyclerView.Adapter<MenuHistoryAdapter.
         formatter.setDecimalFormatSymbols(symbols);
 
 
-        holder.textViewMenuName.setText(menusList.getMenuTitle());
+        holder.textViewMenuName.setText(menusList.getName());
         holder.textViewMenuQty.setText(formatter.format(menusList.getMaxOrderQty()));
         holder.textViewMenuValue.setText(formatter.format(menusList.getMenuPrice()));
 

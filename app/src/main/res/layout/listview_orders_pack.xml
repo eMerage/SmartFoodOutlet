@@ -10,6 +10,7 @@
 
 
     <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_cardview"
@@ -99,6 +100,34 @@
                 android:text="Time : " />
 
 
+            <emerge.project.onmealoutlet.ui.font.OpenSansBold
+                android:id="@+id/openSansLightcountdown_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView_time"
+                android:layout_marginLeft="5dp"
+                android:freezesText="true"
+                android:textColor="@color/app_black"
+                android:textSize="15sp"
+                android:text="Count Down Time : " />
+
+
+            <emerge.project.onmealoutlet.ui.font.OpenSansBold
+                android:id="@+id/textView_countdown_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView_time"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:freezesText="true"
+                android:text=""
+                android:textColor="@color/app_black"
+                android:textSize="15sp" />
+
+
 
             <emerge.project.onmealoutlet.ui.font.OpenSansLight
                 android:id="@+id/openSansLight222"
@@ -106,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView_time"
+                android:layout_below="@+id/textView_countdown_time"
                 android:textColor="@color/app_black"
                 android:layout_marginLeft="5dp"
                 android:textSize="15sp"
@@ -118,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/textView_time"
+                android:layout_below="@+id/textView_countdown_time"
                 android:layout_marginRight="5dp"
                 android:textColor="@color/app_black"
                 android:textSize="15sp"

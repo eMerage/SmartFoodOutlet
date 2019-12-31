@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import emerge.project.onmealoutlet.data.db.Outlet;
 import emerge.project.onmealoutlet.servies.api.ApiClient;
 import emerge.project.onmealoutlet.servies.api.ApiInterface;
-import emerge.project.onmealoutlet.ui.activity.orderHistory.OrderHistoryInteractor;
-import emerge.project.onmealoutlet.ui.activity.settings.SettingsInteractor;
-import emerge.project.onmealoutlet.utils.entittes.MenuHistoryEntittes;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.OutletSales;
+import emerge.project.onmealoutlet.utils.entittes.v2.MenuHistory.MenuHistoryData;
+import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryData;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -29,11 +28,8 @@ public class MenuHistoryInteractorImpil implements MenuHistoryInteractor {
 
     Outlet outlet = realm.where(Outlet.class).findFirst();
 
-    ArrayList<Orders> ordersArrayList = new ArrayList<Orders>();
 
-    OutletSales outletSales = new OutletSales();
-
-    ArrayList<MenuHistoryEntittes> menuHistoryEntittes =  new ArrayList<MenuHistoryEntittes>();
+    MenuHistoryData menuHistoryData =  new MenuHistoryData();
     @Override
     public void getMenuHistory(String sDate, String eDate, final OnGetMenuHistoryFinishedListener onGetMenuHistoryFinishedListener) {
 
@@ -52,15 +48,15 @@ public class MenuHistoryInteractorImpil implements MenuHistoryInteractor {
                 apiService.getMenuSaleForOutlet(outlet.getOutletId(),sDate, eDate,"")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Observer<ArrayList<MenuHistoryEntittes>>() {
+                        .subscribe(new Observer<MenuHistoryData>() {
                             @Override
                             public void onSubscribe(Disposable d) {
 
                             }
 
                             @Override
-                            public void onNext(ArrayList<MenuHistoryEntittes> outletsales) {
-                                menuHistoryEntittes = outletsales;
+                            public void onNext(MenuHistoryData outletsales) {
+                                menuHistoryData = outletsales;
                             }
 
                             @Override
@@ -70,11 +66,11 @@ public class MenuHistoryInteractorImpil implements MenuHistoryInteractor {
 
                             @Override
                             public void onComplete() {
-                                if(menuHistoryEntittes.size()==0){
+                                if(menuHistoryData.getStatus().getTotalQty() ==0){
                                     onGetMenuHistoryFinishedListener.getMenuHistoryFail("No History for selected Date,Please check the date");
 
                                 }else {
-                                    onGetMenuHistoryFinishedListener.getMenuHistory(menuHistoryEntittes);
+                                    onGetMenuHistoryFinishedListener.getMenuHistory(menuHistoryData);
                                 }
 
                             }
@@ -85,51 +81,6 @@ public class MenuHistoryInteractorImpil implements MenuHistoryInteractor {
 
         }
 
-
-
-
     }
-
-    @Override
-    public void getOrderHistorySalse(String sDate, String eDate, final OnGetOrderHistorySalseFinishedListener onGetOrderHistorySalseFinishedListener) {
-        if(eDate.equals("")){
-            eDate = sDate;
-        }else {
-
-        }
-
-        try {
-            apiService.GetTotalOutletSale(outlet.getOutletId(),sDate, eDate )
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<OutletSales>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
-
-                        @Override
-                        public void onNext(OutletSales outletsales) {
-                            outletSales = outletsales;
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                          //  onGetOrderHistorySalseFinishedListener.getOrderHistoryFailSalse("Something went wrong, Please try again");
-
-                        }
-
-                        @Override
-                        public void onComplete() {
-                            onGetOrderHistorySalseFinishedListener.getOrderHistorySalse(outletSales);
-
-
-                        }
-                    });
-        } catch (Exception ex) {
-            onGetOrderHistorySalseFinishedListener.getOrderHistoryFailSalse("Something went wrong, Please try again");
-        }
-    }
-
 
 }

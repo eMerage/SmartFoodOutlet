@@ -2,7 +2,10 @@ package emerge.project.onmealoutlet.ui.adaptor;
 
 
 import android.content.Context;
+import android.os.CountDownTimer;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +38,7 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
     ArrayList<Orders> ordersItems;
 
     HomePresenter homePresenter;
+    CountDownTimer cTimer;
 
     public PackedAdapter(Context mContext, ArrayList<Orders> item, HomeView homeView) {
         this.mContext = mContext;
@@ -62,11 +69,14 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
 
 
         final String time;
+        long remTime ;
 
         if (orders.getDeliveryTime().getTimeSlotID() == 0) {
             time = orders.getPickUpTime();
+            remTime=getRemaningMin(time);
         } else {
             time = orders.getDeliveryTime().getTimeSlot();
+            remTime=getRemaningMinDelivery(orders.getDeliveryTime().getTimeFrom(),orders.getDeliveryTime().getTimeTo());
         }
 
         holder.textViewTime.setText(time);
@@ -81,6 +91,45 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
 
 
         holder.textViewRider.setText(orders.getRider().getName());
+
+
+        cTimer=  new CountDownTimer(remTime, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                long millis = millisUntilFinished;
+
+                String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis), TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+
+                holder.textViewCountdownTime.setText(hms);//set text
+
+                if(millisUntilFinished<420000){
+
+                    if(orders.isCuntDownExp()){
+
+                    }else {
+                        holder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.app_color_light_red));
+                        orders.setCuntDownExp(true);
+
+
+                        notifyDataSetChanged();
+                    }
+
+
+                }else {
+
+
+                }
+
+
+            }
+            public void onFinish() {
+                holder.textViewTime.setText(time);//set text
+            }
+        }.start();
+
+
+
+
 
 
         if(String.valueOf(orders.getDispatchType()).equals("D")){
@@ -124,6 +173,7 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
         holder.buttonDispatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cTimer.cancel();
                 homePresenter.updateOrderStatus(orders.getOrderID(),orders.getUserID(),"ODDS",orders.getDispatchType());
 
             }
@@ -149,6 +199,8 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.card_view)
+        CardView cardView;
 
         @BindView(R.id.textView_ordernumber)
         TextView textViewOrderNumber;
@@ -159,6 +211,8 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
 
         @BindView(R.id.textView_time)
         TextView textViewTime;
+        @BindView(R.id.textView_countdown_time)
+        TextView textViewCountdownTime;
 
         @BindView(R.id.textView_rider)
         TextView textViewRider;
@@ -207,5 +261,71 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
 
     }
 
+    public long getRemaningMin(String time) {
 
+        Calendar c = Calendar.getInstance();
+        String splitTime[] = time.split(":");
+        Calendar cal = Calendar.getInstance();
+        cal.set(c.get(Calendar.YEAR),
+                c.get(Calendar.MONTH),
+                c.get(Calendar.DATE),
+                Integer.parseInt(splitTime[0]),
+                Integer.parseInt(splitTime[1]));
+
+
+        Date now = new Date();
+
+        String remaining1 = DateUtils.formatElapsedTime((cal.getTime().getTime() - now.getTime()) / 1000); // Remaining time to seconds
+
+
+        long millSecond = 0;
+
+        String[] splitRemaningTime = remaining1.split(":");
+        if(splitRemaningTime.length==3){
+            long mill =( Long.parseLong(splitRemaningTime[1])  +( Long.parseLong(splitRemaningTime[0])*60)) *60000 ;
+            millSecond = mill ;
+        }else if(Integer.parseInt(splitRemaningTime[0]) == 0){
+            millSecond = 0;
+        } else {
+            long mill = (Long.parseLong(splitRemaningTime[0])) * 60000 ;
+            millSecond = mill;
+        }
+        return millSecond;
+    }
+
+
+    public long getRemaningMinDelivery(String stime,String eTime) {
+
+        Calendar c = Calendar.getInstance();
+        String splitStartTime[] = stime.split(":");
+        String splitEndTime[] = eTime.split(":");
+
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(c.get(Calendar.YEAR),
+                c.get(Calendar.MONTH),
+                c.get(Calendar.DATE),
+                Integer.parseInt(splitStartTime[0]),
+                Integer.parseInt(splitEndTime[0]));
+
+
+        Date now = new Date();
+
+        String remaining1 = DateUtils.formatElapsedTime((cal.getTime().getTime() - now.getTime()) / 1000); // Remaining time to seconds
+
+
+        long millSecond = 0;
+
+        String[] splitRemaningTime = remaining1.split(":");
+        if(splitRemaningTime.length==3){
+            long mill =( Long.parseLong(splitRemaningTime[1])  +( Long.parseLong(splitRemaningTime[0])*60)) *60000 ;
+            millSecond = mill ;
+        }else if(Integer.parseInt(splitRemaningTime[0]) == 0){
+            millSecond = 0;
+        } else {
+            long mill = (Long.parseLong(splitRemaningTime[0])) * 60000 ;
+            millSecond = mill;
+        }
+        return millSecond;
+    }
 }

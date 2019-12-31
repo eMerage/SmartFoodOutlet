@@ -12,7 +12,7 @@ public interface MenuHistoryPresenter {
 
     void  getMenuHistory(String sDate,String eDate);
 
-    void  getOrderHistorySalse(String sDate, String eDate);
+
 
 
 

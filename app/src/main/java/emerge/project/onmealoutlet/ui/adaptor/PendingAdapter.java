@@ -89,7 +89,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             remTime=getRemaningMinDelivery(orders.getDeliveryTime().getTimeFrom(),orders.getDeliveryTime().getTimeTo());
         }
 
-
+        holder.textViewTime.setText(time);//set text
 
 
         cTimer=  new CountDownTimer(remTime, 1000) {
@@ -99,11 +99,17 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
                 String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis), TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
 
-                holder.textViewTime.setText(time+" "+hms);//set text
+                holder.textViewCountdownTime.setText(hms);//set text
 
                 if(millisUntilFinished<420000){
 
+                    holder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.app_color_light_red));
+                    orders.setCuntDownExp(true);
+                    notifyDataSetChanged();
+/*
                     if(orders.isCuntDownExp()){
+
+
 
                     }else {
                         holder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.app_color_light_red));
@@ -111,7 +117,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
 
                         notifyDataSetChanged();
-                    }
+                    }*/
 
 
                 }else {
@@ -202,6 +208,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
 
 
+
     @Override
     public int getItemCount() {
         return ordersItems.size();
@@ -259,6 +266,8 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         @BindView(R.id.textView_discount)
         TextView textViewDiscount;
 
+        @BindView(R.id.textView_countdown_time)
+        TextView textViewCountdownTime;
 
 
 
