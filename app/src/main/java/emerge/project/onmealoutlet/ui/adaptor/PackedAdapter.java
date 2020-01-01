@@ -123,7 +123,9 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
 
             }
             public void onFinish() {
-                holder.textViewTime.setText(time);//set text
+                holder.textViewTime.setText(time);
+                holder.textViewCountdownTime.setText("Time passed");//set text
+                holder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.app_color_light_red));
             }
         }.start();
 

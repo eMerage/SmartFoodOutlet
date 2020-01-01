@@ -9,7 +9,7 @@ android {
         targetSdkVersion 28
         versionCode 17
        // versionName "1.0.1.PO17"
-        versionName "1.0.1.DEV19"
+        versionName "1.0.1.DEV21"
        // versionName "1.0.1.QA2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

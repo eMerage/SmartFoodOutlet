@@ -7,7 +7,7 @@ import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistorySt
 public class MenuHistoryData {
 
     @SerializedName("status")
-    MenuHistoryStatus status;
+    MenuHistoryStatus status =  new MenuHistoryStatus();
 
     public MenuHistoryStatus getStatus() {
         return status;

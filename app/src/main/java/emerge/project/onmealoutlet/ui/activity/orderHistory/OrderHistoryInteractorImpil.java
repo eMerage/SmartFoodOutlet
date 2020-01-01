@@ -26,7 +26,6 @@ public class OrderHistoryInteractorImpil implements OrderHistoryInteractor {
 
     OrderHistoryData ordersArrayList = new OrderHistoryData();
 
-    OutletSales outletSales = new OutletSales();
 
     @Override
     public void getOrderHistory(String sDate, String eDate, String dispatch, final OnGetOrderHistoryFinishedListener onGetOrderHistoryFinishedListener) {

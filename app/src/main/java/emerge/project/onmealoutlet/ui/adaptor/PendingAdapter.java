@@ -103,12 +103,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
                 if(millisUntilFinished<420000){
 
-                    holder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.app_color_light_red));
-                    orders.setCuntDownExp(true);
-                    notifyDataSetChanged();
-/*
                     if(orders.isCuntDownExp()){
-
 
 
                     }else {
@@ -117,7 +112,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
 
                         notifyDataSetChanged();
-                    }*/
+                    }
 
 
                 }else {
@@ -128,9 +123,14 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
             }
             public void onFinish() {
-                holder.textViewTime.setText(time);//set text
+                holder.textViewTime.setText(time);
+                holder.textViewCountdownTime.setText("Time passed");//set text
+                holder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.app_color_light_red));
+                //set text
             }
         }.start();
+
+
 
 
 

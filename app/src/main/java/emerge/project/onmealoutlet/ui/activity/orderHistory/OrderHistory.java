@@ -6,7 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,9 +37,6 @@ import butterknife.OnClick;
 import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.ui.activity.home.Home;
 import emerge.project.onmealoutlet.ui.adaptor.OrderHistoryAdapter;
-import emerge.project.onmealoutlet.utils.entittes.OrderHistoryEntitte;
-import emerge.project.onmealoutlet.utils.entittes.Orders;
-import emerge.project.onmealoutlet.utils.entittes.OutletSales;
 import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryData;
 
 public class OrderHistory extends Activity implements OrderHistoryView {

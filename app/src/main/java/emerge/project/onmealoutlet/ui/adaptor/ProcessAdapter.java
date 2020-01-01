@@ -118,7 +118,9 @@ public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHo
 
             }
             public void onFinish() {
-                holder.textViewTime.setText(time);//set text
+                holder.textViewTime.setText(time);
+               holder.textViewCountdownTime.setText("Time passed");//set text
+                holder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.app_color_light_red));
             }
         }.start();
 

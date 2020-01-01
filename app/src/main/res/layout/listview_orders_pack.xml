@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_cardview"
-        card_view:cardCornerRadius="10dp">
+        card_view:cardCornerRadius="5dp">
 
         <RelativeLayout
             android:id="@+id/relativelayout_main"
@@ -252,14 +252,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView_price"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-
-                android:layout_marginLeft="15dp"
-                android:layout_toEndOf="@+id/openSansLight156"
-                android:layout_toRightOf="@+id/openSansLight156"
                 android:text=""
                 android:textColor="@color/colorAccent"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:layout_alignParentRight="true" />
+
 
 
             <emerge.project.onmealoutlet.ui.font.OpenSansLight

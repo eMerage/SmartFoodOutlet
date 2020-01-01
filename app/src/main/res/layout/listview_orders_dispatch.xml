@@ -208,20 +208,16 @@
                 android:textSize="15sp"
                 android:text="Note :" />
 
-
             <emerge.project.onmealoutlet.ui.font.OpenSansLight
                 android:id="@+id/textView_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/openSansLight155"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="15dp"
-                android:layout_toEndOf="@+id/openSansLight156"
-                android:layout_toRightOf="@+id/openSansLight156"
                 android:text=""
                 android:textColor="@color/colorAccent"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:layout_alignParentRight="true" />
 
 
             <emerge.project.onmealoutlet.ui.font.OpenSansLightButton

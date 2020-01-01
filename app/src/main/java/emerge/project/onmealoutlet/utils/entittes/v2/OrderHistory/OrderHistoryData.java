@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class OrderHistoryData {
 
     @SerializedName("status")
-    OrderHistoryStatus status;
+    OrderHistoryStatus status = new OrderHistoryStatus();
 
 
     public OrderHistoryStatus getStatus() {
