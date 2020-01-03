@@ -164,7 +164,6 @@ public class HomeInteractorImpil implements HomeInteractor {
         onLogOutFinishedListener.logoutSuccess();
     }
 
-
     @Override
     public void getOrdersFullDetails(final int orderId, final OnGetOrdersFullDetailsFinishedListener onGetOrdersFullDetailsFinishedListener) {
 
@@ -235,6 +234,80 @@ public class HomeInteractorImpil implements HomeInteractor {
 
     }
 
+
+
+/*
+    @Override
+    public void getOrdersFullDetails(final int orderId, final OnGetOrdersFullDetailsFinishedListener onGetOrdersFullDetailsFinishedListener) {
+
+        onGetOrdersFullDetailsFinishedListener.ordersFullDetailsFeedStart();
+
+        final ArrayList<Menus> menusArrayList = new ArrayList<Menus>();//main
+
+        apiService.orderHistorDetails(orderId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<JsonObject>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(JsonObject jsonObject) {
+                        try {
+                            ordersFullDetailsJSONObject = new JSONObject(String.valueOf(jsonObject));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            onGetOrdersFullDetailsFinishedListener.noOrdersFullDetailsAvailable();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        onGetOrdersFullDetailsFinishedListener.ordersFullDetailsTimeOut(orderId);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        JSONArray orderMenusList;
+                        JSONArray orderMenusDetailsList;
+                        try {
+                            orderMenusList = ordersFullDetailsJSONObject.getJSONArray("orderMenus");
+                            orderMenusDetailsList = ordersFullDetailsJSONObject.getJSONArray("orderMenuDetails");
+
+                            for (int i = 0; i < orderMenusList.length(); i++) {
+                                JSONObject jsonData = orderMenusList.getJSONObject(i);
+                                final ArrayList<Foods> foodsArrayList = new ArrayList<Foods>();//sub
+                                for (int k = 0; k < orderMenusDetailsList.length(); k++) {
+                                    JSONObject jsonDatafoodsyList = orderMenusDetailsList.getJSONObject(k);
+                                    if (jsonDatafoodsyList.getString("cartID").equals(jsonData.getString("cartID"))) {
+                                        foodsArrayList.add(new Foods(jsonDatafoodsyList.getString("id"), jsonDatafoodsyList.getString("name"), jsonDatafoodsyList.getInt("foodQty"),
+                                                jsonDatafoodsyList.getBoolean("isBase"), jsonDatafoodsyList.getString("foodItemCategory"), jsonDatafoodsyList.getString("foodItemTypeCode")));
+                                    } else {
+
+                                    }
+
+                                }
+                                menusArrayList.add(new Menus(jsonData.getInt("orderID"), jsonData.getString("id"), jsonData.getString("name"),
+                                        jsonData.getString("menuSizeCode"), jsonData.getDouble("menuPrice"), jsonData.getInt("menuQty"), foodsArrayList));
+
+                            }
+                            onGetOrdersFullDetailsFinishedListener.ordersFullDetails(menusArrayList);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            onGetOrdersFullDetailsFinishedListener.noOrdersFullDetailsAvailable();
+                        }
+
+                    }
+                });
+
+
+    }
+*/
+
     @Override
     public void updateOrderStatus(final int orderId, final int userID, final String statusCode, final String dispatchType, final OnUpdateOrderStatusFinishedListener onUpdateOrderStatusFinishedListener) {
 
@@ -257,26 +330,32 @@ public class HomeInteractorImpil implements HomeInteractor {
                     }
                     @Override
                     public void onError(Throwable e) {
-                        onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId,userID,statusCode,"Update Fail",dispatchType);
+                        onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId,userID,statusCode,"Communication error, Please try again",dispatchType);
                     }
                     @Override
                     public void onComplete() {
                         int orderCurrentStatus = 0;
 
+                        String status ="";
+
                         if (statusCode.equals("ODPN")) {
                             orderCurrentStatus = 0;
+                            status = "Pending";
                         } else if (statusCode.equals("ODPR")) {
                             orderCurrentStatus = 1;
+                            status = "Process";
                         } else if (statusCode.equals("ODPK")) {
                             orderCurrentStatus = 2;
+                            status = "Packed";
                         } else if (statusCode.equals("ODDS")) {
                             orderCurrentStatus = 3;
+                            status = "Dispatch";
                         }
 
                         if (updateOrderStatus) {
                             onUpdateOrderStatusFinishedListener.updateOrderStatusSuccessful(orderCurrentStatus, orderId,  userID, dispatchType);
                         } else {
-                            onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId,userID,statusCode,"Update Fail",dispatchType);
+                            onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId,userID,statusCode,"This Order already change to "+status,dispatchType);
                         }
 
                     }
