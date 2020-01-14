@@ -50,7 +50,7 @@ android {
             // buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_Production/api/\"'
               // buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_QA/api/\"'
          //   buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_DEV/api/\"'
-            buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_Inhouse/api/\"'
+            buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_DEV/api/\"'
         }
 
     }

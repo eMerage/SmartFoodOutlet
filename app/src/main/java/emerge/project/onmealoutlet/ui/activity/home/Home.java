@@ -66,6 +66,9 @@ import emerge.project.onmealoutlet.utils.entittes.Menus;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.SliderMenuItems;
 import emerge.project.onmealoutlet.utils.entittes.TimeSlots;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrderMenus;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrdersData;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrdersList;
 
 
 public class Home extends FragmentActivity implements HomeView {
@@ -511,31 +514,9 @@ public class Home extends FragmentActivity implements HomeView {
     }
 
 
-    @Override
-    public void ordersFullDetailsFeedStart() {
-        progressBar.setVisibility(View.VISIBLE);
-        bloackUserInteraction();
-    }
 
     @Override
-    public void noOrdersFullDetailsAvailable() {
-        progressBar.setVisibility(View.GONE);
-        unBloackUserInteraction();
-
-        errorHandlingUI("No Orders Full Details", true, false, 0);
-    }
-
-    @Override
-    public void ordersFullDetailsTimeOut(int orderId) {
-        progressBar.setVisibility(View.GONE);
-        unBloackUserInteraction();
-
-        errorHandlingUI("Connection lost, Please try again", true, true, orderId);
-
-    }
-
-    @Override
-    public void ordersFullDetails(ArrayList<Menus> menusArrayList) {
+    public void ordersFullDetails(ArrayList<OrderMenus> menusArrayList) {
         progressBar.setVisibility(View.GONE);
 
         unBloackUserInteraction();
@@ -560,19 +541,20 @@ public class Home extends FragmentActivity implements HomeView {
         recyclerViewOrderSubitems.setAdapter(menuAdapter);
 
 
+
         dialogBox.show();
 
     }
 
     @Override
-    public void updateOrderStatusSuccessful(int orderCurrentStatus, int orderId, int userID, String dispatchType) {
+    public void updateOrderStatusSuccessful(int orderCurrentStatus, int orderId, String dispatchType) {
         progressBar.setVisibility(View.GONE);
         unBloackUserInteraction();
         homePresenter.getOrders(status, selectDeliveryTimeSlotId, selectriderId, dispathType);
 
         if (orderCurrentStatus == 3) {
             if ((dispatchType.equals("T")) || (dispatchType.equals("P"))) {
-                homePresenter.updateOrderStatus(orderId, userID, "ODCP", dispatchType);
+                homePresenter.updateOrderStatus(orderId, "ODCP", dispatchType);
             } else {
 
             }
@@ -583,7 +565,7 @@ public class Home extends FragmentActivity implements HomeView {
     }
 
     @Override
-    public void updateOrderStatusFail(final int orderId, final int userID, final String statusCode, String msg, final String dispatchType) {
+    public void updateOrderStatusFail(final int orderId, final String statusCode, String msg, final String dispatchType) {
 
         progressBar.setVisibility(View.GONE);
         unBloackUserInteraction();
@@ -597,7 +579,7 @@ public class Home extends FragmentActivity implements HomeView {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-                                homePresenter.updateOrderStatus(orderId, userID, statusCode, dispatchType);
+                                homePresenter.updateOrderStatus(orderId, statusCode, dispatchType);
                             } else {
 
                                 Toast.makeText(Home.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
@@ -713,7 +695,7 @@ public class Home extends FragmentActivity implements HomeView {
 
 
     @Override
-    public void ordersList(ArrayList<Orders> ordersArrayList) {
+    public void ordersList(OrdersData ordersArrayList) {
 
         swipeContainer.setRefreshing(false);
 
@@ -721,28 +703,63 @@ public class Home extends FragmentActivity implements HomeView {
         unBloackUserInteraction();
 
 
-        errorHandlingUI("", false, false, 0);
 
 
-        if (status.equals("ODPN")) {
-            pendingAdapter = new PendingAdapter(this, ordersArrayList, this);
-            recyclerviewMain.setAdapter(pendingAdapter);
 
-        } else if (status.equals("ODPR")) {
-            processAdapter = new ProcessAdapter(this, ordersArrayList, this);
-            recyclerviewMain.setAdapter(processAdapter);
+        if(ordersArrayList.getStatus()){
 
-        } else if (status.equals("ODPK")) {
-            packedAdapter = new PackedAdapter(this, ordersArrayList, this);
-            recyclerviewMain.setAdapter(packedAdapter);
-        } else if (status.equals("ODDS")) {
-            dispatchAdapter = new DispatchAdapter(this, ordersArrayList, this);
-            recyclerviewMain.setAdapter(dispatchAdapter);
+            errorHandlingUI("", false, false, 0);
+
+
+            if (status.equals("ODPN")) {
+                pendingAdapter = new PendingAdapter(this, ordersArrayList.getOrdersList(), this);
+                recyclerviewMain.setAdapter(pendingAdapter);
+
+            } else if (status.equals("ODPR")) {
+                processAdapter = new ProcessAdapter(this, ordersArrayList.getOrdersList(), this);
+                recyclerviewMain.setAdapter(processAdapter);
+
+            } else if (status.equals("ODPK")) {
+                packedAdapter = new PackedAdapter(this, ordersArrayList.getOrdersList(), this);
+                recyclerviewMain.setAdapter(packedAdapter);
+            } else if (status.equals("ODDS")) {
+                dispatchAdapter = new DispatchAdapter(this, ordersArrayList.getOrdersList(), this);
+                recyclerviewMain.setAdapter(dispatchAdapter);
+            }
+
+
+        }else {
+            errorHandlingUI(ordersArrayList.getError().getErrDescription(), true, true, 0);
+
+            final ArrayList<OrdersList> ordersEmptyList = new ArrayList<OrdersList>();
+
+           if (status.equals("ODPN")) {
+                pendingAdapter = new PendingAdapter(this, ordersEmptyList, this);
+                recyclerviewMain.setAdapter(pendingAdapter);
+
+            } else if (status.equals("ODPR")) {
+                processAdapter = new ProcessAdapter(this, ordersEmptyList, this);
+                recyclerviewMain.setAdapter(processAdapter);
+
+
+            } else if (status.equals("ODPK")) {
+                packedAdapter = new PackedAdapter(this, ordersEmptyList, this);
+                recyclerviewMain.setAdapter(packedAdapter);
+            } else if (status.equals("ODDS")) {
+                dispatchAdapter = new DispatchAdapter(this, ordersEmptyList, this);
+                recyclerviewMain.setAdapter(dispatchAdapter);
+            }
+
         }
+
+
+
+
+
 
     }
 
-    @Override
+/*    @Override
     public void noOrdersList() {
         swipeContainer.setRefreshing(false);
         progressBar.setVisibility(View.GONE);
@@ -769,7 +786,7 @@ public class Home extends FragmentActivity implements HomeView {
         }
 
 
-    }
+    }*/
 
     @Override
     public void ordersTimeOut() {
@@ -778,22 +795,23 @@ public class Home extends FragmentActivity implements HomeView {
         unBloackUserInteraction();
         errorHandlingUI("Connection lost, Please try again", true, true, 0);
 
-        final ArrayList<Orders> ordersArrayList = new ArrayList<Orders>();
+
+        final ArrayList<OrdersList> ordersEmptyList = new ArrayList<OrdersList>();
 
         if (status.equals("ODPN")) {
-            pendingAdapter = new PendingAdapter(this, ordersArrayList, this);
+            pendingAdapter = new PendingAdapter(this, ordersEmptyList, this);
             recyclerviewMain.setAdapter(pendingAdapter);
 
         } else if (status.equals("ODPR")) {
-            processAdapter = new ProcessAdapter(this, ordersArrayList, this);
+            processAdapter = new ProcessAdapter(this, ordersEmptyList, this);
             recyclerviewMain.setAdapter(processAdapter);
 
 
         } else if (status.equals("ODPK")) {
-            packedAdapter = new PackedAdapter(this, ordersArrayList, this);
+            packedAdapter = new PackedAdapter(this, ordersEmptyList, this);
             recyclerviewMain.setAdapter(packedAdapter);
         } else if (status.equals("ODDS")) {
-            dispatchAdapter = new DispatchAdapter(this, ordersArrayList, this);
+            dispatchAdapter = new DispatchAdapter(this, ordersEmptyList, this);
             recyclerviewMain.setAdapter(dispatchAdapter);
         }
     }

@@ -16,8 +16,11 @@ import emerge.project.onmealoutlet.utils.entittes.TimeSlots;
 import emerge.project.onmealoutlet.utils.entittes.User;
 import emerge.project.onmealoutlet.utils.entittes.v2.MenuHistory.MenuHistoryData;
 import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryData;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrdersData;
+import emerge.project.onmealoutlet.utils.entittes.v2.UpdateToken;
 import io.reactivex.Observable;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -30,6 +33,7 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
 
+
     @GET("MealTimeUser/ValidateUser")
     Observable<Outlet> userLoginValidation(@Query("eMail") String email, @Query("Password") String password);
 
@@ -37,8 +41,20 @@ public interface ApiInterface {
     Observable<User> getUserByEmail(@Query("email") String email, @Query("pushTokenId") String pushTokenId);
 
 
+
+/*
     @GET("Order/GetOrdersForOutlet")
     Observable<ArrayList<Orders>> getOrdersForOutlet(@Query("outletID") int outletID, @Query("orderStatusCode") String orderStatusCode, @Query("dispatchType") String dispatchType, @Query("timeSlotID") int timeSlotID, @Query("riderID") int riderID);
+
+    */
+
+
+    @GET("Order/GetOrdersForOutlet")
+    Observable<OrdersData> getOrdersForOutlet(@Query("outletID") int outletID, @Query("orderStatusCode") String orderStatusCode, @Query("dispatchType") String dispatchType, @Query("timeSlotID") int timeSlotID, @Query("riderID") int riderID);
+
+
+
+
 
 
     @GET("Order/GetOrderHistoryByOrder")
@@ -85,6 +101,9 @@ public interface ApiInterface {
 
 
 
+
+
+
     @GET("Order/GetOrdersForOutletBetweenDates")
     Observable<OrderHistoryData> getOrdersForOutletBetweenDates(@Query("outletID") int outletID,
                                                                 @Query("orderStatusCode") String orderStatusCode, @Query("startDate") String startDate,
@@ -95,19 +114,13 @@ public interface ApiInterface {
 
 
 
-
-
-    @GET("outlet/GetTotalOutletSale")
-    Observable<OutletSales> GetTotalOutletSale(@Query("outletID") int outletID, @Query("startDate") String startDate, @Query("endDate") String endDate);
-
-
     @GET("Menu/GetMenuSaleForOutlet")
     Observable<MenuHistoryData> getMenuSaleForOutlet(@Query("outletID") int outletID, @Query("startDate") String startDate, @Query("endDate") String endDate, @Query("menuCategoryID") String menuCategoryID);
 
 
 
-
-
-
+    @POST("MealTime/SaveMealTimeUserPushToken")
+    Observable<UpdateToken> saveMealTimeUserPushToken(@Query("UserID") int userID, @Query("pushToken") String pushToken, @Query("appVersion") int appVersion,
+                                                      @Query("AppType") String AppType, @Query("AppOs") String AppOs);
 
 }

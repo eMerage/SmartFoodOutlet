@@ -4,6 +4,7 @@ package emerge.project.onmealoutlet.ui.activity.home;
 import java.util.ArrayList;
 
 import emerge.project.onmealoutlet.utils.entittes.SliderMenuItems;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrderMenus;
 
 /**
  * Created by Himanshu on 4/4/2017.
@@ -17,11 +18,11 @@ public interface HomePresenter {
 
 
 
-    void getOrdersFullDetails(int orderId);
+    void getOrdersFullDetails(ArrayList<OrderMenus> orderMenus);
 
 
 
-    void updateOrderStatus(int orderId, int userID, String statusCode,String dispatchType);
+    void updateOrderStatus(int orderId, String statusCode,String dispatchType);
 
 
 

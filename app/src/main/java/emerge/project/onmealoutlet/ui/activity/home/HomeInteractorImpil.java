@@ -26,6 +26,8 @@ import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.SliderMenuItems;
 import emerge.project.onmealoutlet.utils.entittes.TimeSlots;
 import emerge.project.onmealoutlet.utils.entittes.User;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrderMenus;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrdersData;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -47,7 +49,6 @@ public class HomeInteractorImpil implements HomeInteractor {
     ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
 
-
     JSONObject ordersFullDetailsJSONObject = null;
     JSONObject printOrdersJSONObject = null;
     Boolean updateOrderStatus;
@@ -58,7 +59,10 @@ public class HomeInteractorImpil implements HomeInteractor {
 
     List<Orders> data;
 
-     ArrayList<Orders> ordersArrayList = new ArrayList<Orders>();
+    //   ArrayList<Orders> ordersArrayList = new ArrayList<Orders>();
+
+    OrdersData ordersArrayList = new OrdersData();
+
 
     Outlet outlet = realm.where(Outlet.class).findFirst();
 
@@ -95,15 +99,18 @@ public class HomeInteractorImpil implements HomeInteractor {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(List<TimeSlots> timeSlots) {
-                        timeSlotsList =timeSlots;
+                        timeSlotsList = timeSlots;
 
                     }
+
                     @Override
                     public void onError(Throwable e) {
 
                     }
+
                     @Override
                     public void onComplete() {
                         timeSlots.add(new TimeSlots(0, "ALL"));
@@ -121,7 +128,6 @@ public class HomeInteractorImpil implements HomeInteractor {
     public void getDeliveryRiders(String status, final OngetDeliveryRidersFinishedListener ongetDeliveryRidersFinishedListener) {
 
         final ArrayList<DeliveryRiders> deliveryRiders = new ArrayList<DeliveryRiders>();
-
 
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -165,72 +171,8 @@ public class HomeInteractorImpil implements HomeInteractor {
     }
 
     @Override
-    public void getOrdersFullDetails(final int orderId, final OnGetOrdersFullDetailsFinishedListener onGetOrdersFullDetailsFinishedListener) {
-
-        onGetOrdersFullDetailsFinishedListener.ordersFullDetailsFeedStart();
-
-        final ArrayList<Menus> menusArrayList = new ArrayList<Menus>();//main
-
-        apiService.orderHistorDetails(orderId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<JsonObject>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(JsonObject jsonObject) {
-                        try {
-                            ordersFullDetailsJSONObject = new JSONObject(String.valueOf(jsonObject));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            onGetOrdersFullDetailsFinishedListener.noOrdersFullDetailsAvailable();
-                        }
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        onGetOrdersFullDetailsFinishedListener.ordersFullDetailsTimeOut(orderId);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        JSONArray orderMenusList;
-                        JSONArray orderMenusDetailsList;
-                        try {
-                            orderMenusList = ordersFullDetailsJSONObject.getJSONArray("orderMenus");
-                            orderMenusDetailsList = ordersFullDetailsJSONObject.getJSONArray("orderMenuDetails");
-
-                            for (int i = 0; i < orderMenusList.length(); i++) {
-                                JSONObject jsonData = orderMenusList.getJSONObject(i);
-                                final ArrayList<Foods> foodsArrayList = new ArrayList<Foods>();//sub
-                                for (int k = 0; k < orderMenusDetailsList.length(); k++) {
-                                    JSONObject jsonDatafoodsyList = orderMenusDetailsList.getJSONObject(k);
-                                    if (jsonDatafoodsyList.getString("cartID").equals(jsonData.getString("cartID"))) {
-                                        foodsArrayList.add(new Foods(jsonDatafoodsyList.getString("id"), jsonDatafoodsyList.getString("name"), jsonDatafoodsyList.getInt("foodQty"),
-                                                jsonDatafoodsyList.getBoolean("isBase"), jsonDatafoodsyList.getString("foodItemCategory"), jsonDatafoodsyList.getString("foodItemTypeCode")));
-                                    } else {
-
-                                    }
-
-                                }
-                                menusArrayList.add(new Menus(jsonData.getInt("orderID"), jsonData.getString("id"), jsonData.getString("name"),
-                                        jsonData.getString("menuSizeCode"), jsonData.getDouble("menuPrice"), jsonData.getInt("menuQty"), foodsArrayList));
-
-                            }
-                            onGetOrdersFullDetailsFinishedListener.ordersFullDetails(menusArrayList);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            onGetOrdersFullDetailsFinishedListener.noOrdersFullDetailsAvailable();
-                        }
-
-                    }
-                });
-
+    public void getOrdersFullDetails(ArrayList<OrderMenus> ordermenus, final OnGetOrdersFullDetailsFinishedListener onGetOrdersFullDetailsFinishedListener) {
+        onGetOrdersFullDetailsFinishedListener.ordersFullDetails(ordermenus);
 
     }
 
@@ -309,9 +251,16 @@ public class HomeInteractorImpil implements HomeInteractor {
 */
 
     @Override
-    public void updateOrderStatus(final int orderId, final int userID, final String statusCode, final String dispatchType, final OnUpdateOrderStatusFinishedListener onUpdateOrderStatusFinishedListener) {
+    public void updateOrderStatus(final int orderId, final String statusCode, final String dispatchType, final OnUpdateOrderStatusFinishedListener onUpdateOrderStatusFinishedListener) {
 
 
+        int userID = 0;
+        try {
+            Outlet outlet = realm.where(Outlet.class).findFirst();
+            userID = outlet.getUserID();
+        } catch (Exception ex) {
+
+        }
 
 
         onUpdateOrderStatusFinishedListener.updateOrderStatusStart();
@@ -323,20 +272,23 @@ public class HomeInteractorImpil implements HomeInteractor {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(Boolean status) {
-                        updateOrderStatus =status;
+                        updateOrderStatus = status;
 
                     }
+
                     @Override
                     public void onError(Throwable e) {
-                        onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId,userID,statusCode,"Communication error, Please try again",dispatchType);
+                        onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId, statusCode, "Communication error, Please try again", dispatchType);
                     }
+
                     @Override
                     public void onComplete() {
                         int orderCurrentStatus = 0;
 
-                        String status ="";
+                        String status = "";
 
                         if (statusCode.equals("ODPN")) {
                             orderCurrentStatus = 0;
@@ -353,9 +305,9 @@ public class HomeInteractorImpil implements HomeInteractor {
                         }
 
                         if (updateOrderStatus) {
-                            onUpdateOrderStatusFinishedListener.updateOrderStatusSuccessful(orderCurrentStatus, orderId,  userID, dispatchType);
+                            onUpdateOrderStatusFinishedListener.updateOrderStatusSuccessful(orderCurrentStatus, orderId, dispatchType);
                         } else {
-                            onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId,userID,statusCode,"This Order already change to "+status,dispatchType);
+                            onUpdateOrderStatusFinishedListener.updateOrderStatusFail(orderId, statusCode, "This Order already change to " + status, dispatchType);
                         }
 
                     }
@@ -363,9 +315,6 @@ public class HomeInteractorImpil implements HomeInteractor {
 
 
     }
-
-
-
 
 
     @Override
@@ -479,6 +428,7 @@ public class HomeInteractorImpil implements HomeInteractor {
     @Override
     public void getOrders(String statusCode, int timeSlotId, int riderId, String dispatcType, final OnGetOrdersFinishedListener onGetOrdersFinishedListener) {
 
+/*
         apiService.getOrdersForOutlet(outlet.getOutletId(), statusCode, dispatcType, timeSlotId, riderId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -508,13 +458,46 @@ public class HomeInteractorImpil implements HomeInteractor {
                         }
                     }
                 });
+*/
+
+        try {
+            apiService.getOrdersForOutlet(outlet.getOutletId(), statusCode, dispatcType, timeSlotId, riderId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<OrdersData>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(OrdersData ordersList) {
+                            ordersArrayList = ordersList;
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            onGetOrdersFinishedListener.ordersTimeOut();
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            onGetOrdersFinishedListener.ordersList(ordersArrayList);
+                        }
+                    });
+
+        } catch (Exception ex) {
+            onGetOrdersFinishedListener.ordersTimeOut();
+        }
+
+
 
     }
 
 
     @Override
     public void getIncome(final OnGetIncomeFinishedListener onGetIncomeFinishedListener) {
-
 
 
         apiService.getOutletDailySale(outlet.getOutletId())
@@ -525,19 +508,22 @@ public class HomeInteractorImpil implements HomeInteractor {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(JsonObject jsonObject) {
                         try {
-                            salesDetails  = new JSONObject(String.valueOf(jsonObject));
+                            salesDetails = new JSONObject(String.valueOf(jsonObject));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                     }
+
                     @Override
                     public void onError(Throwable e) {
 
                     }
+
                     @Override
                     public void onComplete() {
 
@@ -550,14 +536,13 @@ public class HomeInteractorImpil implements HomeInteractor {
                 });
 
 
-
     }
 
     @Override
     public void getOutletName(OnGetOutletNameFinishedListener onGetOutletNameFinishedListener) {
-         String outletName ="";
-         outletName=outlet.getOutletname();
-         onGetOutletNameFinishedListener.outlatname(outletName);
+        String outletName = "";
+        outletName = outlet.getOutletname();
+        onGetOutletNameFinishedListener.outlatname(outletName);
     }
 
 

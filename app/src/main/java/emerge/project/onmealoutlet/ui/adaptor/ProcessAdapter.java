@@ -26,6 +26,7 @@ import emerge.project.onmealoutlet.ui.activity.home.HomePresenter;
 import emerge.project.onmealoutlet.ui.activity.home.HomePresenterImpli;
 import emerge.project.onmealoutlet.ui.activity.home.HomeView;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrdersList;
 
 
 /**
@@ -34,7 +35,7 @@ import emerge.project.onmealoutlet.utils.entittes.Orders;
 public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<Orders> ordersItems;
+    ArrayList<OrdersList> ordersItems;
 
     HomePresenter homePresenter;
 
@@ -42,7 +43,7 @@ public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHo
     int counter;
     CountDownTimer cTimer;
 
-    public ProcessAdapter(Context mContext, ArrayList<Orders> item, HomeView homeView) {
+    public ProcessAdapter(Context mContext, ArrayList<OrdersList> item, HomeView homeView) {
         this.mContext = mContext;
         this.ordersItems = item;
 
@@ -63,7 +64,7 @@ public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        final Orders orders =ordersItems.get(position);
+        final OrdersList orders =ordersItems.get(position);
 
         counter = 0;
 
@@ -136,7 +137,7 @@ public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHo
         }
 
 
-        holder.textViewRider.setText(orders.getRider().getName());
+        holder.textViewRider.setText(orders.getRideName());
 
 
 
@@ -160,13 +161,12 @@ public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHo
 
         holder.textViewPromotype.setText(promo);
         holder.textViewAmount.setText(String.valueOf(orders.getOrderTotalWithoutDeliveryCost()));
-
-        holder.textViewDiscount.setText(String.valueOf(orders.getPromoDiscountValue()));
+       holder.textViewDiscount.setText(String.valueOf(orders.getPromoDiscountValue()));
 
         holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               homePresenter.getOrdersFullDetails(orders.getOrderID());
+               homePresenter.getOrdersFullDetails(orders.getMenuItems());
 
             }
         });
@@ -176,7 +176,7 @@ public class ProcessAdapter extends RecyclerView.Adapter<ProcessAdapter.MyViewHo
             @Override
             public void onClick(View v) {
                 cTimer.cancel();
-                homePresenter.updateOrderStatus(orders.getOrderID(),orders.getUserID(),"ODPK",orders.getDispatchType());
+                homePresenter.updateOrderStatus(orders.getOrderID(),"ODPK",orders.getDispatchType());
 
             }
         });

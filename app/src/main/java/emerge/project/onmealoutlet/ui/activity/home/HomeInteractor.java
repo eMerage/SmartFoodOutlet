@@ -11,6 +11,8 @@ import emerge.project.onmealoutlet.utils.entittes.Menus;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.SliderMenuItems;
 import emerge.project.onmealoutlet.utils.entittes.TimeSlots;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrderMenus;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrdersData;
 
 /**
  * Created by Himanshu on 4/4/2017.
@@ -52,25 +54,19 @@ public interface HomeInteractor {
 
 
     interface OnGetOrdersFullDetailsFinishedListener {
-
-        void ordersFullDetailsFeedStart();
-
-        void noOrdersFullDetailsAvailable();
-
-        void ordersFullDetailsTimeOut(int orderId);
-
-        void ordersFullDetails(ArrayList<Menus> menusArrayList);
+        void ordersFullDetails(ArrayList<OrderMenus> menusArrayList);
     }
 
-    void getOrdersFullDetails(int orderId, OnGetOrdersFullDetailsFinishedListener onGetOrdersFullDetailsFinishedListener);
+    void getOrdersFullDetails(ArrayList<OrderMenus> menusArrayList, OnGetOrdersFullDetailsFinishedListener onGetOrdersFullDetailsFinishedListener);
+
 
 
     interface OnUpdateOrderStatusFinishedListener {
         void updateOrderStatusStart();
-        void updateOrderStatusSuccessful(int orderCurrentStatus,int orderId, int userID,String dispatchType );
-        void updateOrderStatusFail(int orderId, int userID, String statusCode,String msg,String dispatchType);
+        void updateOrderStatusSuccessful(int orderCurrentStatus,int orderId,String dispatchType );
+        void updateOrderStatusFail(int orderId, String statusCode,String msg,String dispatchType);
     }
-    void updateOrderStatus(int orderId, int userID, String statusCode,String dispatchType ,OnUpdateOrderStatusFinishedListener onUpdateOrderStatusFinishedListener);
+    void updateOrderStatus(int orderId, String statusCode,String dispatchType ,OnUpdateOrderStatusFinishedListener onUpdateOrderStatusFinishedListener);
 
 
 
@@ -87,11 +83,11 @@ public interface HomeInteractor {
 
 
     interface OnGetOrdersFinishedListener {
-        void ordersList(ArrayList<Orders> ordersArrayList);
-        void noOrdersList();
+        void ordersList(OrdersData ordersArrayList);
         void ordersTimeOut();
     }
     void getOrders(String statusCode, int timeSlotId, int riderId, String dispatcType, OnGetOrdersFinishedListener onGetOrdersFinishedListener);
+
 
 
 

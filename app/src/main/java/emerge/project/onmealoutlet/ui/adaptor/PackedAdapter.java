@@ -27,6 +27,7 @@ import emerge.project.onmealoutlet.ui.activity.home.HomePresenter;
 import emerge.project.onmealoutlet.ui.activity.home.HomePresenterImpli;
 import emerge.project.onmealoutlet.ui.activity.home.HomeView;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrdersList;
 
 
 /**
@@ -35,12 +36,12 @@ import emerge.project.onmealoutlet.utils.entittes.Orders;
 public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<Orders> ordersItems;
+    ArrayList<OrdersList> ordersItems;
 
     HomePresenter homePresenter;
     CountDownTimer cTimer;
 
-    public PackedAdapter(Context mContext, ArrayList<Orders> item, HomeView homeView) {
+    public PackedAdapter(Context mContext, ArrayList<OrdersList> item, HomeView homeView) {
         this.mContext = mContext;
         this.ordersItems = item;
         homePresenter = new HomePresenterImpli(homeView);
@@ -62,7 +63,7 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
 
-        final Orders orders =ordersItems.get(position);
+        final OrdersList orders =ordersItems.get(position);
 
         holder.textViewOrderNumber.setText(String.valueOf(orders.getOrderID()));
         holder.textViewQTY.setText(String.valueOf(orders.getOrderQty()));
@@ -90,7 +91,7 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
         }
 
 
-        holder.textViewRider.setText(orders.getRider().getName());
+        holder.textViewRider.setText(orders.getRideName());
 
 
         cTimer=  new CountDownTimer(remTime, 1000) {
@@ -159,14 +160,14 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
         holder.textViewNote.setText(orders.getOrderNote());
 
 
-        holder.textViewDiscount.setText(String.valueOf(orders.getPromoDiscountValue()));
+       holder.textViewDiscount.setText(String.valueOf(orders.getPromoDiscountValue()));
 
 
 
         holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                homePresenter.getOrdersFullDetails(orders.getOrderID());
+                homePresenter.getOrdersFullDetails(orders.getMenuItems());
 
             }
         });
@@ -176,7 +177,7 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
             @Override
             public void onClick(View v) {
                 cTimer.cancel();
-                homePresenter.updateOrderStatus(orders.getOrderID(),orders.getUserID(),"ODDS",orders.getDispatchType());
+                homePresenter.updateOrderStatus(orders.getOrderID(),"ODDS",orders.getDispatchType());
 
             }
         });

@@ -32,6 +32,7 @@ import emerge.project.onmealoutlet.ui.activity.home.HomePresenter;
 import emerge.project.onmealoutlet.ui.activity.home.HomePresenterImpli;
 import emerge.project.onmealoutlet.ui.activity.home.HomeView;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrdersList;
 
 
 /**
@@ -41,12 +42,12 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
     Context mContext;
 
-    ArrayList<Orders> ordersItems;
+    ArrayList<OrdersList> ordersItems;
     int counter;
     HomePresenter homePresenter;
     CountDownTimer cTimer;
     boolean isCollor=false;
-    public PendingAdapter(Context mContext, ArrayList<Orders> item, HomeView homeView) {
+    public PendingAdapter(Context mContext, ArrayList<OrdersList> item, HomeView homeView) {
         this.mContext = mContext;
         this.ordersItems = item;
 
@@ -68,7 +69,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-       final Orders orders = ordersItems.get(position);
+       final OrdersList orders = ordersItems.get(position);
 
 
         counter = 0;
@@ -141,7 +142,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         }
 
 
-        holder.textViewRider.setText(orders.getRider().getName());
+        holder.textViewRider.setText(orders.getRideName());
 
 
 
@@ -158,6 +159,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         }
 
         holder.textViewDiscount.setText(String.valueOf(orders.getPromoDiscountValue()));
+
 
         String promo;
 
@@ -196,7 +198,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             @Override
             public void onClick(View v) {
                 cTimer.cancel();
-                homePresenter.updateOrderStatus(orders.getOrderID(), orders.getUserID(), "ODPR",orders.getDispatchType());
+                homePresenter.updateOrderStatus(orders.getOrderID(), "ODPR",orders.getDispatchType());
                 orders.setCuntDownExp(true);
 
             }

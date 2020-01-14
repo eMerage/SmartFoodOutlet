@@ -12,6 +12,8 @@ import emerge.project.onmealoutlet.utils.entittes.Menus;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.SliderMenuItems;
 import emerge.project.onmealoutlet.utils.entittes.TimeSlots;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrderMenus;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrdersData;
 
 /**
  * Created by Himanshu on 4/4/2017.
@@ -101,36 +103,14 @@ HomeInteractor.OnGetOutletNameFinishedListener{
 
 
 
-    @Override
-    public void getOrdersFullDetails(int orderId) {
-        homeInteractor.getOrdersFullDetails(orderId, this);
-    }
 
 
-    @Override
-    public void ordersFullDetailsFeedStart() {
-        homeView.ordersFullDetailsFeedStart();
-    }
 
-    @Override
-    public void noOrdersFullDetailsAvailable() {
-        homeView.noOrdersFullDetailsAvailable();
-    }
-
-    @Override
-    public void ordersFullDetailsTimeOut(int orderId) {
-        homeView.ordersFullDetailsTimeOut(orderId);
-    }
-
-    @Override
-    public void ordersFullDetails(ArrayList<Menus> menusArrayList) {
-        homeView.ordersFullDetails(menusArrayList);
-    }
 
 
     @Override
-    public void updateOrderStatus(int orderId, int userID, String statusCode,String dispatchType) {
-        homeInteractor.updateOrderStatus(orderId, userID, statusCode, dispatchType,this);
+    public void updateOrderStatus(int orderId, String statusCode,String dispatchType) {
+        homeInteractor.updateOrderStatus(orderId, statusCode, dispatchType,this);
     }
 
 
@@ -141,13 +121,13 @@ HomeInteractor.OnGetOutletNameFinishedListener{
     }
 
     @Override
-    public void updateOrderStatusSuccessful(int orderCurrentStatus,int orderId, int userID,String dispatchType) {
-        homeView.updateOrderStatusSuccessful(orderCurrentStatus, orderId,  userID, dispatchType);
+    public void updateOrderStatusSuccessful(int orderCurrentStatus,int orderId,String dispatchType) {
+        homeView.updateOrderStatusSuccessful(orderCurrentStatus, orderId, dispatchType);
     }
 
     @Override
-    public void updateOrderStatusFail(int orderId, int userID, String statusCode,String msg,String dispatchType) {
-        homeView.updateOrderStatusFail( orderId,  userID,  statusCode, msg, dispatchType);
+    public void updateOrderStatusFail(int orderId, String statusCode,String msg,String dispatchType) {
+        homeView.updateOrderStatusFail( orderId,  statusCode, msg, dispatchType);
     }
 
 
@@ -189,14 +169,11 @@ HomeInteractor.OnGetOutletNameFinishedListener{
 
 
     @Override
-    public void ordersList(ArrayList<Orders> ordersArrayList) {
+    public void ordersList(OrdersData ordersArrayList) {
         homeView.ordersList(ordersArrayList);
     }
 
-    @Override
-    public void noOrdersList() {
-        homeView.noOrdersList();
-    }
+
 
     @Override
     public void ordersTimeOut() {
@@ -246,5 +223,19 @@ HomeInteractor.OnGetOutletNameFinishedListener{
     @Override
     public void outlatname(String name) {
         homeView.outlatname(name);
+    }
+
+
+
+
+    @Override
+    public void getOrdersFullDetails(ArrayList<OrderMenus> orderMenus) {
+        homeInteractor.getOrdersFullDetails(orderMenus, this);
+    }
+
+
+    @Override
+    public void ordersFullDetails(ArrayList<OrderMenus> menusArrayList) {
+        homeView.ordersFullDetails(menusArrayList);
     }
 }

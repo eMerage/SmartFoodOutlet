@@ -19,6 +19,8 @@ import butterknife.ButterKnife;
 import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.utils.entittes.Foods;
 import emerge.project.onmealoutlet.utils.entittes.Menus;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrderMenuDetails;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrderMenus;
 
 
 /**
@@ -27,10 +29,10 @@ import emerge.project.onmealoutlet.utils.entittes.Menus;
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<Menus> menusItems;
+    ArrayList<OrderMenus> menusItems;
 
 
-    public MenuAdapter(Context mContext, ArrayList<Menus> item) {
+    public MenuAdapter(Context mContext, ArrayList<OrderMenus> item) {
         this.mContext = mContext;
         this.menusItems = item;
 
@@ -51,15 +53,15 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        final Menus menusList =menusItems.get(position);
+        final OrderMenus menusList =menusItems.get(position);
 
 
 
-        holder.textViewMenuNumber.setText(menusList.getCartID());
-        holder.textViewMenuName.setText(menusList.getOutletMenuName());
-        holder.textViewMenuSize.setText(String.valueOf(menusList.getSize()));
-        holder.textViewAmount.setText(String.valueOf(menusList.getPrice()));
-        holder.textViewQuantity.setText(String.valueOf(menusList.getQty()));
+        holder.textViewMenuNumber.setText(menusList.getMenuID());
+        holder.textViewMenuName.setText(menusList.getName());
+        holder.textViewMenuSize.setText(String.valueOf(menusList.getMenuSizeCode()));
+        holder.textViewAmount.setText(String.valueOf(menusList.getMenuPrice()));
+        holder.textViewQuantity.setText(String.valueOf(menusList.getMenuQty()));
 
 
 
@@ -68,26 +70,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
         } else {
             holder.linearLayoutChild.setVisibility(View.VISIBLE);
 
-            setSubItems(mContext,holder,menusList.getFoods());
+            setSubItems(mContext,holder,menusList.getOrderMenuDetails());
 
         }
 
 
-       /* holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                if (holder.linearLayoutChild.getVisibility() == View.VISIBLE) {
-                    holder.linearLayoutChild.setVisibility(View.GONE);
-                } else {
-                    holder.linearLayoutChild.setVisibility(View.VISIBLE);
-
-                    setSubItems(mContext,holder,menusList.getFoods());
-
-                }
-            }
-        });*/
 
     }
 
@@ -141,7 +128,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
     }
 
 
-    public void setSubItems(Context context, MyViewHolder holder, ArrayList<Foods> foodsArrayList){
+    public void setSubItems(Context context, MyViewHolder holder, ArrayList<OrderMenuDetails> foodsArrayList){
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);

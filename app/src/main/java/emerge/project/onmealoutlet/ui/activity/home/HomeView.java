@@ -10,6 +10,8 @@ import emerge.project.onmealoutlet.utils.entittes.DeliveryRiders;
 import emerge.project.onmealoutlet.utils.entittes.Menus;
 import emerge.project.onmealoutlet.utils.entittes.Orders;
 import emerge.project.onmealoutlet.utils.entittes.TimeSlots;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrderMenus;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrdersData;
 
 /**
  * Created by Himanshu on 4/4/2017.
@@ -28,15 +30,12 @@ public interface HomeView {
 
 
 
-    void ordersFullDetailsFeedStart();
-    void noOrdersFullDetailsAvailable();
-    void ordersFullDetailsTimeOut(int orderId);
-    void ordersFullDetails(ArrayList<Menus> menusArrayList);
+    void ordersFullDetails(ArrayList<OrderMenus> ordermenus);
 
 
 
-    void  updateOrderStatusSuccessful(int orderCurrentStatus,int orderId, int userID,String dispatchType);
-    void updateOrderStatusFail(int orderId, int userID, String statusCode,String msg,String dispatchType);
+    void  updateOrderStatusSuccessful(int orderCurrentStatus,int orderId,String dispatchType);
+    void updateOrderStatusFail(int orderId, String statusCode,String msg,String dispatchType);
     void updateOrderStatusStart();
 
 
@@ -53,8 +52,7 @@ public interface HomeView {
 
 
 
-    void ordersList(ArrayList<Orders> ordersArrayList);
-    void noOrdersList();
+    void ordersList(OrdersData ordersArrayList);
     void ordersTimeOut();
 
 

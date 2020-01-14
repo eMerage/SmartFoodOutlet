@@ -17,7 +17,7 @@ public class OnMealOutlet  extends Application {
 
         Realm.init(this);
 
-        final RealmConfiguration configuration = new RealmConfiguration.Builder().name("foodeey_outlet.realm").schemaVersion(0).migration(new RealmMigrations()).build();
+        final RealmConfiguration configuration = new RealmConfiguration.Builder().name("foodeey_outlet.realm").schemaVersion(1).migration(new RealmMigrations()).build();
         Realm.setDefaultConfiguration(configuration);
         Realm.getInstance(configuration);
     }

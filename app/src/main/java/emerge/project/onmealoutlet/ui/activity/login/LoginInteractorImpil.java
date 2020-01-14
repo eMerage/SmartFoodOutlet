@@ -86,11 +86,11 @@ public class LoginInteractorImpil implements LoginInteractor {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
-
                 final Long userList = bgRealm.where(Outlet.class).count();
                 Outlet outletDb = bgRealm.createObject(Outlet.class, (userList.intValue() + 1));
                 outletDb.setOutletId(outlet.getOutletId());
                 outletDb.setOutletname(outlet.getOutletname());
+                outletDb.setUserID(outlet.getUserID());
                 updatePushTokan(context, userName, onLoginValidationFinishedListener);
 
             }

@@ -24,7 +24,8 @@ public class Outlet extends RealmObject implements Serializable {
     int pickupTimeInterval;
 
 
-
+    @SerializedName("id")
+    int userID;
 
 
 
@@ -50,5 +51,21 @@ public class Outlet extends RealmObject implements Serializable {
 
     public void setPickupTimeInterval(int pickupTimeInterval) {
         this.pickupTimeInterval = pickupTimeInterval;
+    }
+
+    public long getRowid() {
+        return rowid;
+    }
+
+    public void setRowid(long rowid) {
+        this.rowid = rowid;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }

@@ -3,19 +3,45 @@ package emerge.project.onmealoutlet.utils.entittes.v2.Orders;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
+import emerge.project.onmealoutlet.utils.entittes.v2.ErrorObject;
 import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryStatus;
 
 public class OrdersData {
 
     @SerializedName("status")
-    OrdersStatus status = new OrdersStatus();
+    Boolean status = false;
 
 
-    public OrdersStatus getStatus() {
+    @SerializedName("error")
+    ErrorObject error = new ErrorObject();
+
+    @SerializedName("orders")
+    ArrayList<OrdersList> ordersList = new ArrayList<OrdersList>();
+
+
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(OrdersStatus status) {
+    public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public ErrorObject getError() {
+        return error;
+    }
+
+    public void setError(ErrorObject error) {
+        this.error = error;
+    }
+
+    public ArrayList<OrdersList> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(ArrayList<OrdersList> ordersList) {
+        this.ordersList = ordersList;
     }
 }

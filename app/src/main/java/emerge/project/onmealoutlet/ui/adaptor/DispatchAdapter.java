@@ -20,6 +20,7 @@ import emerge.project.onmealoutlet.ui.activity.home.HomePresenterImpli;
 import emerge.project.onmealoutlet.ui.activity.home.HomeView;
 
 import emerge.project.onmealoutlet.utils.entittes.Orders;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrdersList;
 
 
 /**
@@ -28,11 +29,11 @@ import emerge.project.onmealoutlet.utils.entittes.Orders;
 public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<Orders> ordersItems;
+    ArrayList<OrdersList> ordersItems;
 
     HomePresenter homePresenter;
 
-    public DispatchAdapter(Context mContext, ArrayList<Orders> item, HomeView homeView) {
+    public DispatchAdapter(Context mContext, ArrayList<OrdersList> item, HomeView homeView) {
         this.mContext = mContext;
         this.ordersItems = item;
 
@@ -57,7 +58,7 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.MyView
 
 
 
-        final Orders orders = ordersItems.get(position);
+        final OrdersList orders = ordersItems.get(position);
 
 
 
@@ -70,7 +71,7 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.MyView
             holder.textViewTime.setText(orders.getDeliveryTime().getTimeSlot());
         }
 
-        holder.textViewRider.setText(orders.getRider().getName());
+        holder.textViewRider.setText(orders.getRideName());
 
         holder.textViewAmount.setText(String.valueOf(orders.getOrderTotal()));
         holder.textViewQty.setText(String.valueOf(orders.getOrderQty()));
@@ -119,7 +120,7 @@ public class DispatchAdapter extends RecyclerView.Adapter<DispatchAdapter.MyView
         holder.relativelayouMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                homePresenter.getOrdersFullDetails(orders.getOrderID());
+                homePresenter.getOrdersFullDetails(orders.getMenuItems());
 
             }
         });

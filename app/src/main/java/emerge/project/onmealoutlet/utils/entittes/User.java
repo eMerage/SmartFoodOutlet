@@ -13,6 +13,7 @@ public class User implements Parcelable {
     String city;//Colombo
     String mobileNo;
     String name;
+    int userID;
 
 
     public User() {
@@ -121,5 +122,17 @@ public class User implements Parcelable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public static Creator<User> getCREATOR() {
+        return CREATOR;
     }
 }

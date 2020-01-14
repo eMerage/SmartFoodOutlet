@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 
 import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.utils.entittes.Foods;
+import emerge.project.onmealoutlet.utils.entittes.v2.Orders.OrderMenuDetails;
 
 
 /**
@@ -23,11 +24,11 @@ import emerge.project.onmealoutlet.utils.entittes.Foods;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<Foods> foodsItems;
+    ArrayList<OrderMenuDetails> foodsItems;
 
 
 
-    public FoodAdapter(Context mContext, ArrayList<Foods> item) {
+    public FoodAdapter(Context mContext, ArrayList<OrderMenuDetails> item) {
         this.mContext = mContext;
         this.foodsItems = item;
 
@@ -49,15 +50,15 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        Foods foods =foodsItems.get(position);
+        OrderMenuDetails foods =foodsItems.get(position);
 
-        holder.textViewFoodname.setText(foods.getOutletMenuName());
+        holder.textViewFoodname.setText(foods.getName());
 
-        holder.textViewFoodqty.setText(String.valueOf(foods.getQty()));
+        holder.textViewFoodqty.setText(String.valueOf(foods.getFoodQty()));
 
         String catagory;
 
-        if (foods.isBaseFood()) {
+        if (foods.getBase()) {
             catagory = "BASE";
         } else if (foods.getFoodItemTypeCode().equals("EX")) {
             catagory = "EXTRA";

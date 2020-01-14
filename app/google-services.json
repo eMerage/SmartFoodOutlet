@@ -1,37 +1,52 @@
 {
   "project_info": {
-    "project_number": "235521215984",
-    "firebase_url": "https://smartfoodoutlet.firebaseio.com",
-    "project_id": "smartfoodoutlet",
-    "storage_bucket": "smartfoodoutlet.appspot.com"
+    "project_number": "918366048787",
+    "firebase_url": "https://onmeal-outlet.firebaseio.com",
+    "project_id": "onmeal-outlet",
+    "storage_bucket": "onmeal-outlet.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:235521215984:android:0957f16dacb3fac5c1e135",
+        "mobilesdk_app_id": "1:918366048787:android:db30e6c055540106",
         "android_client_info": {
           "package_name": "emerge.project.onmealoutlet"
         }
       },
       "oauth_client": [
         {
-          "client_id": "235521215984-pll76cng55becdvbkuir732p2jmdsfge.apps.googleusercontent.com",
+          "client_id": "918366048787-1r2j85da8mteugc89f3935ti2se6g1pt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "emerge.project.onmealoutlet",
+            "certificate_hash": "76e9ce16908e0b0084622bdc1bc308acb8446c6d"
+          }
+        },
+        {
+          "client_id": "918366048787-vj9n2vkn0eluj64c5mbsshjpfd55q0qt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBVvN1pTEuCVa16S0b3xPe2C1_eAKcDPWM"
+          "current_key": "AIzaSyDJzPdOSw4RThy3l9PD3nwfMph3DJaQvv8"
         }
       ],
       "services": {
+        "analytics_service": {
+          "status": 1
+        },
         "appinvite_service": {
+          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "235521215984-pll76cng55becdvbkuir732p2jmdsfge.apps.googleusercontent.com",
+              "client_id": "918366048787-vj9n2vkn0eluj64c5mbsshjpfd55q0qt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
+        },
+        "ads_service": {
+          "status": 2
         }
       }
     }
