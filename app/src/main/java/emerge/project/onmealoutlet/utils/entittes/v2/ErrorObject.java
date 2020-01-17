@@ -12,7 +12,7 @@ public class ErrorObject implements Serializable {
     String errCode;
 
 
-    @SerializedName("errDescription")
+    @SerializedName("errDesc")
     String errDescription;
 
     public String getErrCode() {

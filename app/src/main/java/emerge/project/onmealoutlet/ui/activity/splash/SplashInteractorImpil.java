@@ -33,9 +33,12 @@ import io.realm.RealmResults;
 public class SplashInteractorImpil implements SplashInteractor {
 
     Realm realm;
-    String pushToken ;
+
     ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
+
+
+    String pushToken ;
     UpdateToken updateToken =  new UpdateToken();
 
     @Override
@@ -88,11 +91,6 @@ public class SplashInteractorImpil implements SplashInteractor {
         final ErrorObject errorObject =  new ErrorObject();
         errorObject.setErrCode("CE");
         errorObject.setErrDescription("Communication error, Please try again");
-
-        System.out.println("xxxxxxxxxxxxxxxxxx userID: "+userID);
-        System.out.println("xxxxxxxxxxxxxxxxxx versionCode: "+versionCode);
-        System.out.println("xxxxxxxxxxxxxxxxxx token: "+token);
-
 
 
 

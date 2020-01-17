@@ -103,18 +103,18 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
                 holder.textViewCountdownTime.setText(hms);//set text
 
                 if(millisUntilFinished<420000){
-
                     if(orders.isCuntDownExp()){
+                        holder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.app_white));
+                        orders.setCuntDownExp(false);
 
+                        notifyDataSetChanged();
 
                     }else {
                         holder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.app_color_light_red));
                         orders.setCuntDownExp(true);
 
-
                         notifyDataSetChanged();
                     }
-
 
                 }else {
 

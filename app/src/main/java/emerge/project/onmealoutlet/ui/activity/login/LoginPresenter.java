@@ -10,5 +10,6 @@ import android.content.Context;
 public interface LoginPresenter {
 
     void checkLoginValidation(Context context, String userName, String password);
+    void updatePushTokenAndAppVersion(Context con);
 
 }

@@ -3,12 +3,13 @@ package emerge.project.onmealoutlet.utils.entittes.v2.Orders;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import emerge.project.onmealoutlet.utils.entittes.v2.ErrorObject;
 import emerge.project.onmealoutlet.utils.entittes.v2.OrderHistory.OrderHistoryStatus;
 
-public class OrdersData {
+public class OrdersData  implements Serializable {
 
     @SerializedName("status")
     Boolean status = false;

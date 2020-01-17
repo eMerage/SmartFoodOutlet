@@ -57,7 +57,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
 
 
 
-        holder.textViewMenuNumber.setText(menusList.getMenuID());
+        holder.textViewMenuNumber.setText(String.valueOf(menusList.getMenuID()));
         holder.textViewMenuName.setText(menusList.getName());
         holder.textViewMenuSize.setText(String.valueOf(menusList.getMenuSizeCode()));
         holder.textViewAmount.setText(String.valueOf(menusList.getMenuPrice()));

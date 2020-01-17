@@ -13,12 +13,12 @@ public class SplashPresenterImpli implements SplashPresenter,SplashInteractor.On
 
 
     private SplashView splashView;
-    SplashInteractor landingInteractor;
+    SplashInteractor splashInteractor;
 
 
     public SplashPresenterImpli(SplashView splashView) {
         this.splashView = splashView;
-        this.landingInteractor = new SplashInteractorImpil();
+        this.splashInteractor = new SplashInteractorImpil();
 
     }
 
@@ -28,7 +28,7 @@ public class SplashPresenterImpli implements SplashPresenter,SplashInteractor.On
 
     @Override
     public void updatePushTokenAndAppVersion(Context con) {
-        landingInteractor.updatePushTokenAndAppVersion( con,this);
+        splashInteractor.updatePushTokenAndAppVersion( con,this);
     }
 
 

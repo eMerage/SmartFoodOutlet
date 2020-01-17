@@ -39,7 +39,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
 
-        notification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+        notification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
     }
 
     @Override
@@ -57,25 +57,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.onSendError(s, e);
     }
 
-    public void notification(String titel, String message){
-
-
-
+    public void notification(String titel, String message) {
         Intent myIntent = new Intent(getBaseContext(), PushService.class);
         startService(myIntent);
-
-
-
-
-
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-
-
-
-
-
-
-
 
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
         Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
