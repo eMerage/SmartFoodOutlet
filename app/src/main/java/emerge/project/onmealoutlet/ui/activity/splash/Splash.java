@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.data.db.Outlet;
+import emerge.project.onmealoutlet.servies.network.NetworkAvailability;
 import emerge.project.onmealoutlet.ui.activity.home.Home;
 import emerge.project.onmealoutlet.ui.activity.login.Login;
 import emerge.project.onmealoutlet.ui.activity.menus.MenusActivity;
@@ -39,7 +40,21 @@ public class Splash extends Activity implements SplashView{
 
 
         splashPresenter = new SplashPresenterImpli(this);
-        splashPresenter.updatePushTokenAndAppVersion(this);
+
+        if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+            splashPresenter.updatePushTokenAndAppVersion(this);
+        }else {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder.setMessage("No Internet Access, Please try again ");
+            alertDialogBuilder.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+            alertDialogBuilder.show();
+        }
 
 
     }
