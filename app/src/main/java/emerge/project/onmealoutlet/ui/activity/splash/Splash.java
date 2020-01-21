@@ -37,6 +37,8 @@ public class Splash extends Activity implements SplashView{
         setContentView(R.layout.activity_splash);
 
         realm = Realm.getDefaultInstance();
+        splashPresenter = new SplashPresenterImpli(this);
+
 
 
         splashPresenter = new SplashPresenterImpli(this);
@@ -57,6 +59,46 @@ public class Splash extends Activity implements SplashView{
         }
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        try {
+            if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+                splashPresenter.updatePushTokenAndAppVersion(this);
+            }else {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Warning");
+                alertDialogBuilder.setMessage("No Internet Access, Please try again ");
+                alertDialogBuilder.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                return;
+                            }
+                        });
+                alertDialogBuilder.show();
+            }
+        }catch (Exception ex){
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder.setMessage("we have problem to get your connection,Please try again");
+            alertDialogBuilder.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+            alertDialogBuilder.show();
+
+        }
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
     }
 
     @Override
@@ -100,7 +142,7 @@ public class Splash extends Activity implements SplashView{
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateToken.getAppUrl()));
-                               startActivity(browserIntent);
+                                startActivity(browserIntent);
 
                                 return;
                             }
