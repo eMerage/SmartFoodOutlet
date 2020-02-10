@@ -7,22 +7,22 @@ android {
         applicationId "emerge.project.onmealoutlet"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 17
-       // versionName "1.0.1.PO17"
-        versionName "1.0.1.DEV24"
-     //  versionName "1.0.1.QA24"
+        versionCode 22
+        versionName "1.0.1.PO22"
+        // versionName "1.0.1.DEV24"
+        // versionName "1.0.1.QA25"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
 
 
-
     signingConfigs {
         key {
             keyAlias 'onmealoutlet'
             keyPassword 'onmealoutlet'
-            storeFile file('E:\\Project\\Android\\OnMeal-Outlet\\key\\onmealoutlet.jks')
+            /*storeFile file('E:\\Project\\Android\\OnMeal-Outlet\\key\\onmealoutlet.jks')*/
+            storeFile file('D:\\Project\\Android\\SmartFoodOutlet\\key\\onmealoutlet.jks')
             storePassword 'onmealoutlet'
         }
     }
@@ -39,15 +39,15 @@ android {
             minifyEnabled true
             signingConfig signingConfigs.key
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            // buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_Production/api/\"'
-            // buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_QA/api/\"'
-              buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_DEV/api/\"'
+            buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_Production/api/\"'
+            //  buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_QA/api/\"'
+            //  buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_DEV/api/\"'
 
         }
         debug {
-            // buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_Production/api/\"'
-             //  buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_QA/api/\"'
-           buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_DEV/api/\"'
+            buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_Production/api/\"'
+            // buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_QA/api/\"'
+            //buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_DEV/api/\"'
 
         }
 
@@ -111,8 +111,6 @@ dependencies {
     implementation 'com.archit.calendar:awesome-calendar:1.1.4'
 
     implementation 'com.tuyenmonkey:mkloader:1.4.0'
-
-
 
 
 }

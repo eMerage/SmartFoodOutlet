@@ -50,9 +50,7 @@ public class Splash extends Activity implements SplashView{
         splashPresenter = new SplashPresenterImpli(this);
 
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-          //  splashPresenter.checkTrialVersion(this);
-
-           // splashPresenter.updatePushTokenAndAppVersion(this);
+            splashPresenter.checkTrialVersion(this);
         }else {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Warning");
@@ -138,6 +136,19 @@ public class Splash extends Activity implements SplashView{
 
     @Override
     public void trialversion(Boolean status, String msg) {
-      //  progressbar.setVisibility(View.GONE);
+        if(status){
+            splashPresenter.updatePushTokenAndAppVersion(this);
+        }else {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage(msg);
+            alertDialogBuilder.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+            alertDialogBuilder.show();
+        }
+
     }
 }

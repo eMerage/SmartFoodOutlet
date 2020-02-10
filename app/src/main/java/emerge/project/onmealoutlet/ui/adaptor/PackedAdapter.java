@@ -144,7 +144,7 @@ public class PackedAdapter extends RecyclerView.Adapter<PackedAdapter.MyViewHold
         }
 
 
-        holder.textView_price.setText(String.valueOf(orders.getOrderTotal()));
+        holder.textView_price.setText(String.valueOf(orders.getOrderTotalWithoutDeliveryCost()));
 
 
         String promo;
