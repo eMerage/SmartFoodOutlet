@@ -6,6 +6,17 @@
     android:background="@color/colorAccent">
 
 
+
+
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:id="@+id/progressbar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:mk_type="Whirlpool" />
+
+
     <emerge.project.onmealoutlet.ui.font.OpenSansRegular
         android:id="@+id/openSansBold"
         android:layout_width="wrap_content"
@@ -23,9 +34,12 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
 
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
 
         android:src="@drawable/smartfood_logo" />
+
+
 </RelativeLayout>

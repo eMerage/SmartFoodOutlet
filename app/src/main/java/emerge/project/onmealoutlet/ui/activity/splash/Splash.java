@@ -7,11 +7,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 
+import com.tuyenmonkey.mkloader.MKLoader;
+
+import butterknife.BindView;
 import emerge.project.onmealoutlet.R;
 import emerge.project.onmealoutlet.data.db.Outlet;
 import emerge.project.onmealoutlet.servies.network.NetworkAvailability;
@@ -28,6 +32,10 @@ public class Splash extends Activity implements SplashView{
 
     Realm realm;
 
+    @BindView(R.id.progressbar)
+    MKLoader progressbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +50,9 @@ public class Splash extends Activity implements SplashView{
         splashPresenter = new SplashPresenterImpli(this);
 
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-            splashPresenter.updatePushTokenAndAppVersion(this);
+          //  splashPresenter.checkTrialVersion(this);
+
+           // splashPresenter.updatePushTokenAndAppVersion(this);
         }else {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Warning");
@@ -124,5 +134,10 @@ public class Splash extends Activity implements SplashView{
 
 
 
+    }
+
+    @Override
+    public void trialversion(Boolean status, String msg) {
+      //  progressbar.setVisibility(View.GONE);
     }
 }

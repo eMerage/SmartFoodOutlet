@@ -10,4 +10,7 @@ import android.content.Context;
 public interface SplashPresenter {
     void updatePushTokenAndAppVersion(Context con);
 
+    void checkTrialVersion(Context con);
+
+
 }

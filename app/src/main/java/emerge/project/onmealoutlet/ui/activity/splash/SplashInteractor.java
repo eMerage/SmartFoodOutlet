@@ -18,6 +18,11 @@ public interface SplashInteractor {
     }
     void updatePushTokenAndAppVersion(Context con, OnUpdatePushTokenAndAppVersionFinishedListener onUpdatePushTokenAndAppVersionFinishedListener);
 
+    interface OnCheckTrialVersionFinishedListener {
+        void trialversion(Boolean status, String msg);
+    }
+    void checkTrialVersion(Context con, OnCheckTrialVersionFinishedListener onCheckTrialVersionFinishedListener);
+
 
 
 }

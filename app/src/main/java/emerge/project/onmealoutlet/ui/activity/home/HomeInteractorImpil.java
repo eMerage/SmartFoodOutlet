@@ -325,6 +325,8 @@ public class HomeInteractorImpil implements HomeInteractor {
         final ArrayList<Menus> menusArrayList = new ArrayList<Menus>();//main
         final ArrayList<Foods> foodsArrayList = new ArrayList<Foods>();//sub
         final ArrayList<User> userList = new ArrayList<User>();//sub
+
+/*
         apiService.orderHistorDetails(orderId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -421,6 +423,7 @@ public class HomeInteractorImpil implements HomeInteractor {
 
                     }
                 });
+*/
 
 
     }

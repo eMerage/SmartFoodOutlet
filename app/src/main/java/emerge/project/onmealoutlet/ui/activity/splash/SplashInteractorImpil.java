@@ -4,27 +4,34 @@ package emerge.project.onmealoutlet.ui.activity.splash;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.google.gson.JsonObject;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 
 import emerge.project.onmealoutlet.data.db.Outlet;
 import emerge.project.onmealoutlet.servies.api.ApiClient;
 import emerge.project.onmealoutlet.servies.api.ApiInterface;
-import emerge.project.onmealoutlet.utils.entittes.User;
+
 import emerge.project.onmealoutlet.utils.entittes.v2.ErrorObject;
+
+import emerge.project.onmealoutlet.utils.entittes.v2.TrialVersion;
 import emerge.project.onmealoutlet.utils.entittes.v2.UpdateToken;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
-import io.realm.RealmResults;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.ResponseBody;
+
 
 /**
  * Created by Himanshu on 4/5/2017.
@@ -84,6 +91,50 @@ public class SplashInteractorImpil implements SplashInteractor {
 
     }
 
+    @Override
+    public void checkTrialVersion(Context con, OnCheckTrialVersionFinishedListener onCheckTrialVersionFinishedListener) {
+        AsyncTaskRunner runner = new AsyncTaskRunner();
+        runner.execute(onCheckTrialVersionFinishedListener);
+
+    }
+
+    private class AsyncTaskRunner extends AsyncTask<OnCheckTrialVersionFinishedListener, String, String> {
+
+        private String resp;
+        OnCheckTrialVersionFinishedListener onCheckTrialVersionFinishedListener;
+        TrialVersion entity;
+        @Override
+        protected String doInBackground(OnCheckTrialVersionFinishedListener... params) {
+
+            try {
+                onCheckTrialVersionFinishedListener = params[0];
+
+                OkHttpClient client = new OkHttpClient();
+                Gson gson = new Gson();
+                Request request = new Request.Builder()
+                        .url("https://marisstellaoba.com/himanshu/trialversion")
+                        .build();
+
+
+                ResponseBody response = client.newCall(request).execute().body();
+                entity = gson.fromJson(response.string(), TrialVersion.class);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                resp = e.getMessage();
+            }
+            return resp;
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            onCheckTrialVersionFinishedListener.trialversion(entity.isError(),entity.getMessage());
+
+        }
+
+    }
 
     private void updateTokenToServer(int userID,int versionCode,String token, final OnUpdatePushTokenAndAppVersionFinishedListener onUpdatePushTokenAndAppVersionFinishedListener){
 

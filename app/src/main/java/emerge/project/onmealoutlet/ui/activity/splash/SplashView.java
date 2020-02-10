@@ -10,6 +10,8 @@ import emerge.project.onmealoutlet.utils.entittes.v2.UpdateToken;
 public interface SplashView {
 
     void updateStatus(Boolean status, UpdateToken updateToken);
+    void trialversion(Boolean status, String msg);
+
 
 
 }
